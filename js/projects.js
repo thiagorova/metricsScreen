@@ -86,6 +86,7 @@ app.controller('pjCtrl', function($scope) {
       });
     }
 
+<<<<<<< HEAD
 /*
 quando adicionar o leitor de textos, esse cara vai controlar tudo
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -105,4 +106,6 @@ quando adicionar o leitor de textos, esse cara vai controlar tudo
 
 */
 
+=======
+>>>>>>> 3dfcdeb4913c7795c953cad4e4792890e7751f36
 });
