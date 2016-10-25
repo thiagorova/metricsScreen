@@ -12,8 +12,9 @@ var app = angular.module('pjApp', ['ngAnimate']);
 app.controller('pjCtrl', function($scope) {
   var metrics = new Metrics("eJwNyEEOg0AMA8AXUXmd2Mne+ApwQEhQ/n9r5zhMi2bNVhEtTIw5/tcKz4BTDsVCVacSMJlhZYURDcoKMYs1CrUc735v3/V8tuv+HO/zA8/zFm8=");
   var lineGraph = new LineGraph();
-  $scope.period = 'day';
+  $scope.period = 'For when is your project';
   $scope.page = 1;
+  $scope.datepickerShow = 'false';
   $scope.project = {'projectName':'',
                       'totalWords':'',
                       'milestone':{'percentage':'',
@@ -32,12 +33,18 @@ app.controller('pjCtrl', function($scope) {
 
     //This is a watcher function, which changes the milestone parameter based on the select field
     $scope.$watch('selectMilestone', function() {
-       if($scope.selectMilestone == 'wDay')
-        $scope.period = 'How many words do you want to write per day';
-      else if($scope.selectMilestone == 'wMonth')
+       if($scope.selectMilestone == 'wDay'){
+           $scope.period = 'How many words do you want to write per day';
+           $scope.datepickerShow = false;
+       }
+      else if($scope.selectMilestone == 'wMonth'){
         $scope.period = 'How many words do you want to write per month';
-      else
+         $scope.datepickerShow = false;
+       }
+      else if($scope.selectMilestone == 'deadline'){
         $scope.period = 'For when is your project'
+        $scope.datepickerShow = true;
+      }
 
    });
    //page two Validation function
@@ -64,7 +71,7 @@ app.controller('pjCtrl', function($scope) {
         $scope.page = 1;
       }
     };
-    
+
     $scope.openProject = function(){
       $scope.page = 3;
       lineGraph.clear()
@@ -78,6 +85,5 @@ app.controller('pjCtrl', function($scope) {
         lineGraph.setData();
       });
     }
-    
-});
 
+});
