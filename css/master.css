@@ -1,0 +1,176 @@
+*{
+    margin: 0;
+    padding: 0;
+    color: #666;
+    font-family: 'Oxygen', sans-serif;
+}
+
+.projects-container{
+  background-color: #f3f3f3;
+}
+
+.projects-container h3, h4{
+  text-align: center;
+  color: #808080;
+  font-weight: 100;
+}
+
+.center{
+  text-align: center;
+}
+
+.circle{
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+}
+
+.td-icon{
+  width: 1px;
+}
+
+.icon-success{
+  background-color:#80b984;
+}
+
+.icon-ok{
+  background-color: #4f81ae;
+}
+
+.table tbody>tr>td.middle{
+    vertical-align: middle;
+}
+.table tbody>tr>td.border{
+  border-right: 1px solid #ddd;
+}
+
+label{
+  font-weight: 100;
+
+}
+
+.cpj-form input, select{
+  background-color: #e5e5e5!important;
+}
+.btn-div{
+  margin-top: 50px;
+  padding-bottom: 50px;
+}
+.btn{
+  background-color: #1AA7B5;
+
+  border: none;
+  font-size: 14px;
+  padding: 10px;
+}
+.btn:hover{
+  background-color: #147D88;
+}
+.form-group{
+  padding: 10px;
+}
+
+.btn-project-name{
+  border:none;
+  background: none;
+}
+
+
+.hLine {
+  fill: none;
+  stroke: #C5CDCB;
+  stroke-width: 1.5px;
+}
+
+.axis--x path {
+
+}
+
+.axis--x path {
+
+}
+
+.line {
+  fill: none;
+  stroke: #1AA7B5;
+  stroke-width: 1.5px;
+}
+
+.axis-text {
+}
+
+svg {
+  background-color: #F5F5F5;
+}
+
+body {
+  font-family: 'Quicksand', sans-serif;
+
+}
+
+header h1 {
+  color: #1AA7B5;
+  margin-bottom: 0px;
+  padding: 0px;
+  margin-top: 15px;
+  font-size: 25pt;  
+}
+
+header span {
+  color: #C5CDCB;
+  margin-left: 2em;
+}
+
+header button {
+  float: right;
+  background-color: #1AA7B5;
+  border: none;
+  color: white;
+  margin-bottom: 18px;
+  padding: 10px;
+  margin-top: -27px;
+}
+
+.info {
+  display: inline-block;
+  border-right: 1px solid;
+  border-color: #C5CDCB;
+  padding: 0px 15px 0px 15px; 
+  font-family: 'Oxygen', sans-serif;
+}
+
+.info:last-child {
+  border-right: none;
+  
+}
+
+.info p {
+  margin: 0px;
+  padding: 0px;
+  font-size: 15pt;
+}
+
+.info span {
+  font-size: 11pt;
+  font-weight: bold;
+}
+
+.legend {
+  color: #C5CDCB;
+}
+
+.view {
+  background-color: #F5F5F5;
+  display: inline-block;
+  margin: 0 auto;
+  padding-bottom: 60px;
+}
+
+.viewTitle {
+  color: #666;
+}
+
+#projectView {
+  text-align:center;
+}
+
