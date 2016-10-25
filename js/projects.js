@@ -86,4 +86,23 @@ app.controller('pjCtrl', function($scope) {
       });
     }
 
+/*
+quando adicionar o leitor de textos, esse cara vai controlar tudo
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {please: "get tags"}, function(response) {
+        if(typeof response === "undefined") {
+        //  alert("No data available in this page");
+        } else if  (response.error === "") {
+          
+        } else {
+          alert(response.error);
+        }      
+    });
+  });
+  } else {
+    chrome.tabs.create({url: "http://www.tags.authorship.me"});
+  } 
+
+*/
+
 });
