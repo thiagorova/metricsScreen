@@ -15,24 +15,24 @@ app.controller('pjCtrl', function($scope) {
   $scope.period = 'For when is your project';
   $scope.page = 1;
   $scope.datepickerShow = 'false';
-  $scope.project = {  'projectId':'',
+  $scope.project = {  'id':'',
                       'projectName':'',
                       'totalWords':'',
-                      'milestone':{ 'deadlineDate':'',
+                      'milestone':{ 'deadline':'',
                                     'percentage':'',
                                     'words':''}
                       };
-  $scope.projectsList = [{'projectId': '1',
+  $scope.projectsList = [{'id': '1',
                           'projectName':'Birds and Nature',
                           'totalWords':'10000',
-                          'milestone':{ 'deadlineDate':'12/12/2012',
+                          'milestone':{ 'deadline':'12/12/2012',
                                         'percentage':'10',
                                         'words':'100'}
                         },
-                        { 'projectId': '2',
+                        { 'id': '2',
                           'projectName':'Getaway and Destinations',
                           'totalWords': 6000,
-                          'milestone':{ 'deadlineDate':'12/12/2012',
+                          'milestone':{ 'deadline':'12/12/2012',
                                         'percentage':'20',
                                         'words':'900'}
                         }];
@@ -66,19 +66,25 @@ app.controller('pjCtrl', function($scope) {
 
    //function to create a project
     $scope.addProject = function(){
-        console.log('executei');
+      if($scope.validation == true)
+      {
         $scope.project = {};
         metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.selectMilestone, $scope.project.words);
-        metrics.getAllProjects(null, function (projects) {
-          //$scope.projectsList = projects;
-          /*Quando conectar a API a variavel $scope.projectsList sera preenchida com
-            a projects e esta ja está configurada para fazer um foreach na tabela
-            usando ng-repeat
-          */
-        });
+        $scope.showProjects();
         $scope.page = 1;
-
+      }
     };
+
+    $scope.showProjects = function(){
+      console.log('executei');
+      metrics.getAllProjects(null, function (projects) {
+        //$scope.projectsList = projects;
+        /*Quando conectar a API a variavel $scope.projectsList sera preenchida com
+          a projects e esta ja está configurada para fazer um foreach na tabela
+          usando ng-repeat
+        */
+      });
+    }
 
     $scope.openProject = function(){
       $scope.page = 3;
