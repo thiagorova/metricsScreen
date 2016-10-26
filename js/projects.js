@@ -7,31 +7,59 @@ app.controller('pjCtrl', function($scope, $http){
 
 
 });*/
-
 var app = angular.module('pjApp', ['ngAnimate']);
 app.controller('pjCtrl', function($scope) {
+  var list = [];
+  var setStartPage = function(projects) {
+    var len = projects.length;
+    var newData = []
+    for (var i = 0; i < len; i ++) {
+      newData.push({
+        'projectName':projects[i].name,
+        'totalWords':projects[i].finish,
+        'milestone':{
+          'percentage': (projects[i].wordCount / projects[i].finish)*100,
+          'words':projects[i].wordCount
+        }
+      });
+    }
+    $scope.metricsList += newData;
+  }
+
   var metrics = new Metrics("eJwNyEEOg0AMA8AXUXmd2Mne+ApwQEhQ/n9r5zhMi2bNVhEtTIw5/tcKz4BTDsVCVacSMJlhZYURDcoKMYs1CrUc735v3/V8tuv+HO/zA8/zFm8=");
   var lineGraph = new LineGraph();
-  $scope.period = 'For when is your project';
-  $scope.page = 1;
-  $scope.datepickerShow = 'false';
-  $scope.project = {'projectName':'',
-                      'totalWords':'',
-                      'milestone':{'percentage':'',
-                                    'words':''}
-                      };
-  $scope.metricsList = [{'projectName':'Birds and Nature',
-                          'totalWords':'10000',
-                          'milestone':{'percentage':'10',
-                                        'words':'100'}
-                        },
-                        {'projectName':'Getaway and Destinations',
-                          'totalWords': 6000,
-                          'milestone':{'percentage':'20',
-                                        'words':'900'}
-                        }];
+  $scope.project = {
+    'projectName':'',
+    'totalWords':'',
+    'milestone': {
+      'percentage':'',
+      'words':''
+    }
+  };
+  $scope.metricsList = [{
+    'projectName':"hakase",
+    'totalWords':"100",
+    'milestone':{
+      'percentage': "100%",
+      'words':"100"
+    }
+  }, {
+    'projectName':"japa",
+    'totalWords':"200",
+    'milestone': {
+      'percentage': "10%",
+      'words':"20"
+    }
+  }];
+  $scope.page = 1;    
+  metrics.getAllProjects(function (projects) {
+ //here is the callback where you fill the table
+   setStartPage (projects.projects);
+  });  
 
+  $scope.datepickerShow = 'false';
     //This is a watcher function, which changes the milestone parameter based on the select field
+    $scope.period = 'For when is your project'
     $scope.$watch('selectMilestone', function() {
        if($scope.selectMilestone == 'wDay'){
            $scope.period = 'How many words do you want to write per day';
@@ -55,19 +83,15 @@ app.controller('pjCtrl', function($scope) {
 
    //function to go to the create project page from anywhere
    $scope.createProject = function(){
-    $scope.page = 2
+     $scope.page = 2
    };
 
    //function to create a project
     $scope.addProject = function(){
       if ($scope.validation() == true){
+        metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.selectMilestone, $scope.project.milestoneMeasure);
         $scope.metricsList.push($scope.project);
         $scope.project = {};
-        metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.selectMilestone, $scope.project.words);
-        metrics.getAllProjects(function (projects) {
-          //here is the callback where you fill the table
-          alert(projects);
-        });
         $scope.page = 1;
       }
     };
@@ -86,7 +110,6 @@ app.controller('pjCtrl', function($scope) {
       });
     }
 
-<<<<<<< HEAD
 /*
 quando adicionar o leitor de textos, esse cara vai controlar tudo
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -106,6 +129,4 @@ quando adicionar o leitor de textos, esse cara vai controlar tudo
 
 */
 
-=======
->>>>>>> 3dfcdeb4913c7795c953cad4e4792890e7751f36
 });

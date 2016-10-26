@@ -55,7 +55,7 @@
             </div>
               <div class="form-group" ng-hide="datepickerShow">
                 <label for="many-words">{{period}} ? </label>
-                <input type="number" class="form-control" id="many-words" ng-model="project.milestone.words">
+                <input type="number" class="form-control" id="many-words" ng-model="project.milestoneMeasure">
                 <div class="bg-danger">
                   <span class="glyphicon glyphicon-exclamation-sign"></span>  Empty field
                 </div>
@@ -81,7 +81,7 @@
     <div class="projects-container animate-show col-md-4 col-xs-12" ng-show="page ==1">
       <h4>Recently</h4>
       <div class="col-md-12 col-xs-12 projects-table">
-        <table class="table">
+        <table class="table" id="projectInfo">
           <tr ng-repeat="metrics in metricsList">
             <td class="td-icon middle">
               <div class="circle icon-success icon"></div>
