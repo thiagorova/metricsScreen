@@ -16,70 +16,58 @@ var Metrics = function (key) {
   };
    
 //public methods
-    Metrics.prototype.setProject = function (projectName) {
-      this.project = projectName;
-    };
 
     Metrics.prototype.createProject = function (projectName, acceptance, milestoneType, measure ) {
-      this.project = projectName;
       var project = buildProjectJSON(this.priv.key, projectName, measure, acceptance, milestoneType);
       apiCall("POST", this.priv.projectAdd + "create", project);
     };
 
 //sends the text to the server to create 
-    Metrics.prototype.analyze = function (text, callback, callbackError) {
+    Metrics.prototype.analyze = function (text, projectId, callback, callbackError) {
       if (typeof callback === 'undefined') { callback = null; }      
       if (typeof callbackError === 'undefined') { callbackError = null; }      
-      if (this.project !== null) {
-        apiCall("POST", this.priv.metricsAdd + "analyze", buildJSON(this.priv.key, this.project, this.text), function(response) {
+        apiCall("POST", this.priv.metricsAdd + "analyze", buildJSON(this.priv.key, projectId, this.text), function(response) {
           if(callback !== null) callback(JSON.parse( response ));
         }, 
         callbackError);
-      }
     };
 
 //returns project main Data: name, deadline and number of words necessary for the project to be completed
-    Metrics.prototype.getProject = function (callback, callbackError) {
+    Metrics.prototype.getProject = function (projectId, callback, callbackError) {
       if (typeof callback === 'undefined') { callback = null; }      
       if (typeof callbackError === 'undefined') { callbackError = null; }      
-      if (this.project !== null) {
-        apiCall("GET", this.priv.projectAdd + "show", buildJSON(this.priv.key, this.project), function(response) {
-          if(callback !== null) callback(JSON.parse( response ));
-        }, 
-        callbackError);
-      }
+      apiCall("GET", this.priv.projectAdd + "show", buildJSON(this.priv.key, projectId), function(response) {
+        if(callback !== null) callback(JSON.parse( response ));
+      }, 
+      callbackError);
     };
 
     Metrics.prototype.getAllProjects = function (callback, callbackError) {
       if (typeof callback === 'undefined') { callback = null; }      
       if (typeof callbackError === 'undefined') { callbackError = null; }      
-      if (this.project !== null) {
-        apiCall("GET", this.priv.projectAdd + "index", buildJSON(this.priv.key), function(response) {
-          if(callback !== null) callback(JSON.parse( response ));
-        }, 
-        callbackError);
-      }
+      apiCall("GET", this.priv.projectAdd + "index", buildJSON(this.priv.key), function(response) {
+        if(callback !== null) callback(JSON.parse( response ));
+      }, 
+      callbackError);
     };
 
 //returns a JSON with a list of milestones (number of words per datetime)
-    Metrics.prototype.getMetrics = function (callback, callbackError) {
+    Metrics.prototype.getMetrics = function (projectId, callback, callbackError) {
       if (typeof callback === 'undefined') { callback = null; }      
       if (typeof callbackError === 'undefined') { callbackError = null; }      
-      if (this.project !== null) {
-        apiCall("GET", this.priv.metricsAdd + "index", buildJSON(this.priv.key, this.project), function(response) {
-          if(callback !== null) callback(JSON.parse( response ));
-        }, 
-        callbackError);
-      }
+      apiCall("GET", this.priv.metricsAdd + "index", buildJSON(this.priv.key, projectId), function(response) {
+        if(callback !== null) callback(JSON.parse( response ));
+      }, 
+      callbackError);
     };
 
     Metrics.prototype.getUser = function (callback, callbackError) {
       if (typeof callback === 'undefined') { callback = null; }    
       if (typeof callbackError === 'undefined') { callbackError = null; }
-        apiCall("GET", this.priv.userAdd + "show", {"apikey": this.priv.key }, function (response) {
-          var user = JSON.parse( response );
-           if (callback !== null) callback(user.login);
-       }, callbackError);
+      apiCall("GET", this.priv.userAdd + "show", {"apikey": this.priv.key }, function (response) {
+        var user = JSON.parse( response );
+        if (callback !== null) callback(user.login);
+      }, callbackError);
     };
 
 
@@ -137,7 +125,7 @@ var Metrics = function (key) {
     };
 
 var buildJSON = function(key, project, text) {
-  if (typeof text === 'undefined') { text = null; }  
+  if (typeof text === 'undefined') { text = null; }
   return {
       apikey: key,
       text: text,

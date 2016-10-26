@@ -22,20 +22,7 @@ app.controller('pjCtrl', function($scope) {
                                     'percentage':'',
                                     'words':''}
                       };
-  $scope.projectsList = [{'id': '1',
-                          'projectName':'Birds and Nature',
-                          'totalWords':'10000',
-                          'milestone':{ 'deadline':'12/12/2012',
-                                        'percentage':'10',
-                                        'words':'100'}
-                        },
-                        { 'id': '2',
-                          'projectName':'Getaway and Destinations',
-                          'totalWords': 6000,
-                          'milestone':{ 'deadline':'12/12/2012',
-                                        'percentage':'20',
-                                        'words':'900'}
-                        }];
+  $scope.projectsList = [];
 
     //This is a watcher function, which changes the milestone parameter based on the select field
     $scope.$watch('selectMilestone', function() {
@@ -53,6 +40,7 @@ app.controller('pjCtrl', function($scope) {
       }
 
    });
+   
    $scope.validationMaster = true;
    $scope.validationPjName = function(){
         if($scope.project.projectName.length <= 0){
@@ -116,8 +104,9 @@ app.controller('pjCtrl', function($scope) {
    //function to create a project
     $scope.addProject = function(){
         $scope.unifiedValidation();
-        $scope.project = {};
-        metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.selectMilestone, $scope.project.words);
+//        metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.selectMilestone, $scope.project.words);        
+        $scope.showProjects();
+        $scope.project = {};        
         $scope.showProjects();
         $scope.page = 1;
 
@@ -126,29 +115,41 @@ app.controller('pjCtrl', function($scope) {
 
     $scope.showProjects = function(){
 
-      metrics.getAllProjects(null, function (projects) {
-        //$scope.projectsList = projects;
-        /*Quando conectar a API a variavel $scope.projectsList sera preenchida com
-          a projects e esta ja está configurada para fazer um foreach na tabela
-          usando ng-repeat
-        */
-
-
-      });
-
+      metrics.getAllProjects(function (projects) {
+          var projects = projects.projects;
+          var len = projects.length;
+          var pList = []
+          for (var i = 0; i < len; i ++) {
+              pList.push({
+                'projectName':projects[i].name.toString(),
+                'totalWords':projects[i].finish.toString(),
+                'id': projects[i].id.toString(),
+                'time':projects[i].time.hours.toString() + ":" + projects[i].time.minutes.toString(),
+                'milestone':{
+                  'percentage': ((projects[i].wordCount / projects[i].finish)*100).toString(),
+                 'words':projects[i].wordCount.toString(),
+                 'deadline': (typeof projects[i].deadline === "undefined") ? null: projects[i].deadline.toString()
+               }
+             });
+           }
+           $scope.$apply(function() {
+             $scope.projectsList = pList;
+           });
+         });
     }
 
     $scope.openProject = function(project){
-
       $scope.page = 3;
+      $scope.dProject = project;
       lineGraph.clear();
       lineGraph.build(500, 250);
-      lineGraph.setDateFormat("yearly_whole");
-      metrics.getMetrics(function (metrics) {
-        alert(metrics);
-        lineGraph.setData(metrics);
+      lineGraph.setDateFormat("day_whole");
+      metrics.getMetrics(project.id, function (metrics) {
+       if(metrics.metrics !== "") {
+         lineGraph.setData(metrics.metrics);
+       } else
+         $scope.dProject.time = "0";
       }, function(error) {
-//        alert(error);
         lineGraph.setData();
       });
     }

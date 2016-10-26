@@ -62,6 +62,7 @@ LineGraph.hidden.setDateFormat = function(format) {
   if (format==="day_whole") { return function (date) {
       var mainDate = date.split(" ")
       var time = mainDate[1].split(":")
+      console.log(mainDate[0].split("/")[0] + " " + time[0] + ":" + time[1]);
       return mainDate[0].split("/")[0] + " " + time[0] + ":" + time[1];
     };
   }
