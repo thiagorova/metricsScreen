@@ -29,7 +29,7 @@ app.controller('pjCtrl', function($scope) {
                                         'percentage':'10',
                                         'words':'100'}
                         },
-                        { 'projectId': '1',
+                        { 'projectId': '2',
                           'projectName':'Getaway and Destinations',
                           'totalWords': 6000,
                           'milestone':{ 'deadlineDate':'12/12/2012',
@@ -66,8 +66,7 @@ app.controller('pjCtrl', function($scope) {
 
    //function to create a project
     $scope.addProject = function(){
-      if ($scope.validation() == true){
-
+        console.log('executei');
         $scope.project = {};
         metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.selectMilestone, $scope.project.words);
         metrics.getAllProjects(null, function (projects) {
@@ -78,7 +77,7 @@ app.controller('pjCtrl', function($scope) {
           */
         });
         $scope.page = 1;
-      }
+
     };
 
     $scope.openProject = function(){

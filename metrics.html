@@ -16,7 +16,7 @@
     <script src="js/metricsApi.js"></script>
   </head>
 
-  <body ng-controller="pjCtrl">
+  <body ng-controller="pjCtrl" ng-init="addProject()">
     <header>
     	<h1>Metrics</h1>
     	<span>by Authorship</span>
@@ -128,9 +128,7 @@
 <!-- this should be the last thing the html file -->
   <script src="js/graph.js"></script>
 </div>
-<pre>
-  {{$scope.project}}
-</pre>
+
 
   </body>
 </html>
