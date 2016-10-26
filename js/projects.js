@@ -15,19 +15,25 @@ app.controller('pjCtrl', function($scope) {
   $scope.period = 'For when is your project';
   $scope.page = 1;
   $scope.datepickerShow = 'false';
-  $scope.project = {'projectName':'',
+  $scope.project = {  'projectId':'',
+                      'projectName':'',
                       'totalWords':'',
-                      'milestone':{'percentage':'',
+                      'milestone':{ 'deadlineDate':'',
+                                    'percentage':'',
                                     'words':''}
                       };
-  $scope.metricsList = [{'projectName':'Birds and Nature',
+  $scope.projectsList = [{'projectId': '1',
+                          'projectName':'Birds and Nature',
                           'totalWords':'10000',
-                          'milestone':{'percentage':'10',
+                          'milestone':{ 'deadlineDate':'12/12/2012',
+                                        'percentage':'10',
                                         'words':'100'}
                         },
-                        {'projectName':'Getaway and Destinations',
+                        { 'projectId': '1',
+                          'projectName':'Getaway and Destinations',
                           'totalWords': 6000,
-                          'milestone':{'percentage':'20',
+                          'milestone':{ 'deadlineDate':'12/12/2012',
+                                        'percentage':'20',
                                         'words':'900'}
                         }];
 
@@ -61,12 +67,15 @@ app.controller('pjCtrl', function($scope) {
    //function to create a project
     $scope.addProject = function(){
       if ($scope.validation() == true){
-        $scope.metricsList.push($scope.project);
+
         $scope.project = {};
         metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.selectMilestone, $scope.project.words);
-        metrics.getAllProjects(function (projects) {
-          //here is the callback where you fill the table
-          alert(projects);
+        metrics.getAllProjects(null, function (projects) {
+          //$scope.projectsList = projects;
+          /*Quando conectar a API a variavel $scope.projectsList sera preenchida com
+            a projects e esta ja está configurada para fazer um foreach na tabela
+            usando ng-repeat
+          */
         });
         $scope.page = 1;
       }

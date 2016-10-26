@@ -82,15 +82,15 @@
       <h4>Recently</h4>
       <div class="col-md-12 col-xs-12 projects-table">
         <table class="table">
-          <tr ng-repeat="metrics in metricsList">
+          <tr ng-repeat="projects in projectsList">
             <td class="td-icon middle">
               <div class="circle icon-success icon"></div>
             </td>
             <td class="middle">
-              <button type="button" class="btn-project-name" ng-click="openProject()">{{metrics.projectName}}</button>
+              <button type="button" class="btn-project-name" ng-click="openProject()">{{projects.projectName}}</button>
             </td>
-            <td class="middle center border"><p>{{metrics.milestone.percentage}}%<br>COMPLETE</p></td>
-            <td class="middle center"><p><br>{{metrics.milestone.words}}<br>Words</p></td>
+            <td class="middle center border"><p>{{projects.milestone.percentage}}%<br>COMPLETE</p></td>
+            <td class="middle center"><p><br>{{projects.milestone.words}}<br>Words</p></td>
           </tr>
         </table>
       </div>
@@ -123,6 +123,9 @@
 <!-- this should be the last thing the html file -->
   <script src="js/graph.js"></script>
 </div>
+<pre>
+  {{$scope.project}}
+</pre>
 
   </body>
 </html>
