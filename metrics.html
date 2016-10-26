@@ -30,16 +30,16 @@
           <form>
             <div class="form-group">
               <label for="project-title">Title</label>
-              <input type="text" class="form-control" id="project-title" ng-model="project.projectName">
-              <div class="bg-danger">
+              <input type="text" class="form-control" id="project-title" ng-model="project.projectName" ng-blur="validationPjName()">
+              <div class="bg-danger" ng-show="pjNameShow">
                 <span class="glyphicon glyphicon-exclamation-sign"></span>  Empty field
               </div>
             </div>
             <div class="form-group">
               <label for="total-words">Total number of words</label>
-              <input type="number" class="form-control" id="total-words" ng-model="project.totalWords">
-              <div class="bg-danger">
-                <span class="glyphicon glyphicon-exclamation-sign"></span>  Empty field
+              <input type="number" class="form-control" id="total-words" ng-model="project.totalWords" ng-blur="validationTotalWords()">
+              <div class="bg-danger" ng-show="tWordsShow">
+                <span class="glyphicon glyphicon-exclamation-sign"></span>  Please, put a number greater than 0.
               </div>
             </div>
             <div class="form-group">
@@ -49,26 +49,23 @@
                 <option value="wMonth">Words per Month</option>
                 <option value="deadline" ng-selected="true">Deadlines</option>
               </select>
-              <div class="bg-danger">
-                <span class="glyphicon glyphicon-exclamation-sign"></span>  Empty field
-              </div>
             </div>
               <div class="form-group" ng-hide="datepickerShow">
                 <label for="many-words">{{period}} ? </label>
-                <input type="number" class="form-control" id="many-words" ng-model="project.milestoneMeasure">
-                <div class="bg-danger">
-                  <span class="glyphicon glyphicon-exclamation-sign"></span>  Empty field
+                <input type="number" class="form-control" id="many-words" ng-model="project.milestoneMeasure" ng-blur="validationMeasure()">
+                <div class="bg-danger" ng-show="measureShow">
+                  <span class="glyphicon glyphicon-exclamation-sign"></span>  Please, put a number greater than 0.
                 </div>
               </div>
               <div class="form-group" ng-show="datepickerShow">
                 <label for="deadline">{{period}} ? </label>
-                <input type="date" class="form-control" id="deadline" ng-model="deadlineDate">
-                <div class="bg-danger">
-                  <span class="glyphicon glyphicon-exclamation-sign"></span>  Empty field
+                <input type="date" class="form-control" id="deadline" ng-model="project.deadlineDate" ng-blur="validationDate()">
+                <div class="bg-danger" ng-show="deadlineShow">
+                  <span class="glyphicon glyphicon-exclamation-sign"></span> Invalid date.
                 </div>
               </div>
               <div class="center btn-div col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
-                <button class="btn btn-primary btn-block" ng-model="page" ng-click="addProject()">Create Project
+                <button class="btn btn-primary btn-block" ng-model="page" ng-click="addProject()" ng-disabled="validationMaster">Create Project
               </div>
           </form>
         </div>

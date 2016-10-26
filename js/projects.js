@@ -53,11 +53,60 @@ app.controller('pjCtrl', function($scope) {
       }
 
    });
-   //page two Validation function
-   $scope.validation = function(){
+   $scope.validationMaster = true;
+   $scope.validationPjName = function(){
+        if($scope.project.projectName.length <= 0){
+        $scope.pjNameShow = true;
+        $scope.validationMaster = true;
+      }
+      else{
+        $scope.pjNameShow = false;
+        $scope.validationMaster = false;
+      }
+    }
 
-     return true;
-   };
+    $scope.validationTotalWords = function(){
+      if($scope.project.totalWords <= 0 || $scope.project.totalWords == null || $scope.project.totalWords.length <= 0 ){
+        $scope.tWordsShow = true;
+        $scope.validationMaster = true;
+      }
+      else{
+        $scope.tWordsShow = false;
+        $scope.validationMaster = false;
+      }
+    }
+
+    $scope.validationMeasure = function(){
+      if($scope.project.milestoneMeasure <= 0 ){
+        $scope.measureShow = true;
+        $scope.validationMaster = true;
+      }
+      else{
+        $scope.measureShow = false;
+        $scope.validationMaster = false;
+      }
+    }
+
+    $scope.validationDate = function(){
+      var d = new Date();
+      if($scope.project.deadlineDate < d || $scope.project.deadlineDate == undefined){
+        $scope.deadlineShow = true;
+        $scope.validationMaster = true;
+      }
+      else{
+        $scope.deadlineShow = false;
+        $scope.validationMaster = false;
+        }
+      }
+
+      $scope.unifiedValidation = function(){
+        $scope.validationPjName();
+        $scope.validationTotalWords();
+        $scope.validationMeasure();
+        $scope.validationDate();
+      }
+
+
 
    //function to go to the create project page from anywhere
    $scope.createProject = function(){
@@ -66,7 +115,7 @@ app.controller('pjCtrl', function($scope) {
 
    //function to create a project
     $scope.addProject = function(){
-
+        $scope.unifiedValidation();
         $scope.project = {};
         metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.selectMilestone, $scope.project.words);
         $scope.showProjects();
@@ -84,14 +133,13 @@ app.controller('pjCtrl', function($scope) {
           usando ng-repeat
         */
 
-        console.log($scope.projectsList);
+
       });
 
     }
 
     $scope.openProject = function(project){
 
-      console.log(project);
       $scope.page = 3;
       lineGraph.clear();
       lineGraph.build(500, 250);
