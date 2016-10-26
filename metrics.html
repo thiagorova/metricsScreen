@@ -68,7 +68,7 @@
                 </div>
               </div>
               <div class="center btn-div col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
-                <button class="btn btn-primary btn-block" ng-model="page" ng-click="addProject(project)">Create Project
+                <button class="btn btn-primary btn-block" ng-model="page" ng-click="addProject()">Create Project
               </div>
           </form>
         </div>
@@ -81,10 +81,6 @@
     <div class="projects-container animate-show col-md-4 col-xs-12" ng-show="page ==1">
       <h4>Recently</h4>
       <div class="col-md-12 col-xs-12 projects-table">
-
-        <table class="table">
-          <tr ng-repeat="projects in projectsList">
-
         <table class="table" id="projectInfo">
           <tr ng-repeat="projects in projectsList">
 
@@ -92,7 +88,7 @@
               <div class="circle icon-success icon"></div>
             </td>
             <td class="middle">
-              <button type="button" class="btn-project-name" ng-click="openProject()">{{projects.projectName}}</button>
+              <button type="button" class="btn-project-name" ng-click="openProject(projects)">{{projects.projectName}}</button>
             </td>
             <td class="middle center border"><p>{{projects.milestone.percentage}}%<br>COMPLETE</p></td>
             <td class="middle center"><p><br>{{projects.milestone.words}}<br>Words</p></td>

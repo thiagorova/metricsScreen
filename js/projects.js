@@ -66,29 +66,34 @@ app.controller('pjCtrl', function($scope) {
 
    //function to create a project
     $scope.addProject = function(){
-      if($scope.validation == true)
-      {
+
         $scope.project = {};
         metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.selectMilestone, $scope.project.words);
         $scope.showProjects();
         $scope.page = 1;
-      }
+
+
     };
 
     $scope.showProjects = function(){
-      console.log('executei');
+
       metrics.getAllProjects(null, function (projects) {
         //$scope.projectsList = projects;
         /*Quando conectar a API a variavel $scope.projectsList sera preenchida com
           a projects e esta ja está configurada para fazer um foreach na tabela
           usando ng-repeat
         */
+
+        console.log($scope.projectsList);
       });
+
     }
 
-    $scope.openProject = function(){
+    $scope.openProject = function(project){
+
+      console.log(project);
       $scope.page = 3;
-      lineGraph.clear()
+      lineGraph.clear();
       lineGraph.build(500, 250);
       lineGraph.setDateFormat("yearly_whole");
       metrics.getMetrics(function (metrics) {
