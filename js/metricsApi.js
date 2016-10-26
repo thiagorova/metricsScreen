@@ -131,7 +131,6 @@ var Metrics = function (key) {
           xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         }
 
-        xhttp.setRequestHeader("Origin", window.top.location.href.split("?")[0]);
         //it is necessary to repeat the if because the request headers cannot be set before the xhttp.open()
         if (method === "GET")   xhttp.send();
         else xhttp.send(JSON.stringify( data ));
@@ -146,13 +145,13 @@ var buildJSON = function(key, project, text) {
     };
 }
 
-var buildProjectJSON = function(key, projectName, deadlineDate, acceptance, milestoneTypes) {
+var buildProjectJSON = function(key, projectName, milestoneMeasure, acceptance, milestoneTypes) {
   return {
       apikey: key,
       project: projectName,
-      deadline: deadlineDate,
+      deadline: milestoneMeasure,
       numWords: acceptance,
-      milestone: deadlineDate,
+      milestone: milestoneMeasure,
       milestoneType: milestoneTypes
     };
 }
