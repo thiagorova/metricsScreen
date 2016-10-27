@@ -110,14 +110,21 @@ app.controller('pjCtrl', function($scope) {
       var projects = projects.projects;
       var len = projects.length;
       var pList = [];
+      var percentage;
       for (var i = 0; i < len; i ++) {
+        percentage = Math.round((projects[i].wordCount / projects[i].finish)*100)
+        if (percentage > 100) percentage = 100
         pList.push({
           'projectName':projects[i].name.toString(),
           'totalWords':projects[i].finish.toString()',
           'id': projects[i].id.toString(),
           'time':projects[i].time.hours.toString() + ":" + projects[i].time.minutes.toString(),
           'milestone':{
+<<<<<<< HEAD
             'percentage':((projects[i].wordCount / projects[i].finish)*100).toString(),
+=======
+            'percentage': percentage.toString(),
+>>>>>>> 547bd9206b057c7f3498e1d4f941b1569f1cc37e
             'words':projects[i].wordCount.toString(),
             'deadline':(typeof projects[i].deadline === "undefined") ? null: projects[i].deadline.toString()
           }
@@ -175,33 +182,19 @@ app.controller('pjCtrl', function($scope) {
 
 
   $scope.startMeasuring = function(){
-    var timeInterval = 2; //number of minutes between readings
-    if(!$scope.intervalId) {
-    dProject.
-      $scope.intervalId = setInterval(function() {getData($scope.dProject.id); }, timeInterval * 60 * 1000);
-    }
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {request: "start", project: $scope.dProject.id}, null);
+    });
   };
 
-
   $scope.stopMeasuring = function(project) {
-    if($scope.intervalId) {
-      clearInterval($scope.intervalId);
-      $scope.intervalId = null;
-    }
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, {request: "stop", project: $scope.dProject.id}, null);
+    });
   };
 
   var getData = function() {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {please: "get tags"}, function(response) {
-        if(typeof response === "undefined") {
-          alert("No data available in this page");
-        } else if  (response.error === "") {
-          metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.selectMilestone, $scope.project.words);
-        } else {
-          alert(response.error);
-        }
-      });
-    });
+
   };
 
 });

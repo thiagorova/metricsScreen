@@ -24,9 +24,15 @@ var Metrics = function (key) {
 
 //sends the text to the server to create
     Metrics.prototype.analyze = function (text, projectId, callback, callbackError) {
+<<<<<<< HEAD
       if (typeof callback === 'undefined') { callback = null; }
       if (typeof callbackError === 'undefined') { callbackError = null; }
         apiCall("POST", this.priv.metricsAdd + "analyze", buildJSON(this.priv.key, projectId, this.text), function(response) {
+=======
+      if (typeof callback === 'undefined') { callback = null; }      
+      if (typeof callbackError === 'undefined') { callbackError = null; }      
+        apiCall("POST", this.priv.metricsAdd + "analyze", buildJSON(this.priv.key, projectId, text), function(response) {
+>>>>>>> 547bd9206b057c7f3498e1d4f941b1569f1cc37e
           if(callback !== null) callback(JSON.parse( response ));
         },
         callbackError);
