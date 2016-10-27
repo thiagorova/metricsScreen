@@ -25,7 +25,7 @@
     "content_scripts": [
     {
       "matches": ["*://*/*"],
-      "js": ["js/tagWorks.js"]
+      "js": ["js/metricsApi.js", "js/getTexts.js"]
     }
   ],
   "web_accessible_resources" : ["/js/catchData.js"]

@@ -26,7 +26,7 @@ var Metrics = function (key) {
     Metrics.prototype.analyze = function (text, projectId, callback, callbackError) {
       if (typeof callback === 'undefined') { callback = null; }      
       if (typeof callbackError === 'undefined') { callbackError = null; }      
-        apiCall("POST", this.priv.metricsAdd + "analyze", buildJSON(this.priv.key, projectId, this.text), function(response) {
+        apiCall("POST", this.priv.metricsAdd + "analyze", buildJSON(this.priv.key, projectId, text), function(response) {
           if(callback !== null) callback(JSON.parse( response ));
         }, 
         callbackError);
