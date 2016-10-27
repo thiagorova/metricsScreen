@@ -12,9 +12,9 @@ var Metrics = function (key) {
     var mainAdd = "http://localhost:4000"
     this.priv.metricsAdd = mainAdd + "/metrics/";
     this.priv.userAdd = mainAdd + "/users/";
-    this.priv.projectAdd = mainAdd + "/projects/";    
+    this.priv.projectAdd = mainAdd + "/projects/";
   };
-   
+
 //public methods
 
     Metrics.prototype.createProject = function (projectName, acceptance, milestoneType, measure ) {
@@ -22,47 +22,47 @@ var Metrics = function (key) {
       apiCall("POST", this.priv.projectAdd + "create", project);
     };
 
-//sends the text to the server to create 
+//sends the text to the server to create
     Metrics.prototype.analyze = function (text, projectId, callback, callbackError) {
-      if (typeof callback === 'undefined') { callback = null; }      
-      if (typeof callbackError === 'undefined') { callbackError = null; }      
+      if (typeof callback === 'undefined') { callback = null; }
+      if (typeof callbackError === 'undefined') { callbackError = null; }
         apiCall("POST", this.priv.metricsAdd + "analyze", buildJSON(this.priv.key, projectId, this.text), function(response) {
           if(callback !== null) callback(JSON.parse( response ));
-        }, 
+        },
         callbackError);
     };
 
 //returns project main Data: name, deadline and number of words necessary for the project to be completed
     Metrics.prototype.getProject = function (projectId, callback, callbackError) {
-      if (typeof callback === 'undefined') { callback = null; }      
-      if (typeof callbackError === 'undefined') { callbackError = null; }      
+      if (typeof callback === 'undefined') { callback = null; }
+      if (typeof callbackError === 'undefined') { callbackError = null; }
       apiCall("GET", this.priv.projectAdd + "show", buildJSON(this.priv.key, projectId), function(response) {
         if(callback !== null) callback(JSON.parse( response ));
-      }, 
+      },
       callbackError);
     };
 
     Metrics.prototype.getAllProjects = function (callback, callbackError) {
-      if (typeof callback === 'undefined') { callback = null; }      
-      if (typeof callbackError === 'undefined') { callbackError = null; }      
+      if (typeof callback === 'undefined') { callback = null; }
+      if (typeof callbackError === 'undefined') { callbackError = null; }
       apiCall("GET", this.priv.projectAdd + "index", buildJSON(this.priv.key), function(response) {
         if(callback !== null) callback(JSON.parse( response ));
-      }, 
+      },
       callbackError);
     };
 
 //returns a JSON with a list of milestones (number of words per datetime)
     Metrics.prototype.getMetrics = function (projectId, callback, callbackError) {
-      if (typeof callback === 'undefined') { callback = null; }      
-      if (typeof callbackError === 'undefined') { callbackError = null; }      
+      if (typeof callback === 'undefined') { callback = null; }
+      if (typeof callbackError === 'undefined') { callbackError = null; }
       apiCall("GET", this.priv.metricsAdd + "index", buildJSON(this.priv.key, projectId), function(response) {
         if(callback !== null) callback(JSON.parse( response ));
-      }, 
+      },
       callbackError);
     };
 
     Metrics.prototype.getUser = function (callback, callbackError) {
-      if (typeof callback === 'undefined') { callback = null; }    
+      if (typeof callback === 'undefined') { callback = null; }
       if (typeof callbackError === 'undefined') { callbackError = null; }
       apiCall("GET", this.priv.userAdd + "show", {"apikey": this.priv.key }, function (response) {
         var user = JSON.parse( response );
@@ -86,7 +86,7 @@ var Metrics = function (key) {
 //a few helper functions
     var apiCall = function(method, api, data, callbackOK, callbackError) {
       if (typeof callbackOK === 'undefined') { callbackOK = null; }
-      if (typeof callbackError === 'undefined') { callbackError = null; }          
+      if (typeof callbackError === 'undefined') { callbackError = null; }
          var xhttp = createXHTTP( function(response) {
              if (xhttp.readyState == 4) {
                  if (xhttp.status == 200) {
@@ -113,7 +113,7 @@ var Metrics = function (key) {
             }
           }
           xhttp.open(method, api + "?" + getParams, true);
-          xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");          
+          xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         } else {
           xhttp.open(method, api, true);
           xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
@@ -147,4 +147,3 @@ var buildProjectJSON = function(key, projectName, milestoneMeasure, acceptance, 
 window.Metrics = Metrics;
 
 })( window );
-

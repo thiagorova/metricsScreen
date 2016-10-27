@@ -37,7 +37,7 @@ app.controller('pjCtrl', function($scope) {
       $scope.datepickerShow = true;
     }
   });
-   
+
   $scope.validationMaster = true;
   $scope.validationPjName = function(){
     if($scope.project.projectName.length <= 0) {
@@ -99,33 +99,58 @@ app.controller('pjCtrl', function($scope) {
     $scope.unifiedValidation();
     metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.selectMilestone, $scope.project.words);
     $scope.showProjects();
-    $scope.project = {};  
+    $scope.project = {};
     $scope.showProjects();
     $scope.page = 1;
   };
 
   $scope.showProjects = function(){
-    metrics.getAllProjects(function (projects) {
+
+    /*metrics.getAllProjects(function (projects) {
       var projects = projects.projects;
       var len = projects.length;
       var pList = [];
       for (var i = 0; i < len; i ++) {
         pList.push({
           'projectName':projects[i].name.toString(),
-          'totalWords':projects[i].finish.toString(),
+          'totalWords':projects[i].finish.toString()',
           'id': projects[i].id.toString(),
           'time':projects[i].time.hours.toString() + ":" + projects[i].time.minutes.toString(),
           'milestone':{
-            'percentage': ((projects[i].wordCount / projects[i].finish)*100).toString(),
+            'percentage':((projects[i].wordCount / projects[i].finish)*100).toString(),
             'words':projects[i].wordCount.toString(),
-            'deadline': (typeof projects[i].deadline === "undefined") ? null: projects[i].deadline.toString()
+            'deadline':(typeof projects[i].deadline === "undefined") ? null: projects[i].deadline.toString()
           }
         });
       }
       $scope.$apply(function() {
+
         $scope.projectsList = pList;
       });
     });
+    */
+      $scope.projectsList =[{
+      'projectName':'Harry Potter',//projects[i].name.toString(),
+      'totalWords':'10000',//projects[i].finish.toString(),
+      'id': '1',//projects[i].id.toString(),
+      'time':'12:50',//projects[i].time.hours.toString() + ":" + projects[i].time.minutes.toString(),
+      'milestone':{
+        'percentage':'50', //((projects[i].wordCount / projects[i].finish)*100).toString(),
+        'words':'5000',//projects[i].wordCount.toString(),
+        'deadline':'12/12/2016' //(typeof projects[i].deadline === "undefined") ? null: projects[i].deadline.toString()
+      }
+    },
+    {
+    'projectName':'Hunger Games',//projects[i].name.toString(),
+    'totalWords':'15000',//projects[i].finish.toString(),
+    'id': '2',//projects[i].id.toString(),
+    'time':'13:50',//projects[i].time.hours.toString() + ":" + projects[i].time.minutes.toString(),
+    'milestone':{
+      'percentage':'75', //((projects[i].wordCount / projects[i].finish)*100).toString(),
+      'words':'10000',//projects[i].wordCount.toString(),
+      'deadline':null //(typeof projects[i].deadline === "undefined") ? null: projects[i].deadline.toString()
+    }
+  }];
   }
 
   $scope.openProject = function(project){
@@ -144,6 +169,11 @@ app.controller('pjCtrl', function($scope) {
     });
   };
 
+  $scope.projectStatus = function(){
+
+  };
+
+
   $scope.startMeasuring = function(){
     var timeInterval = 2; //number of minutes between readings
     if(!$scope.intervalId) {
@@ -159,7 +189,7 @@ app.controller('pjCtrl', function($scope) {
       $scope.intervalId = null;
     }
   };
-  
+
   var getData = function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {please: "get tags"}, function(response) {

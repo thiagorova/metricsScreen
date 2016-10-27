@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     color: #666;
-    font-family: 'Oxygen', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .projects-container{
@@ -37,6 +37,10 @@
   background-color: #4f81ae;
 }
 
+.icon-danger{
+  background-color: #cb8184;
+}
+
 .table tbody>tr>td.middle{
     vertical-align: middle;
 }
@@ -46,7 +50,6 @@
 
 label{
   font-weight: 100;
-
 }
 
 .cpj-form input, select{
@@ -113,7 +116,7 @@ header h1 {
   margin-bottom: 0px;
   padding: 0px;
   margin-top: 15px;
-  font-size: 25pt;  
+  font-size: 25pt;
 }
 
 header span {
@@ -135,13 +138,13 @@ header button {
   display: inline-block;
   border-right: 1px solid;
   border-color: #C5CDCB;
-  padding: 0px 15px 0px 15px; 
+  padding: 0px 15px 0px 15px;
   font-family: 'Oxygen', sans-serif;
 }
 
 .info:last-child {
   border-right: none;
-  
+
 }
 
 .info p {
@@ -173,4 +176,3 @@ header button {
 #projectView {
   text-align:center;
 }
-

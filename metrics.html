@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/master.css" media="screen" title="no title">
     <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <script src="js/angular.min.js"></script>
     <script src="js/angular-animate.min.js"></script>
     <script src="js/jquery-3.0.0.min.js"></script>
@@ -80,9 +81,8 @@
       <div class="col-md-12 col-xs-12 projects-table">
         <table class="table" id="projectInfo">
           <tr ng-repeat="projects in projectsList">
-
             <td class="td-icon middle">
-              <div class="circle icon-success icon"></div>
+              <div ng-class="projectStatus()"></div>
             </td>
             <td class="middle">
               <button type="button" class="btn-project-name" ng-click="openProject(projects)">{{projects.projectName}}</button>
