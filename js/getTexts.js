@@ -2,7 +2,7 @@
   var intervalId = null;
   var projectId = null;
   var metrics = new Metrics("eJwNyEEOg0AMA8AXUXmd2Mne+ApwQEhQ/n9r5zhMi2bNVhEtTIw5/tcKz4BTDsVCVacSMJlhZYURDcoKMYs1CrUc735v3/V8tuv+HO/zA8/zFm8=");
-  var timeInterval = 2; //number of minutes between readings
+  var timeInterval = 0.5; //number of minutes between readings
 
   
 chrome.runtime.onMessage.addListener( function (request, sender, callback) {
@@ -44,7 +44,9 @@ function injectScript(file, node) {
   };
     
   function readText() {  
-    injectScript( chrome.extension.getURL('/js/catchData.js'), 'body');
+    if(!document.getElementById('myReallyFakeTextArea')) {
+      injectScript( chrome.extension.getURL('/js/catchData.js'), 'body');
+    }
     
     var texts = document.getElementsByTagName('textarea');
     var contentEditable = document.querySelectorAll('[contenteditable=true]');
@@ -71,15 +73,14 @@ function injectScript(file, node) {
     for (i=0; i < DATlen; i++) {
       data += (docAutomaticText[i].innerText.trim() + "\n");
     }
-  
 //used only for wordpress
     sleep(800).then(() => {
       var createdTA = document.getElementById('myReallyFakeTextArea');
       data += createdTA.value.trim();
       data = data.trim();
-//      createdTA.parentNode.removeChild(createdTA);
       if (data !== "") {
         metrics.analyze(data, projectId);
       }
     });
+    
   }

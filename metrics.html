@@ -3,11 +3,9 @@
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
     <title>Metric Projects</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="css/master.css" media="screen" title="no title">
-    <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <script src="js/angular.min.js"></script>
     <script src="js/angular-animate.min.js"></script>
@@ -19,9 +17,8 @@
 
   <body ng-controller="pjCtrl" ng-init="showProjects()">
     <header>
-    	<h1>Metrics</h1>
-    	<span>by Authorship</span>
-    	<button ng-click="createProject()" ng-hide="page == 2 || page ==0" class="btn btn-primary"> Create Project</button>
+        	<button ng-click="createProject()" ng-hide="page == 2 || page == 0" class="btn btn-primary"> Create Project</button>
+    	<img src="img/metrics_logo.png">
     </header>
 
     <div class="projects-container animate-show col-md-12 col-sm-12 col-xs-12" ng-show="page ==2">
@@ -45,7 +42,7 @@
             </div>
             <div class="form-group">
               <label for="milestone">Milestone</label>
-              <select class="form-control" name="milestone" id="milestone" ng-model="selectMilestone">
+              <select class="form-control" name="milestone" id="milestone" ng-model="project.selectMilestone">
                 <option value="wDay">Words per Day</option>
                 <option value="wMonth">Words per Month</option>
                 <option value="deadline" ng-selected="true">Deadlines</option>
@@ -60,7 +57,7 @@
               </div>
               <div class="form-group" ng-show="datepickerShow">
                 <label for="deadline">{{period}} ? </label>
-                <input type="date" class="form-control" id="deadline" ng-model="project.deadlineDate" ng-blur="validationDate()">
+                <input type="date" class="form-control" id="deadline" ng-model="project.milestoneMeasure" ng-blur="validationDate()">
                 <div class="bg-danger" ng-show="deadlineShow">
                   <span class="glyphicon glyphicon-exclamation-sign"></span> Invalid date.
                 </div>
@@ -76,7 +73,7 @@
 
     <!---Projects Page----------------------------------------------------------------------->
 
-  <div class="projects-container col-md-12 col-xs-12" ng-show="page ==1">
+  <div class="projects-container col-md-12 col-xs-12" ng-show="page ==1" ng-init="projectStatus()">
     <h4>Recently</h4>
     <div class="col-md-12 col-xs-12">
       <table class="col-md-12 col-xs-12 projects-table" id="projectInfo">
@@ -95,15 +92,19 @@
             <p>{{projects.milestone.words}}</p>
             <span class="legend">WORDS</span>
           </td>
+          <td class="info">
+            <p>{{projects.milestone.measure}}</p>
+            <span class="legend">MILESTONE</span>
+          </td>
         </tr>
       </table>
     </div>
   </div>
 
 <!--chart page -->
-<div class="chart-container col-md-12 col-xs-12" ng-show="page ==3">
+<div class="" ng-show="page ==3">
 <div id="projectView" class="view">
-  <h1 class="viewTitle">Project name</h1>
+  <h1 class="viewTitle">{{dProject.projectName}}</h1>
   <div id="projectInfo">
     <div class="info">
       <p>{{dProject.time}}h</p>
@@ -117,17 +118,14 @@
       <p>{{dProject.milestone.percentage}}%</p>
       <span class="legend">COMPLETED</span>
     </div>
-    <div class="info">
-      <p>{{dProject.totalWords }}</p>
-      <span class="legend">MILESTONES</span>
-    </div>
   </div>
   <div id="graph"> </div>
   <div id="controls">
-    <button class="btn btn-primary col-xs-4 col-md-4" ng-click="startMeasuring()" >Start Measuring</button>
-    <button class="btn btn-primary col-xs-4 col-md-4" ng-click="stopMeasuring()" >Pause Measuring</button>
-    <button class="btn btn-primary col-xs-4 col-md-4" ng-click="stopMeasuring()" >Stop Measuring</button>
+    <button class="btn btn-primary" ng-click="startMeasuring()" >Start Measuring</button>
+    <button class="btn btn-primary" ng-click="stopMeasuring()" >Pause Measuring</button>
+    <button class="btn btn-primary" ng-click="stopMeasuring()" >Stop Measuring</button>
   </div>
+  </div>    
 </div>
 
 <!-- this should be the last thing the html file -->
@@ -150,7 +148,5 @@
        </p>
        <h3>Masterpiece!</h3>
     </div>
-
-
   </body>
 </html>
