@@ -37,7 +37,7 @@ var Metrics = function (key) {
       if (typeof callback === 'undefined') { callback = null; }
       if (typeof callbackError === 'undefined') { callbackError = null; }
       apiCall("GET", this.priv.projectAdd + "show", buildJSON(this.priv.key, projectId), function(response) {
-        if(callback !== null) callback(JSON.parse( response ));
+        if(callback !== null) callback(JSON.parse( response ).projects);
       },
       callbackError);
     };
@@ -46,7 +46,12 @@ var Metrics = function (key) {
       if (typeof callback === 'undefined') { callback = null; }
       if (typeof callbackError === 'undefined') { callbackError = null; }
       apiCall("GET", this.priv.projectAdd + "index", buildJSON(this.priv.key), function(response) {
-        if(callback !== null) callback(JSON.parse( response ));
+        var data = JSON.parse( response ).projects;
+        var len = data.length;
+        for (var i = 0; i < len;  i++) { 
+          data[i].milestones = JSON.parse( data[i].milestones );
+        }
+        if(callback !== null) callback(data);
       },
       callbackError);
     };
@@ -56,7 +61,7 @@ var Metrics = function (key) {
       if (typeof callback === 'undefined') { callback = null; }
       if (typeof callbackError === 'undefined') { callbackError = null; }
       apiCall("GET", this.priv.metricsAdd + "index", buildJSON(this.priv.key, projectId), function(response) {
-        if(callback !== null) callback(JSON.parse( response ));
+        if(callback !== null) callback(JSON.parse( response ).metrics);
       },
       callbackError);
     };

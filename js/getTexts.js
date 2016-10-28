@@ -2,6 +2,8 @@
   var intervalId = null;
   var projectId = null;
   var metrics = new Metrics("eJwNyEEOg0AMA8AXUXmd2Mne+ApwQEhQ/n9r5zhMi2bNVhEtTIw5/tcKz4BTDsVCVacSMJlhZYURDcoKMYs1CrUc735v3/V8tuv+HO/zA8/zFm8=");
+  var timeInterval = 2; //number of minutes between readings
+
   
 chrome.runtime.onMessage.addListener( function (request, sender, callback) {
   //main program, that will be executed every time a button is pressed
@@ -29,7 +31,6 @@ function injectScript(file, node) {
 }
 
   function startMeasuring(){
-    var timeInterval = 0.05; //number of minutes between readings
     if(!intervalId) {
       intervalId = setInterval(readText, timeInterval * 60 * 1000);
     }

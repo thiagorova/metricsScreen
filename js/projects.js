@@ -96,29 +96,21 @@ app.controller('pjCtrl', function($scope) {
 
   $scope.showProjects = function(){
     metrics.getAllProjects(function (projects) {
-
-      var projects = projects.projects;
-      var len = projects.length;
-      var pList = [];
-      var percentage;
-      for (var i = 0; i < len; i ++) {
-        percentage = Math.round((projects[i].wordCount / projects[i].finish)*100)
-        if (percentage > 100) percentage = 100
-        pList.push({
-          'projectName':projects[i].name.toString(),
-          'totalWords':projects[i].finish.toString(),
-          'id': projects[i].id.toString(),
-          'time':projects[i].time.hours.toString() + ":" + projects[i].time.minutes.toString(),
-          'milestone':{
-            'percentage': percentage.toString(),
-            'words':projects[i].wordCount.toString(),
-            'deadline': (typeof projects[i].deadline === "undefined") ? null: projects[i].deadline.toString()
-          }
+      var pList = setProjects(projects);
+      
+      if(pList.length === 0) {
+        $scope.$apply(function() {
+          $scope.page = 0;
+        });
+      } else {
+        $scope.$apply(function() {
+          $scope.projectsList = pList;
         });
       }
-      $scope.$apply(function() {
-        $scope.projectsList = pList;
-      });
+    }, function(error) {
+        $scope.$apply(function() {
+          $scope.page = 0;
+        });
     });
 
   /*  $scope.projectsList = [{'projectName':'Birds and Nature',
@@ -139,9 +131,6 @@ app.controller('pjCtrl', function($scope) {
                           }];
                           $scope.projectsList = [];*/
 
-      if($scope.projectsList == '')
-        $scope.page = 0;
-
   }
 
   $scope.openProject = function(project){
@@ -151,10 +140,11 @@ app.controller('pjCtrl', function($scope) {
     lineGraph.build(500, 250);
     lineGraph.setDateFormat("day_whole");
     metrics.getMetrics(project.id, function (metrics) {
-    if(metrics.metrics !== "") {
-      lineGraph.setData(metrics.metrics);
-    } else
-      $scope.dProject.time = "0";
+      if(metrics !== "") {
+        lineGraph.setData(metrics);
+      } else {
+        $scope.dProject.time = "0";
+      }
     }, function(error) {
       lineGraph.setData();
     });
@@ -176,8 +166,36 @@ app.controller('pjCtrl', function($scope) {
     });
   };
 
-  var getData = function() {
-
-  };
+  function setProjects(projects) {
+    var percentage;
+    var len = projects.length;
+    var pList = [];
+    for (var i = 0; i < len; i ++) {
+      percentage = Math.round((projects[i].wordCount / projects[i].finish)*100)
+      if (percentage > 100) percentage = 100;
+      if (projects[i].milestones.metrics == "") {
+        firstM = null;
+        secondM = null;
+      } else {
+        firstM = projects[i].milestones.metrics[0];
+        secondM = projects[i].milestones.metrics[1];
+      }
+      pList.push({
+        'projectName':projects[i].name.toString(),
+        'totalWords':projects[i].finish.toString(),
+        'id': projects[i].id.toString(),
+        'time': projects[i].time.hours.toString() + ":" + projects[i].time.minutes.toString(),
+        'milestone':{
+          'percentage': percentage.toString(),
+          'words':projects[i].wordCount.toString(),
+          'deadline': (typeof projects[i].deadline === "undefined") ? null: projects[i].deadline.toString(),
+          'firstM': projects[i].milestones.metrics[0],
+          'lastM':projects[i].milestones[1]
+        }
+      });
+    }
+    return pList;
+  }
 
 });
+
