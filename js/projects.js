@@ -95,7 +95,8 @@ app.controller('pjCtrl', function($scope) {
   };
 
   $scope.showProjects = function(){
-    metrics.getAllProjects(function (projects) {
+    /*metrics.getAllProjects(function (projects) {
+
       var projects = projects.projects;
       var len = projects.length;
       var pList = [];
@@ -118,7 +119,24 @@ app.controller('pjCtrl', function($scope) {
       $scope.$apply(function() {
         $scope.projectsList = pList;
       });
-    });
+    });*/
+
+    $scope.projectsList = [{'projectName':'Birds and Nature',
+                           'totalWords':'10000',
+                           'id':'1',
+                           'time' : '12:50',
+                           'milestone':{'percentage':'10',
+                                         'words':'100',
+                                          'deadline':null}
+                         },
+                         {'projectName':'Birds and Nature',
+                                                'totalWords':'10000',
+                                                'id':'1',
+                                                'time' : '12:50',
+                                                'milestone':{'percentage':'10',
+                                                              'words':'100',
+                                                               'deadline':null}
+                          }];
   }
 
   $scope.openProject = function(project){
@@ -135,6 +153,10 @@ app.controller('pjCtrl', function($scope) {
     }, function(error) {
       lineGraph.setData();
     });
+  };
+
+  $scope.projectStatus = function(){
+    return 'circle icon-ok';
   };
 
   $scope.startMeasuring = function(){
