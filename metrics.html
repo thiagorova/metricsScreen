@@ -24,7 +24,7 @@
     	<button ng-click="createProject()" ng-hide="page == 2 || page ==0" class="btn btn-primary"> Create Project</button>
     </header>
 
-    <div class="projects-container animate-show col-md-4 col-sm-12 col-xs-12" ng-show="page ==2">
+    <div class="projects-container animate-show col-md-12 col-sm-12 col-xs-12" ng-show="page ==2">
       <h4>Create Project</h4>
       <div class="col-md-12 col-xs-12">
         <div class="cpj-form col-md-10 col-md-offset-1 col-xs-12">
@@ -76,10 +76,10 @@
 
     <!---Projects Page----------------------------------------------------------------------->
 
-  <div class="projects-container col-md-4 col-xs-12" ng-show="page ==1">
+  <div class="projects-container col-md-12 col-xs-12" ng-show="page ==1">
     <h4>Recently</h4>
     <div class="col-md-12 col-xs-12">
-      <table class="projects-table" id="projectInfo">
+      <table class="col-md-12 col-xs-12 projects-table" id="projectInfo">
           <tr ng-repeat="projects in projectsList">
           <td class="">
             <div ng-class="projectStatus()"></div>
@@ -101,7 +101,7 @@
   </div>
 
 <!--chart page -->
-<div class="projects-container animate-show col-md-4 col-xs-12" ng-show="page ==3">
+<div class="chart-container col-md-12 col-xs-12" ng-show="page ==3">
 <div id="projectView" class="view">
   <h1 class="viewTitle">Project name</h1>
   <div id="projectInfo">
@@ -149,7 +149,6 @@
          to create your next
        </p>
        <h3>Masterpiece!</h3>
-
     </div>
 
 
