@@ -95,7 +95,7 @@ app.controller('pjCtrl', function($scope) {
   };
 
   $scope.showProjects = function(){
-    /*metrics.getAllProjects(function (projects) {
+    metrics.getAllProjects(function (projects) {
 
       var projects = projects.projects;
       var len = projects.length;
@@ -119,9 +119,9 @@ app.controller('pjCtrl', function($scope) {
       $scope.$apply(function() {
         $scope.projectsList = pList;
       });
-    });*/
+    });
 
-    $scope.projectsList = [{'projectName':'Birds and Nature',
+  /*  $scope.projectsList = [{'projectName':'Birds and Nature',
                            'totalWords':'10000',
                            'id':'1',
                            'time' : '12:50',
@@ -137,6 +137,11 @@ app.controller('pjCtrl', function($scope) {
                                                               'words':'100',
                                                                'deadline':null}
                           }];
+                          $scope.projectsList = [];*/
+
+      if($scope.projectsList == '')
+        $scope.page = 0;
+
   }
 
   $scope.openProject = function(project){

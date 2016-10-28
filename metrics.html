@@ -21,7 +21,7 @@
     <header>
     	<h1>Metrics</h1>
     	<span>by Authorship</span>
-    	<button ng-click="createProject()" ng-hide="page == 2"> Create Project</button>
+    	<button ng-click="createProject()" ng-hide="page == 2 || page ==0" class="btn btn-primary"> Create Project</button>
     </header>
 
     <div class="projects-container animate-show col-md-4 col-sm-12 col-xs-12" ng-show="page ==2">
@@ -66,7 +66,7 @@
                 </div>
               </div>
               <div class="center btn-div col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
-                <button class="btn btn-primary btn-block" ng-model="page" ng-click="addProject()" ng-disabled="validationMaster">Create Project
+                <button class="btn btn-primary btn-block" ng-model="page" ng-click="addProject()" ng-disabled="validationMaster">Create Project</button>
               </div>
           </form>
         </div>
@@ -99,6 +99,8 @@
       </table>
     </div>
   </div>
+
+<!--chart page -->
 <div class="projects-container animate-show col-md-4 col-xs-12" ng-show="page ==3">
 <div id="projectView" class="view">
   <h1 class="viewTitle">Project name</h1>
@@ -122,15 +124,33 @@
   </div>
   <div id="graph"> </div>
   <div id="controls">
-    <button class="btn btn-primary btn-block" ng-click="startMeasuring()" >Start Measuring</button>
-    <button class="btn btn-primary btn-block" ng-click="stopMeasuring()" >Pause Measuring</button>
-    <button class="btn btn-primary btn-block" ng-click="stopMeasuring()" >Stop Measuring</button>
+    <button class="btn btn-primary col-xs-4 col-md-4" ng-click="startMeasuring()" >Start Measuring</button>
+    <button class="btn btn-primary col-xs-4 col-md-4" ng-click="stopMeasuring()" >Pause Measuring</button>
+    <button class="btn btn-primary col-xs-4 col-md-4" ng-click="stopMeasuring()" >Stop Measuring</button>
   </div>
 </div>
 
 <!-- this should be the last thing the html file -->
   <script src="js/graph.js"></script>
 </div>
+
+<!--empty project page-->
+    <div class="empty-page" ng-show="page==0">
+      <div class = "title">
+        <h1>Welcome!</h1>
+      </div>
+      <h2>
+        To start using
+      </h2>
+        <h1><span>Metrics</span></h1>
+         press <br>
+       <button class="btn btn-primary" ng-model="page" ng-click="createProject()">Create Project</button>
+       <p>
+         to create your next
+       </p>
+       <h3>Masterpiece!</h3>
+
+    </div>
 
 
   </body>
