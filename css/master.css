@@ -5,11 +5,11 @@
 
 .projects-container{
   background-color: #f3f3f3;
-  width: 450px;
+  width: 456px;
 }
 .chart-container{
   background-color: #f3f3f3;
-  width: 450px;
+  width: 456px;
 }
 .projects-container h3, h4{
   text-align: center;
@@ -79,12 +79,13 @@ label{
 .projects-table .info{
   padding-top: 10px;
   text-align: center;
-  font-weight: bold;
 }
 
-.projects-table .info span{
-  font-weight: normal;
+.projects-table .info p{
+  font-size: 11pt;
+  font-weight: bold;
 }
+  
 
 .hLine {
   fill: none;
@@ -174,7 +175,7 @@ header button {
 .empty-page{
   text-align: center;
   background-color: #f3f3f3;
-  width: 450px;
+  width: 456px;
   font-size: 20px;
   margin: 0px;
 }
@@ -223,4 +224,24 @@ header button {
 
 #controls button {
   margin-right: 1px;
+}
+
+.icon-attention{
+  background-color: #f2f302;
+}
+
+.right {
+  float: right;
+}
+
+#seeAll {
+  background: #FFF;
+  text-align:center;
+  width: 456px;
+  font-style:underline;
+  cursor:pointer;
+  outline:none;
+  margin-left:-12px;
+  color: #666;
+  border:none;
 }

@@ -1,28 +1,28 @@
 var app = angular.module('pjApp', ['ngAnimate']);
 app.controller('pjCtrl', function($scope) {
-  var metrics = new Metrics("eJwNyEEOg0AMA8AXUXmd2Mne+ApwQEhQ/n9r5zhMi2bNVhEtTIw5/tcKz4BTDsVCVacSMJlhZYURDcoKMYs1CrUc735v3/V8tuv+HO/zA8/zFm8=");
+  var metrics = new Metrics("eJwNyDsOgDAMBNETgTZre+10XAVSICQ+9++INHrFELAQmEF3V/OiuhhtPqUbyAT6wmpUWc7Qw8mqtGaQDBMVIoy2jO+493c7n/261/E9P8cBFlU=");
   var lineGraph = new LineGraph();
   $scope.period = 'For when is your project';
   $scope.page = 1;
   $scope.datepickerShow = 'false';
-  $scope.project = {  'id':'',
+  $scope.project = {
     'projectName':'',
+    'selectMilestone' : '',
     'totalWords':'',
-    'milestone':{ 'deadline':'',
-      'percentage':'',
-      'words':''}
+    'milestoneMeasure':'',
+    'deadline':''
     };
   $scope.projectsList = [];
 
   //This is a watcher function, which changes the milestone parameter based on the select field
-  $scope.$watch('selectMilestone', function() {
-    if($scope.selectMilestone == 'wDay'){
+  $scope.$watch('project.selectMilestone', function() {
+    if($scope.project.selectMilestone == 'wDay'){
       $scope.period = 'How many words do you want to write per day';
       $scope.datepickerShow = false;
-    } else if($scope.selectMilestone == 'wMonth'){
+    } else if($scope.project.selectMilestone == 'wMonth'){
       $scope.period = 'How many words do you want to write per month';
       $scope.datepickerShow = false;
-   } else if($scope.selectMilestone == 'deadline'){
+   } else if($scope.project.selectMilestone == 'deadline'){
       $scope.period = 'For when is your project'
       $scope.datepickerShow = true;
     }
@@ -32,49 +32,56 @@ app.controller('pjCtrl', function($scope) {
   $scope.validationPjName = function(){
     if($scope.project.projectName.length <= 0) {
       $scope.pjNameShow = true;
-      $scope.validationMaster = true;
+      return true;
     } else{
       $scope.pjNameShow = false;
-      $scope.validationMaster = false;
+      return false;
     }
   }
 
   $scope.validationTotalWords = function(){
-    if($scope.project.totalWords <= 0 || $scope.project.totalWords == null || $scope.project.totalWords.length <= 0 ){
+    if($scope.project.totalWords <= 0 || $scope.project.totalWords === null){
       $scope.tWordsShow = true;
-      $scope.validationMaster = true;
+      return true;
     } else{
       $scope.tWordsShow = false;
-      $scope.validationMaster = false;
+      return false;
     }
   }
 
   $scope.validationMeasure = function(){
+    if($scope.project.selectMilestone === "deadline") return false;
     if($scope.project.milestoneMeasure <= 0 ){
       $scope.measureShow = true;
-      $scope.validationMaster = true;
+      return true;
     } else{
       $scope.measureShow = false;
-      $scope.validationMaster = false;
+      return false;
     }
   }
 
   $scope.validationDate = function(){
-    var d = new Date();
-    if($scope.project.deadlineDate < d || $scope.project.deadlineDate == undefined){
-      $scope.deadlineShow = true;
+    if($scope.project.selectMilestone === "wMonth" || $scope.project.selectMilestone === "wDay") return false;
+    return false;
+  }
+   
+  $scope.validationMType = function(){
+    if($scope.project.selectMilestone === "none")
       $scope.validationMaster = true;
-    } else{
-      $scope.deadlineShow = false;
+    else
       $scope.validationMaster = false;
-    }
   }
 
   $scope.unifiedValidation = function(){
-    $scope.validationPjName();
-    $scope.validationTotalWords();
-    $scope.validationMeasure();
-    $scope.validationDate();
+    if ($scope.validationPjName() ||
+    $scope.validationTotalWords() ||
+    $scope.validationMeasure() ||
+    $scope.validationDate() ||
+    $scope.validationMType()) {
+       $scope.validationMaster = true;
+    } else {
+      $scope.validationMaster = false;
+    }
   }
 
 
@@ -84,10 +91,15 @@ app.controller('pjCtrl', function($scope) {
     $scope.page = 2
    };
 
+  $scope.toProjects = function(){
+    $scope.page = 1
+   };
+
    //function to create a project
   $scope.addProject = function(){
-    $scope.unifiedValidation();
-    metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.selectMilestone, $scope.project.words);
+    var milestoneMeasure = $scope.project.milestoneMeasure;
+    if  (!milestoneMeasure) milestoneMeasure = $scope.project.deadline;
+    metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure);
     $scope.showProjects();
     $scope.project = {};
     $scope.showProjects();
@@ -97,62 +109,86 @@ app.controller('pjCtrl', function($scope) {
   $scope.showProjects = function(){
     metrics.getAllProjects(function (projects) {
       var pList = setProjects(projects);
-      
       if(pList.length === 0) {
-        $scope.$apply(function() {
+        $scope.$apply(function() {		//this is an XHR callback, so its not inside angular scope... therefore apply is necessary to bring it back
           $scope.page = 0;
         });
       } else {
         $scope.$apply(function() {
           $scope.projectsList = pList;
+          $scope.projectsListView = []
+          var len = pList.length;
+          for (i = 0; i < len; i ++) {
+            if (pList[i].completed === "True" ) continue;
+            if ( toDays(new Date() - pList[i].lastUpdate) >= 30  ) continue;
+            $scope.projectsListView.push(pList[i]);
+          }
         });
       }
     }, function(error) {
-        $scope.$apply(function() {
-          $scope.page = 0;
-        });
+      $scope.$apply(function() {
+        $scope.page = 0;
+      });
     });
 
-  /*  $scope.projectsList = [{'projectName':'Birds and Nature',
-                           'totalWords':'10000',
-                           'id':'1',
-                           'time' : '12:50',
-                           'milestone':{'percentage':'10',
-                                         'words':'100',
-                                          'deadline':null}
-                         },
-                         {'projectName':'Birds and Nature',
-                                                'totalWords':'10000',
-                                                'id':'1',
-                                                'time' : '12:50',
-                                                'milestone':{'percentage':'10',
-                                                              'words':'100',
-                                                               'deadline':null}
-                          }];
-                          $scope.projectsList = [];*/
+  };
 
+  $scope.seeAllProjects = function() {
+     $scope.projectsListView = $scope.projectsList;
+  }
+
+  //convert miliseconds to days
+  function toDays(date){
+    return (date/86400000);
   }
 
   $scope.openProject = function(project){
     $scope.page = 3;
     $scope.dProject = project;
-    lineGraph.clear();
-    lineGraph.build(500, 250);
-    lineGraph.setDateFormat("day_whole");
     metrics.getMetrics(project.id, function (metrics) {
       if(metrics !== "") {
+        lineGraph.clear();
+        lineGraph.build(430, 240);
+        lineGraph.setDateFormat("day_whole");
         lineGraph.setData(metrics);
-      } else {
-        $scope.dProject.time = "0";
       }
-    }, function(error) {
-      lineGraph.setData();
     });
   };
 
-  $scope.projectStatus = function(){
-    return 'circle icon-ok';
+//função para calcular a porcentagem cumulativa
+  $scope.eloCalc = function(project){
+     var target;
+    var today = new Date();
+    var dateElements = project.creation.split("/")
+    var creation = new Date(dateElements[2], parseInt(dateElements[1]) - 1, dateElements[0]);
+    var difference = today - creation; 
+    if (project.milestone.type !== "deadline") {  //a project can either have an average or a deadline. if one is set, the other is null
+      target = project.milestone.words * toDays(difference);
+      if(project.milestone.type === "wMonth") {  //if it is a monthly milestone, then i must write about 1/30 of the daily expectation (per month)
+         target /= 30;
+      }
+    } else {
+      var deadlineElements = project.milestone.deadline.split("/")
+      var deadline = new Date(deadlineElements[2], parseInt(deadlineElements[1]) - 1, deadlineElements[0]);
+      target = project.totalWords/toDays(deadline - creation)
+    }
+    project.elo = (project.words * 100)/target;
   };
+  
+//função para retornar as classes certas das bolinhas
+  $scope.projectStatus = function(project){
+    if (typeof project.elo === "undefined") {
+      $scope.eloCalc(project)
+    }
+    if(project.elo >= 99)
+      return 'circle icon-success';
+    if(project.elo >= 80 && project.elo < 99)
+      return 'circle icon-attention';
+    if(project.elo < 80 && project.elo > 0)
+      return 'circle icon-danger';
+    if(project.elo == 0)
+      return 'circle icon-ok';
+  }
 
   $scope.startMeasuring = function(){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -173,24 +209,20 @@ app.controller('pjCtrl', function($scope) {
     for (var i = 0; i < len; i ++) {
       percentage = Math.round((projects[i].wordCount / projects[i].finish)*100)
       if (percentage > 100) percentage = 100;
-      if (projects[i].milestones.metrics == "") {
-        firstM = null;
-        secondM = null;
-      } else {
-        firstM = projects[i].milestones.metrics[0];
-        secondM = projects[i].milestones.metrics[1];
-      }
       pList.push({
         'projectName':projects[i].name.toString(),
         'totalWords':projects[i].finish.toString(),
         'id': projects[i].id.toString(),
         'time': projects[i].time.hours.toString() + ":" + projects[i].time.minutes.toString(),
+        'words':projects[i].wordCount.toString(),
+        'creation': projects[i].creation,
+        'completed' : projects[i].done,
+        'lastUpdate' : projects[i].lastUpdate,
         'milestone':{
+          'type': projects[i].milestoneType,
           'percentage': percentage.toString(),
-          'words':projects[i].wordCount.toString(),
-          'deadline': (typeof projects[i].deadline === "undefined") ? null: projects[i].deadline.toString(),
-          'firstM': projects[i].milestones.metrics[0],
-          'lastM':projects[i].milestones[1]
+          'words':(typeof projects[i].milestoneAverage === "undefined") ? null: projects[i].milestoneAverage.toString(),
+          'deadline': (typeof projects[i].deadline === "undefined") ? null: projects[i].deadline.toString()
         }
       });
     }
@@ -198,4 +230,3 @@ app.controller('pjCtrl', function($scope) {
   }
 
 });
-

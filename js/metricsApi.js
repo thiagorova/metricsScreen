@@ -47,10 +47,6 @@ var Metrics = function (key) {
       if (typeof callbackError === 'undefined') { callbackError = null; }
       apiCall("GET", this.priv.projectAdd + "index", buildJSON(this.priv.key), function(response) {
         var data = JSON.parse( response ).projects;
-        var len = data.length;
-        for (var i = 0; i < len;  i++) { 
-          data[i].milestones = JSON.parse( data[i].milestones );
-        }
         if(callback !== null) callback(data);
       },
       callbackError);
