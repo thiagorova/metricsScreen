@@ -160,7 +160,7 @@ LineGraph.prototype.buildAxis = function() {
       .attr("y", 6)
       .attr("x", -25)
       .style("class", "axis-text")
-      .text("Words");
+      .text("Hours");
 };
 
 LineGraph.prototype.buildHLines = function(data) {
