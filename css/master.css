@@ -186,7 +186,7 @@ header button {
 
 #project-view {
   text-align:center;
-    height:inherit;
+  min-height: 356px;
 }
 
 #controls {

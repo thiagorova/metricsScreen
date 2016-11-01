@@ -147,6 +147,12 @@ app.controller('pjCtrl', function($scope) {
     $scope.dProject = project;
     metrics.getMetrics(project.id, function (metrics) {
       if(metrics !== "") {
+       var graph = document.getElementById("graph");
+       if (graph === null)  {
+         graph = document.createElement("div");
+         graph.id = "graph";
+         document.getElementById("project-view").insertBefore(graph, document.getElementById("controls"));
+       }
         lineGraph.clear();
         lineGraph.build(430, 240);
         lineGraph.setDateFormat("day_whole");
