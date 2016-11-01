@@ -1,0 +1,30 @@
+<div ng-controller="chartsController">
+<div id="projectView" class="view">
+  <h1 class="viewTitle">{{dProject.projectName}}</h1>
+  <button class="btn right" ui-sref="projects">Back</button>
+  <div id="projectInfo">
+    <div class="info">
+      <p>{{dProject.time}}h</p>
+      <span class="legend">TIME SPENT</span>
+    </div>
+    <div class="info">
+      <p>{{dProject.words}}</p>
+      <span class="legend">WORDS</span>
+    </div>
+    <div class="info">
+      <p>{{dProject.milestone.percentage}}%</p>
+      <span class="legend">COMPLETED</span>
+    </div>
+  </div>
+  <div id="graph"> </div>
+  <div id="controls">
+    <button class="btn btn-primary" ng-click="startMeasuring()" ><img src="img/start.png">Start</button>
+    <button class="btn btn-primary" ng-click="stopMeasuring()" ><img src="img/pause.png">Pause</button>
+    <button class="btn btn-primary" ng-click="stopMeasuring()" ><img src="img/stop.png">Stop</button>
+  </div>
+  </div>
+</div>
+
+<!-- this should be the last thing the html file -->
+  <script src="js/graph.js"></script>
+</div>

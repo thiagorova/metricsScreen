@@ -1,0 +1,51 @@
+
+<div class="projects-container animate-show col-md-12 col-sm-12 col-xs-12" ng-controller = "createController">
+  <h4>Create Project</h4>
+  <button class="btn right" ui-sref="projects">Back</button>
+  <div class="col-md-12 col-xs-12">
+    <div class="cpj-form col-md-10 col-md-offset-1 col-xs-12">
+      <form>
+        <div class="form-group">
+          <label for="project-title">Title</label>
+          <input type="text" class="form-control" ng-model="project.projectName" ng-blur="unifiedValidation()">
+          <div class="bg-danger" ng-show="pjNameShow">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>  Empty field
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="total-words">Total number of words</label>
+          <input type="number" class="form-control" ng-model="project.totalWords" ng-blur="unifiedValidation()">
+          <div class="bg-danger" ng-show="tWordsShow">
+            <span class="glyphicon glyphicon-exclamation-sign"></span>  Please, put a number greater than 0.
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="milestone">Milestone</label>
+          <select class="form-control" name="milestone" ng-model="project.selectMilestone" ng-blur="unifiedValidation()">
+            <option value="none" ng-selected="true">choose the type of milestone you want</option>
+            <option value="wDay">Words per Day</option>
+            <option value="wMonth">Words per Month</option>
+            <option value="deadline">Deadlines</option>
+          </select>
+        </div>
+          <div class="form-group" ng-hide="datepickerShow">
+            <label for="many-words">{{period}} ? </label>
+            <input type="number" class="form-control" ng-model="project.milestoneMeasure" ng-blur="unifiedValidation()">
+            <div class="bg-danger" ng-show="measureShow">
+              <span class="glyphicon glyphicon-exclamation-sign"></span>  Please, put a number greater than 0.
+            </div>
+          </div>
+          <div class="form-group" ng-show="datepickerShow">
+            <label for="deadline">{{period}} ? </label>
+            <input type="text" class="form-control" ng-model="project.deadline" ng-blur="unifiedValidation()">
+            <div class="bg-danger" ng-show="deadlineShow">
+              <span class="glyphicon glyphicon-exclamation-sign"></span> Invalid date.
+            </div>
+          </div>
+          <div class="center btn-div col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
+            <button class="btn btn-primary btn-block" ng-model="page" ng-click="addProject()"  ng-disabled="validationMaster" ui-sref="projects">Create Project</button>
+          </div>
+      </form>
+    </div>
+  </div>
+</div>
