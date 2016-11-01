@@ -62,7 +62,6 @@ LineGraph.hidden.setDateFormat = function(format) {
   if (format==="day_whole") { return function (date) {
       var mainDate = date.split(" ")
       var time = mainDate[1].split(":")
-      console.log(mainDate[0].split("/")[0] + " " + time[0] + ":" + time[1]);
       return mainDate[0].split("/")[0] + " " + time[0] + ":" + time[1];
     };
   }
@@ -147,7 +146,7 @@ LineGraph.prototype.buildAxis = function() {
       .call(d3.axisBottom(this.x))
     .append("text")
       .attr("fill", "#666")
-      .attr("y", 29)
+      .attr("y", 33)
       .attr("x", this.width)
       .style("class", "axis-text")
       .text("Days");

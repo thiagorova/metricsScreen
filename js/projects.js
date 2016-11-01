@@ -1,6 +1,6 @@
 var app = angular.module('pjApp', ['ngAnimate']);
 app.controller('pjCtrl', function($scope) {
-  var metrics = new Metrics("eJwNyDsOgDAMBNETgTZre+10XAVSICQ+9++INHrFELAQmEF3V/OiuhhtPqUbyAT6wmpUWc7Qw8mqtGaQDBMVIoy2jO+493c7n/261/E9P8cBFlU=");
+  var metrics = new Metrics("eJxFijkOgEAMxF4EmiSbYzq+QoEEBQJx/B+o6CzbkhWhYciISDjhBnWzlgSFns5K6xT1BjaWahHvE8Zm5oHPOkSqqXTjfc3bcc7LPvzYr9MDnkAaIw==");
   var lineGraph = new LineGraph();
   $scope.period = 'For when is your project';
   $scope.page = 1;
@@ -99,11 +99,11 @@ app.controller('pjCtrl', function($scope) {
   $scope.addProject = function(){
     var milestoneMeasure = $scope.project.milestoneMeasure;
     if  (!milestoneMeasure) milestoneMeasure = $scope.project.deadline;
-    metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure);
-    $scope.showProjects();
-    $scope.project = {};
-    $scope.showProjects();
-    $scope.page = 1;
+    metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure, function () {
+      $scope.project = {};
+      $scope.showProjects();
+      $scope.page = 1;
+    });
   };
 
   $scope.showProjects = function(){

@@ -5,16 +5,15 @@
 
 body {
   width: 456px;
-  height: 519px;
+  height: 356px;
 }
 
 .projects-view{
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .container{
   background-color: #f3f3f3;
-  height: 490px;
 }
 
 .projects-container h3, h4{
@@ -188,11 +187,22 @@ header button {
   text-align:center;
 }
 
+#controls {
+  margin-bottom: 10px;
+}
+
 #controls button:first-child {
   margin-left: 30px;
 }
 
-#controls h2 {
+#graph + #controls > h2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: -250px;
+  font-size: 11pt;
+}
+
+:not(#graph) + #controls > h2{
   margin-top: 40px;
   margin-bottom: 10px;
   margin-left: -250px;

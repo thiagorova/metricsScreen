@@ -9,17 +9,19 @@ var Metrics = function (key) {
     this.priv = {}
     this.priv.key = key;
     this.priv.project = null;
-    var mainAdd = "http://localhost:4000"
-    this.priv.metricsAdd = mainAdd + "/metrics/";
-    this.priv.userAdd = mainAdd + "/users/";
-    this.priv.projectAdd = mainAdd + "/projects/";
+//    var mainAdd = "http://localhost:4000"
+    var mainAdd = "http://52.67.118.141/"
+    this.priv.metricsAdd = mainAdd + "metrics/";
+    this.priv.userAdd = mainAdd + "users/";
+    this.priv.projectAdd = mainAdd + "projects/";
   };
 
 //public methods
 
-    Metrics.prototype.createProject = function (projectName, acceptance, milestoneType, measure ) {
+    Metrics.prototype.createProject = function (projectName, acceptance, milestoneType, measure, callback ) {
+      if (typeof callback === 'undefined') { callback = null; }
       var project = buildProjectJSON(this.priv.key, projectName, measure, acceptance, milestoneType);
-      apiCall("POST", this.priv.projectAdd + "create", project);
+      apiCall("POST", this.priv.projectAdd + "create", project, callback);
     };
 
 //sends the text to the server to create
