@@ -151,6 +151,9 @@ app.controller('pjCtrl', function($scope) {
         lineGraph.build(430, 240);
         lineGraph.setDateFormat("day_whole");
         lineGraph.setData(metrics);
+      } else {
+       var graph = document.getElementById("graph");
+        graph.parentNode.removeChild(graph);
       }
     });
   };

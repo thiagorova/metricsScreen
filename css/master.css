@@ -10,6 +10,7 @@ body {
 
 .projects-view{
   overflow-y: scroll;
+   height:inherit;
 }
 
 .container{
@@ -185,6 +186,7 @@ header button {
 
 #project-view {
   text-align:center;
+    height:inherit;
 }
 
 #controls {
