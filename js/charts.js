@@ -1,5 +1,4 @@
 angular.module('metricsApp').controller('chartsController', function($scope, $rootScope){
-  var metrics = new Metrics("eJwNyDsOgDAMBNETgTZre+10XAVSICQ+9++INHrFELAQmEF3V/OiuhhtPqUbyAT6wmpUWc7Qw8mqtGaQDBMVIoy2jO+493c7n/261/E9P8cBFlU=");
   var lineGraph = new LineGraph();
 
   $scope.openProject = function(){

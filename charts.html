@@ -1,7 +1,13 @@
-<div ng-controller="chartsController">
-<div id="projectView" class="view">
-  <h1 class="viewTitle">{{dProject.projectName}}</h1>
-  <button class="btn right" ui-sref="projects">Back</button>
+      <header>
+        	<button ng-click="createProject()" ui-sref="create" class="btn"> New Project</button>
+    	<img src="img/metrics_logo.png">
+    </header>
+
+<div ng-controller="chartsController" id="project-view" class="view container">
+  <button class="btn right btn-primary backButton" ui-sref="projects">Back</button>
+  <h4 class="viewTitle">{{dProject.projectName}}</h4>
+  <div id="projectView" class="view">
+  
   <div id="projectInfo">
     <div class="info">
       <p>{{dProject.time}}h</p>
@@ -14,6 +20,10 @@
     <div class="info">
       <p>{{dProject.milestone.percentage}}%</p>
       <span class="legend">COMPLETED</span>
+    </div>
+       <div class="info">
+      <p>{{dProject.milestone.words || dProject.milestone.deadline.replace("/20", "/")}}</p>
+      <span class="legend">MILESTONE</span>
     </div>
   </div>
   <div id="graph"> </div>

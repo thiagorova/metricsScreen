@@ -1,8 +1,7 @@
 angular.module('metricsApp').controller('projectsController', function($scope, $rootScope, $location){
-  var metrics = new Metrics("eJwNyDsOgDAMBNETgTZre+10XAVSICQ+9++INHrFELAQmEF3V/OiuhhtPqUbyAT6wmpUWc7Qw8mqtGaQDBMVIoy2jO+493c7n/261/E9P8cBFlU=");
   
   $scope.showProjects = function(){
-    metrics.getAllProjects(function (projects) {
+    $scope.metrics.getAllProjects(function (projects) {
       var pList = setProjects(projects);
       if(pList.length === 0) {
         $scope.$apply(function() {		//this is an XHR callback, so its not inside angular scope... therefore apply is necessary to bring it back

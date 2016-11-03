@@ -1,7 +1,6 @@
 angular.module('metricsApp').controller('createController', function($scope, $location){
-  var metrics = new Metrics("eJwNyDsOgDAMBNETgTZre+10XAVSICQ+9++INHrFELAQmEF3V/OiuhhtPqUbyAT6wmpUWc7Qw8mqtGaQDBMVIoy2jO+493c7n/261/E9P8cBFlU=");
   $scope.period = 'For when is your project';
-  $scope.datepickerShow = 'false';
+  $scope.datepickerShow = false;
   $scope.project = {
     'projectName':'',
     'selectMilestone' : '',
@@ -86,7 +85,7 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
   $scope.addProject = function(){
     var milestoneMeasure = $scope.project.milestoneMeasure;
     if  (!milestoneMeasure) milestoneMeasure = $scope.project.deadline;
-    metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure);
+    $scope.metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure);
     $scope.project = {};
     $location.path('/projects');
   };

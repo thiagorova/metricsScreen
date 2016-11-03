@@ -1,6 +1,5 @@
 var myApp = angular.module('metricsApp', ['ui.router']);
 myApp.config(function($stateProvider) {
-  // An array of state definitions
   var states = [
     {
       name: 'empty',
@@ -24,38 +23,6 @@ myApp.config(function($stateProvider) {
       url: '/charts',
       templateUrl: 'charts.html'
     }
-
-
-
-/*
-    {
-      name: 'people',
-      url: '/people',
-      component: 'people',
-      // This state defines a 'people' resolve
-      // It delegates to the PeopleService to HTTP fetch (async)
-      // The people component receives this via its `bindings: `
-      resolve: {
-        people: function(PeopleService) {
-          return PeopleService.getAllPeople();
-        }
-      }
-    },
-
-    {
-      name: 'person',
-      // This state takes a URL parameter called personId
-      url: '/people/{personId}',
-      component: 'person',
-      // This state defines a 'person' resolve
-      // It delegates to the PeopleService, passing the personId parameter
-      resolve: {
-        person: function(PeopleService, $transition$) {
-          return PeopleService.getPerson($transition$.params().personId);
-        }
-      }
-    }
-    */
   ]
 
   // Loop over the state definitions and register them
@@ -63,6 +30,8 @@ myApp.config(function($stateProvider) {
     $stateProvider.state(state);
   });
 });
+
 myApp.controller('indexController', function($scope, $location){
-    $location.path('/projects');
+  $scope.metrics = new Metrics("eJwNyDsOgDAMBNETgTZre+10XAVSICQ+9++INHrFELAQmEF3V/OiuhhtPqUbyAT6wmpUWc7Qw8mqtGaQDBMVIoy2jO+493c7n/261/E9P8cBFlU=");
+  $location.path('/projects');
 });
