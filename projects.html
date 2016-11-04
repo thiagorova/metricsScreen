@@ -1,10 +1,13 @@
-      <header>
+    <header>
         	<button ng-click="createProject()" ui-sref="create" class="btn"> New Project</button>
     	<img src="img/metrics_logo.png">
     </header>
 
 <div class="projects-view container col-md-12 col-xs-12" ng-controller="projectsController" ng-init="showProjects()">
   <h4 class="viewTitle">Your Projects</h4>
+  <div ng-show="loading">
+    <span class="glyphicon glyphicon-refresh spinning"></span>  Loading...
+  </div>
   <div class="col-md-12 col-xs-12">
     <table class="col-md-12 col-xs-12 projects-table" id="projectInfo">
         <tr ng-repeat="projects in projectsListView">
@@ -29,5 +32,4 @@
       </tr>
     </table>
   </div>
-
 </div>

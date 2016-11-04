@@ -1,13 +1,14 @@
 angular.module('metricsApp').controller('projectsController', function($scope, $rootScope, $location){
-  
+  $scope.loading = true;
   $scope.showProjects = function(){
     $scope.metrics.getAllProjects(function (projects) {
       var pList = setProjects(projects);
       if(pList.length === 0) {
         $scope.$apply(function() {		//this is an XHR callback, so its not inside angular scope... therefore apply is necessary to bring it back
-          $scope.page = 0;
+
         });
       } else {
+        $scope.loading = false;
         $scope.$apply(function() {
           $scope.projectsList = pList;
           $scope.projectsListView = []
@@ -21,7 +22,7 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
       }
     }, function(error) {
       $scope.$apply(function() {
-          $location.path('/empty');
+        $location.path('/empty');
       });
     });
     $scope.projectsListView = $scope.projectsList;

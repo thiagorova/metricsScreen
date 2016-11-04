@@ -23,37 +23,45 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
     }
   });
 
-  function dateValidation(date){
-    today = new Date();
-    if(date < today){
-      return false;
-    }
-    else {
-      return true;
-    }
-  }
-  function nameValidation(name){
-    if(name.length <=0){
-      return false;
-    }
-    else {
-      return true;
+  $scope.dateValidation = function(date){
+
+    if(date){
+      var today = new Date();    
+      if(date < today || date.getDate() < 1 || date.getDate() > 31 || date.getMonth() < 0
+          || date.getMonth() > 11){
+        return false;
+      }
+      else {
+        return true;
+      }
     }
   }
-  function numberValidation(number){
-    if(number <= 0){
-      return false;
+  $scope.nameValidation = function(name){
+    if(name){
+      if(name.length <=0){
+        return false;
+      }
+      else {
+        return true;
+      }
     }
-    else {
-      return true;
+  }
+  $scope.numberValidation = function(number){
+    if(number){
+      if(number <= 0){
+        return false;
+      }
+      else {
+        return true;
+      }
     }
   }
   $scope.disable = function(){
     switch ($scope.datepickerShow) {
       case true:
-        if(dateValidation($scope.project.deadline) &&
-            numberValidation($scope.project.totalWords)
-          && nameValidation($scope.project.projectName)){
+        if($scope.dateValidation($scope.project.deadline) &&
+            $scope.numberValidation($scope.project.totalWords)
+          && $scope.nameValidation($scope.project.projectName)){
           return false;
         }
         else {
@@ -61,9 +69,9 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
         }
         break;
       case false:
-        if(numberValidation($scope.project.totalWords) &&
-         numberValidation($scope.project.milestoneMeasure)
-          && nameValidation($scope.project.projectName)){
+        if($scope.numberValidation($scope.project.totalWords) &&
+         $scope.numberValidation($scope.project.milestoneMeasure)
+          && $scope.nameValidation($scope.project.projectName)){
           return false;
         }
         else {
@@ -71,9 +79,9 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
         }
         break;
       default:
-        if(dateValidation($scope.project.deadline) &&
-            numberValidation($scope.project.totalWords)
-          && nameValidation($scope.project.projectName)){
+        if($scope.dateValidation($scope.project.deadline) &&
+            $scope.numberValidation($scope.project.totalWords)
+          && $scope.nameValidation($scope.project.projectName)){
           return false;
         }
         else {
@@ -89,7 +97,7 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
     $scope.project = {};
     $location.path('/projects');
   };
-  
+
   $scope.$watch('project', function(){
     $scope.disable();
   }, true);
