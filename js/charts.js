@@ -3,7 +3,7 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
 
   $scope.openProject = function(){
     $scope.dProject = $rootScope.project;  //the project is passed in this var now: $rootScope.project
-    metrics.getMetrics($scope.dProject.id, function (metrics) {
+    $scope.metrics.getMetrics($scope.dProject.id, function (metrics) {
       if(metrics !== "") {
         lineGraph.clear();
         lineGraph.build(430, 240);
@@ -12,7 +12,6 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
       }
     });
   };
-    $scope.openProject();
 
   $scope.startMeasuring = function(){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -25,4 +24,8 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
       chrome.tabs.sendMessage(tabs[0].id, {request: "stop", project: $scope.dProject.id}, null);
     });
   };
+  
+  
+  
+  $scope.openProject();
 });

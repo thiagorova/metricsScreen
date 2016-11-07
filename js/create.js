@@ -93,9 +93,11 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
   $scope.addProject = function(){
     var milestoneMeasure = $scope.project.milestoneMeasure;
     if  (!milestoneMeasure) milestoneMeasure = $scope.project.deadline;
-    $scope.metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure);
-    $scope.project = {};
-    $location.path('/projects');
+    $scope.metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure, function () {
+      $scope.project = {};
+      $location.path('/projects');    
+    });
+
   };
 
   $scope.$watch('project', function(){
