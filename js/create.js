@@ -26,7 +26,7 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
   $scope.dateValidation = function(date){
 
     if(date){
-      var today = new Date();    
+      var today = new Date();
       if(date < today || date.getDate() < 1 || date.getDate() > 31 || date.getMonth() < 0
           || date.getMonth() > 11){
         return false;
@@ -95,30 +95,31 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
     if  (!milestoneMeasure) milestoneMeasure = $scope.project.deadline;
     $scope.metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure, function () {
       $scope.project = {};
-      $location.path('/projects');    
+      $location.path('/projects');
     });
 
   };
 
   $scope.printWDays = function() {
-    if (typeof $scope.project.totalWords !== "undefined") {
+    if ($scope.project.totalWords) {
      var wordsPerDay = "unknown";
       if($scope.project.selectMilestone === "wDay") {
-        if( typeof $scope.project.milestoneMeasure !=="undefined") {
+        if($scope.project.milestoneMeasure) {
           wordsPerDay = $scope.project.milestoneMeasure;
        }
       } else if ($scope.project.selectMilestone === "wMonth") {
-        if( typeof $scope.project.milestoneMeasure !=="undefined") {
+        if($scope.project.milestoneMeasure) {
           wordsPerDay = Math.ceil($scope.project.milestoneMeasure/30);
         }
       } else  if ($scope.project.selectMilestone === "deadline") {
-        if( typeof $scope.project.deadline !=="undefined") {
+        if($scope.project.deadline) {
           var numDays = Math.ceil(toDays($scope.project.deadline - new Date()));
           if (numDays <= 0) numDays = 1;
           wordsPerDay = Math.ceil($scope.project.totalWords / numDays);
         }
       }
-      document.getElementById("output").innerText = "You need to write (approximately): " + wordsPerDay.toString() + " per day.";
+      //document.getElementById("output").innerText = "You need to write (approximately): " + wordsPerDay.toString() + " per day.";
+      $scope.output = "You need to write (approximately): " + wordsPerDay.toString() + " per day.";
     }
   }
 

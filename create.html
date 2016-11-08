@@ -43,13 +43,16 @@
                 <input type="date" class="form-control" ng-model="project.deadline" ng-change="printWDays()" name="deadline">
                 <div class="bg-danger" ng-show="form.deadline.$touched && !dateValidation(project.deadline)">
                   <span class="glyphicon glyphicon-exclamation-sign"></span> Invalid date.
-                </div>         
+                </div>
               </div>
-              <span  id="output">My name is John Cleaver</span>
+              <span id="output">{{output}}</span>
               <div class="center btn-div col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
                 <button class="btn btn-primary btn-block" ng-model="page" ng-click="addProject()" ng-disabled="disable()">Create Project</button>
               </div>
           </form>
         </div>
       </div>
+      <pre>
+        {{project | json}}
+      </pre>
 </div>
