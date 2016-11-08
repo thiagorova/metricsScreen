@@ -24,7 +24,7 @@
             </div>
             <div class="form-group">
               <label for="milestone">Milestone</label>
-              <select class="form-control" name="milestone" ng-model="project.selectMilestone">
+              <select class="form-control" name="milestone" ng-model="project.selectMilestone" ng-change="printWDays()">
                 <option value="none" ng-selected="true">choose the type of milestone you want</option>
                 <option value="wDay">Words per Day</option>
                 <option value="wMonth">Words per Month</option>

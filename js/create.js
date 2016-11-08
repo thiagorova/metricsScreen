@@ -102,7 +102,7 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
 
   $scope.printWDays = function() {
     if ($scope.project.totalWords) {
-     var wordsPerDay = "unknown";
+     var wordsPerDay;
       if($scope.project.selectMilestone === "wDay") {
         if($scope.project.milestoneMeasure) {
           wordsPerDay = $scope.project.milestoneMeasure;
@@ -115,11 +115,14 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
         if($scope.project.deadline) {
           var numDays = Math.ceil(toDays($scope.project.deadline - new Date()));
           if (numDays <= 0) numDays = 1;
+          else numDays++;
           wordsPerDay = Math.ceil($scope.project.totalWords / numDays);
         }
       }
       //document.getElementById("output").innerText = "You need to write (approximately): " + wordsPerDay.toString() + " per day.";
-      $scope.output = "You need to write (approximately): " + wordsPerDay.toString() + " per day.";
+      if(typeof wordsPerDay !== "undefined") {
+        $scope.output = "You need to write (approximately): " + wordsPerDay.toString() + " per day.";
+      }
     }
   }
 
