@@ -1,13 +1,9 @@
-angular.module('metricsApp').controller('projectsController', function($scope, $rootScope, $location){
+angular.module('metricsApp').controller('projectsController', function($scope, $rootScope, $location, $state) {
   $scope.loading = true;
   $scope.showProjects = function(){
     $scope.metrics.getAllProjects(function (projects) {
       var pList = setProjects(projects);
-      if(pList.length === 0) {
-        $scope.$apply(function() {		//this is an XHR callback, so its not inside angular scope... therefore apply is necessary to bring it back
-
-        });
-      } else {
+      if(pList.length >= 0) {
         $scope.loading = false;
         $scope.$apply(function() {
           $scope.projectsList = pList;
@@ -81,7 +77,7 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
       percentage = Math.round((projects[i].wordCount / projects[i].finish)*100)
       if (percentage > 100) percentage = 100;
       pList.push({
-        'projectName':projects[i].name.toString(),
+        'projectName':projects[i].name,
         'totalWords':projects[i].finish.toString(),
         'id': projects[i].id.toString(),
         'time': projects[i].time.hours.toString() + ":" + projects[i].time.minutes.toString(),
@@ -104,6 +100,27 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
     $rootScope.project = project;
   };
 
+
+  $scope.setSystem = function () {
+//  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+//      chrome.tabs.sendMessage(tabs[0].id, {request: "getId"}, function (projectId) {
+	var projectId = null;
+        if(projectId === null) {
+          $scope.showProjects()
+        } else {
+          $scope.metrics.getProject(projectId, function (project) {
+            var setProject = setProjects(project);
+            $scope.$apply(function() {
+              $scope.sendProject(setProject[0]);
+              $state.go('charts');
+            });
+            console.log("done");
+          });
+        }
+//      });
+//    });
+  }
+  
 });
 
 /*angular.module('metricsApp').component('projects', {
