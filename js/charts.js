@@ -18,11 +18,23 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
   function measuring() {
     document.getElementById("start").style.display = "none";
     document.getElementById("pause").style.display = "inline-block";  
+   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.browserAction.setIcon({
+        path : "img/icons/recording.png",
+        tabId: tabs[0].id
+      });
+    });
   }
   
   function stopped() {
     document.getElementById("start").style.display = "inline-block";
     document.getElementById("pause").style.display = "none";  
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.browserAction.setIcon({
+        path : "img/icons/icon128.png",
+        tabId: tabs[0].id
+      });
+    });
   }
 
 //setting the messages to start recording the data
