@@ -7,20 +7,16 @@
   "author": "Authorship: Thiago Rodrigues, Luis Bajaña and Guilherme Ribeiro",
   "offline_enabled": false,
   "icons": {
-    "16": "img/icons/small.png",
-    "48": "img/icons/48x48.png",
-    "128": "img/icons/naviologo.png",
-    "144": "img/icons/144x144.png"
+    "128": "img/icons/icon128.png"
     },
    "browser_action": {
-    "default_icon": "img/icons/authorship.png",
+    "default_icon": "img/icons/icon128.png",
     "default_popup": "index.html#/",
      "matches": ["http://*/*", "https://*/*"]
   },
   "permissions": [
     "activeTab",
-    "tabs",
-    "https://ajax.googleapis.com/ajax/libs/angularjs/*"
+    "tabs"
   ],
     "content_scripts": [
     {

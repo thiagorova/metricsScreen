@@ -148,6 +148,10 @@ header button {
   cursor:pointer;
 }
 
+header button:hover {
+  color:white !important;
+}
+
 .info {
   display: inline-block;
   border-right: 1px solid;
