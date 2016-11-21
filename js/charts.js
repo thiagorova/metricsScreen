@@ -3,10 +3,15 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
   var lineGraph = new LineGraph();
 
   $scope.openProject = function(){
-                console.log($rootScope.project);
     $scope.dProject = $rootScope.project;  //the project is passed in this var now: $rootScope.project
     $scope.metrics.getMetrics($scope.dProject.id, function (metrics) {
       if(metrics !== "") {
+       var graph = document.getElementById("graph");
+       if (graph === null)  {
+         graph = document.createElement("div");
+         graph.id = "graph";
+         document.getElementById("projectView").insertBefore(graph, document.getElementById("controls"));
+       }
         lineGraph.clear();
         lineGraph.build(430, 240);
         lineGraph.setDateFormat("day_whole");

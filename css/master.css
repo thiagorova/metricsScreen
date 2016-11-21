@@ -8,12 +8,12 @@ body {
 }
 
 ui-view {
-  height: 356px;
+  min-height: 356px;
 }
 
 .projects-view{
   overflow-y: scroll;
-   height:inherit;
+   min-height: inherit;
 }
 
 .container{
@@ -192,26 +192,29 @@ header button:hover {
 }
 
 #project-view {
-  text-align:center;
-  min-height: 356px;
+  min-height: inherit;
 }
 
 #controls {
   margin-bottom: 10px;
+  text-align:center;
+}
+
+#controls > h2 {
+  font-size: 11pt;
+  margin-left: -25px;
 }
 
 #graph + #controls > h2 {
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: -250px;
-  font-size: 11pt;
+  margin-top: 10px; 
 }
 
 :not(#graph) + #controls > h2{
   margin-top: 40px;
-  margin-bottom: 10px;
-  margin-left: -250px;
-  font-size: 11pt;
+}
+
+#graph + #controls{
+  margin-bottom: 20px;
 }
 
 #controls button {
@@ -236,6 +239,7 @@ header button:hover {
   background-color: #f3f3f3;
   font-size: 20px;
   margin: 0px;
+  min-height: inherit;
 }
 
 .empty-page h1{
@@ -292,3 +296,25 @@ header button:hover {
 #pause {
   display: none;
 }
+
+.empty-page p {
+  color: #CDCDCD;
+  font-size: 12pt;
+  text-align: center;
+  width: 60%;
+  margin-left: 20%;
+}
+
+.empty-page b{
+  color: #656565;
+  font-size: 12pt;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+  color: #808184;  
+}
+
