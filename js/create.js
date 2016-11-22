@@ -1,4 +1,4 @@
-angular.module('metricsApp').controller('createController', function($scope, $location){
+angular.module('metricsApp').controller('createController', function($scope, $location, $window){
   $scope.period = 'For when is your project';
   $scope.datepickerShow = false;
   $scope.project = {
@@ -162,19 +162,10 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
         newProjects = newProjects.concat(storedItem.newProjects);
         console.log(newProjects);
       chrome.storage.local.set({ 'newProjects': newProjects });
+      $window.addEventListener('online',  $scope.updateServer);
     });
-
   }
   
-  function sendProject() {
-    var fieldName = "newProjects";
-    chrome.storage.local.get("newProjects", function(storedItem) {
-      storedItem.newProjects.forEach(function (project) {
-        $scope.metrics.createProject(project.projectName, project.totalWords, project.selectMilestone, project.milestoneMeasure);
-      });
-    });
-  }
-
   function createProjectStatus(project, numProjects) {
     return {
       name: project.projectName,
@@ -194,6 +185,15 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
     };
   }
 
+  $scope.updateServer = function() {
+      chrome.storage.local.get('newProjects', function(storedItem) {
+        if(angular.equals(storedItem, {})  === false) {
+          storedItem.newProjects.forEach(function(project)  {
+            $scope.metrics.createProject(project.projectName, project.totalWords, project.selectMilestone, project.milestoneMeasure);
+          });
+        }
+      }
+  }
 
 
 });

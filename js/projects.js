@@ -1,31 +1,38 @@
-angular.module('metricsApp').controller('projectsController', function($scope, $rootScope, $location, $state) {
+angular.module('metricsApp').controller('projectsController', function($scope, $rootScope, $location, $state, $window) {
   $scope.loading = true;
   $scope.showProjects = function(){
-    $scope.metrics.getAllProjects(function (projects) {
-      var pList = setProjects(projects);
-      if(pList.length >= 0) {
-        $scope.loading = false;
-        $scope.$apply(function() {
-          $scope.projectsList = pList;
-          $scope.projectsListView = []
-          var len = pList.length;
-          for (i = 0; i < len; i ++) {
-            if (pList[i].completed === "True" ) continue;
-            if ( toDays(new Date() - pList[i].lastUpdate) >= 30  ) continue;
-            $scope.projectsListView.push(pList[i]);
-          }
+    $scope.metrics.getAllProjects(viewProjects,
+      function(error) {
+        var projects = attemptStorage(viewProjects, 
+          function(){
+            $scope.$apply(function() {
+              $location.path('/empty');
+            });
         });
-      }
-    }, function(error) {
-      $scope.$apply(function() {
-        $location.path('/empty');
       });
-    });
     $scope.projectsListView = $scope.projectsList;
   };
 
   $scope.seeAllProjects = function() {
      $scope.projectsListView = $scope.projectsList;
+  }
+
+  function viewProjects(projects) {
+    saveProjects(projects)
+    var pList = setProjects(projects);
+    if(pList.length >= 0) {
+      $scope.loading = false;
+      $scope.$apply(function() {
+        $scope.projectsList = pList;
+        $scope.projectsListView = []
+        var len = pList.length;
+        for (i = 0; i < len; i ++) {
+          if (pList[i].completed === "True" ) continue;
+          if ( toDays(new Date() - pList[i].lastUpdate) >= 30  ) continue;
+          $scope.projectsListView.push(pList[i]);
+        }  
+      });
+    }
   }
 
   //convert miliseconds to days
@@ -119,6 +126,22 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
         }
 //      });
 //    });
+  }
+
+function attemptStorage(callback, callbackError) {
+    chrome.storage.local.get("projects", function(storedItem) {
+      if (angular.equals(storedItem, {})  === false) 
+        callback(storedItem.projects);
+      else callbackError()
+    });
+}
+
+function saveProjects(projects) {
+    chrome.storage.local.get('projects', function(storedItem) {
+      if (angular.equals(storedItem, {})  === false)
+        projects.concat(storedItem.projects);
+      chrome.storage.local.set({ 'projects': projects });
+    });
   }
   
 });
