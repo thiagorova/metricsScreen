@@ -9,8 +9,8 @@ var Metrics = function (key) {
     this.priv = {}
     this.priv.key = key;
     this.priv.project = null;
-//    var mainAdd = "http://localhost:4000/"
-    var mainAdd = "https://www.metrics.api.authorship.me/"
+    var mainAdd = "http://localhost:4000/"
+//    var mainAdd = "http://www.metrics.api.authorship.me/"
     this.priv.metricsAdd = mainAdd + "metrics/";
     this.priv.userAdd = mainAdd + "users/";
     this.priv.projectAdd = mainAdd + "projects/";
@@ -18,10 +18,11 @@ var Metrics = function (key) {
 
 //public methods
 
-    Metrics.prototype.createProject = function (projectName, acceptance, milestoneType, measure, callback ) {
+    Metrics.prototype.createProject = function (projectName, acceptance, milestoneType, measure, callback, callbackError ) {
       if (typeof callback === 'undefined') { callback = null; }
+      if (typeof callbackError === 'undefined') { callback = null; }
       var project = buildProjectJSON(this.priv.key, projectName, measure, acceptance, milestoneType);
-      apiCall("POST", this.priv.projectAdd + "create", project, callback);
+      apiCall("POST", this.priv.projectAdd + "create", project, callback, callbackError);
     };
 
 //sends the text to the server to create
@@ -29,6 +30,16 @@ var Metrics = function (key) {
       if (typeof callback === 'undefined') { callback = null; }
       if (typeof callbackError === 'undefined') { callbackError = null; }
         apiCall("POST", this.priv.metricsAdd + "analyze", buildJSON(this.priv.key, projectId, text), function(response) {
+          if (response !== "") response = JSON.parse( response );
+          if(callback !== null) callback();
+        },
+        callbackError);
+    };
+
+    Metrics.prototype.saveLater = function (text, projectId, time, callback, callbackError) {
+      if (typeof callback === 'undefined') { callback = null; }
+      if (typeof callbackError === 'undefined') { callbackError = null; }
+        apiCall("POST", this.priv.metricsAdd + "saveAsIs", buildJSON(this.priv.key, projectId, text, time), function(response) {
           if(callback !== null) callback(JSON.parse( response ));
         },
         callbackError);
@@ -96,7 +107,11 @@ var Metrics = function (key) {
                      if(callbackOK !== null) callbackOK(xhttp.responseText);
                 } else {
                   if (xhttp.responseText !== "") {
-                    APIerror = JSON.parse(xhttp.responseText).error;
+                    try {
+                      APIerror = JSON.parse(xhttp.responseText).error;
+                    } catch(err) {
+                      APIerror = "Something unexplained went wrong. Sorry.";
+                    }
                   } else {
                     APIerror = "it seems that our API is, as of yet, completly unreachable. Please try again later";
                   }
@@ -128,12 +143,14 @@ var Metrics = function (key) {
         else xhttp.send(JSON.stringify( data ));
     };
 
-var buildJSON = function(key, project, text) {
+var buildJSON = function(key, project, text, time) {
   if (typeof text === 'undefined') { text = null; }
+  if (typeof time === 'undefined') { time = null; }
   return {
       apikey: key,
       text: text,
-      project: project
+      project: project,
+      time: time
     };
 }
 

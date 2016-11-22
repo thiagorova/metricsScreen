@@ -96,6 +96,10 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
     $scope.metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure, function () {
       $scope.project = {};
       $location.path('/projects');
+    }, function(error) {
+      saveNewProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure);
+      $scope.project = {};
+      $location.path('/projects');
     });
 
   };
@@ -133,5 +137,63 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
   $scope.$watch('project', function(){
     $scope.disable();
   }, true);
+
+
+  function saveNewProject(projectName, totalWords, milestoneType, milestoneMeasure) {
+    var newProject = {
+      projectName:projectName,
+      totalWords:totalWords,
+      milestoneType: milestoneType,
+      milestoneMeasure: milestoneMeasure
+    };
+    chrome.storage.local.get('projects', function(storedItem) {
+      if (typeof storedItem.projects !== "undefined") {
+        var statusArray = [createProjectStatus(newProject, storedItem.projects.length)]
+        statusArray = statusArray.concat(storedItem.projects);
+      } else {
+        var statusArray = [createProjectStatus(newProject, 0)]
+      }
+      console.log(statusArray);
+      chrome.storage.local.set({ 'projects': statusArray });
+    });
+    chrome.storage.local.get('newProjects', function(storedItem) {
+      var newProjects = [newProject];
+      if (typeof storedItem.newProjects !== "undefined")
+        newProjects = newProjects.concat(storedItem.newProjects);
+        console.log(newProjects);
+      chrome.storage.local.set({ 'newProjects': newProjects });
+    });
+
+  }
+  
+  function sendProject() {
+    var fieldName = "newProjects";
+    chrome.storage.local.get("newProjects", function(storedItem) {
+      storedItem.newProjects.forEach(function (project) {
+        $scope.metrics.createProject(project.projectName, project.totalWords, project.selectMilestone, project.milestoneMeasure);
+      });
+    });
+  }
+
+  function createProjectStatus(project, numProjects) {
+    return {
+      name: project.projectName,
+      finish: project.totalWords,
+      id: numProjects*11,
+      time: {
+        hours: 0,
+        minutes: 0
+      },
+      wordCount: 0,
+      creation: Date.now(),
+      done: false,
+      lastUpdate: Date.now(),
+      milestoneType: project.milestoneType,
+      milestoneAverage: (project.milestoneType !== "deadline") ? project.milestoneMeasure:null,
+      deadline: (project.milestoneType === "deadline") ? null:project.milestoneMeasure
+    };
+  }
+
+
 
 });

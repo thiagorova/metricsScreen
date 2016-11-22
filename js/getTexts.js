@@ -3,7 +3,7 @@
   var projectId = null;
 //  var metrics = new Metrics("eJwNyDsOgDAMBNETgTZre+10XAVSICQ+9++INHrFELAQmEF3V/OiuhhtPqUbyAT6wmpUWc7Qw8mqtGaQDBMVIoy2jO+493c7n/261/E9P8cBFlU=");
   var metrics = new Metrics("eJxFijkOgEAMxF4EmiSbYzq+QoEEBQJx/B+o6CzbkhWhYciISDjhBnWzlgSFns5K6xT1BjaWahHvE8Zm5oHPOkSqqXTjfc3bcc7LPvzYr9MDnkAaIw==");
-  var timeInterval = 0.2;  //number of minutes between readings. 0.2 is about 12 seconds
+  var timeInterval = 0.1;  //number of minutes between readings. 0.2 is about 12 seconds
   var projectName;
   
 chrome.runtime.onMessage.addListener( function (request, sender, callback) {
@@ -90,8 +90,62 @@ function injectScript(file, node) {
       data += createdTA.value.trim();
       data = data.trim();
       if (data !== "") {
-        metrics.analyze(data, projectId);
+        var message = data;
+        metrics.analyze(data, projectId, function() { 
+          sendStorage();
+        }, function(error) { 
+          saveToStorage(message)
+        });
       }
     });
     
   }
+//      <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+  function  saveToStorage(data) {
+//    var message = CryptoJS.AES.encrypt(data, "Secret Passphrase");
+    var message = data;
+    var fieldName = "project" + projectId.toString()
+    json = {};
+    json[fieldName] = {};
+    json[fieldName].data = [toJSON(message)];
+    chrome.storage.local.get(fieldName, function(storedItems) {
+      if (typeof storedItems[fieldName] !== "undefined") 
+        json[fieldName].data = json[fieldName].data.concat(storedItems[fieldName].data)
+      chrome.storage.local.set(json);
+    });
+  }
+  
+  function sendStorage() {
+    var fieldName = "project" + projectId.toString()
+    chrome.storage.local.get(fieldName, function(storedItem) {
+      console.log(storedItem)
+      storedItem[fieldName].data.forEach(function (metric) {
+//        var decrypted = CryptoJS.AES.decrypt(item.data, "Secret Passphrase");
+//        var message = decrypted.toString(CryptoJS.enc.Utf8);
+        metrics.saveLater(projectId, metric.time, metric.message);
+        //      chrome.storage.local.remove(fieldName);
+      });
+    });
+  }
+  
+  
+  var toJSON = function(text) {
+  return {
+      text: text,
+      time: timenow()
+    };
+}
+
+function timenow(){
+    var now= new Date(), 
+    h= now.getHours(), 
+    m= now.getMinutes(),
+    s= now.getSeconds(),
+    day=now.getDate(),
+    month=now.getMonth(),
+    year=now.getFullYear()
+    if(m < 10) m= '0' + m;
+    if(s < 10) s= '0' + s;
+    if (day < 10) day = '0' + day;
+    return day + '/' + month + '/' + year + ' ' + h + ':' + m + ':' + s;
+}
