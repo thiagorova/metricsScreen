@@ -9,11 +9,12 @@ body {
 
 ui-view {
   min-height: 356px;
+  min-width: 600px;
 }
 
 .projects-view{
-  overflow-y: scroll;
    min-height: inherit;
+   padding-right: 0px !important;
 }
 
 .container{
