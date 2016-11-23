@@ -10,6 +10,7 @@ body {
 ui-view {
   min-height: 356px;
   min-width: 600px;
+  margin-bottom: 40px;  
 }
 
 .projects-view{
@@ -312,10 +313,11 @@ header button:hover {
 }
 
 footer {
-  position: fixed;
-  bottom: 0;
   text-align: center;
   width: 100%;
-  color: #808184;  
+  color: #808184;
 }
 
+#online_offline {
+	margin-left: 18px;
+}

@@ -144,7 +144,7 @@ LineGraph.prototype.buildAxis = function() {
   this.g.append("g")
       .attr("class", "axis axis--x")
       .attr("transform", "translate(0," + this.height + ")")
-      .call(d3.axisBottom(this.x))
+      .call(d3.axisBottom(this.x).ticks(5))
     .append("text")
       .attr("fill", "#666")
       .attr("y", 29)
@@ -155,7 +155,7 @@ LineGraph.prototype.buildAxis = function() {
 //appending the vertical axis
   this.g.append("g")
       .attr("class", "axis axis--y")
-      .call(d3.axisLeft(this.y))
+      .call(d3.axisLeft(this.y).ticks(5))
     .append("text")
       .attr("fill", "#666")
       .attr("y", 6)
@@ -181,9 +181,9 @@ LineGraph.prototype.buildHLines = function(data) {
     if (start > max.close) start = max.close;
     this.g.append("line")
       .attr("y1", this.y(start))     // x position of the first end of the line
-      .attr("x1", this.x(min.date))
+      .attr("x1", 0)
       .attr("y2", this.y(start))     // x position of the second end of the line
-      .attr("x2", this.x(max.date))
+      .attr("x2", this.x(min.date))
       .attr("class", "hLine");
   }while (start < max.close)
 };
