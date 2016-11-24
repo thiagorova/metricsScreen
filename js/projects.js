@@ -18,7 +18,13 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
   }
 
   function viewProjects(projects) {
-    saveProjects(projects)
+    if (projects === "") {
+         $scope.$apply(function() {
+           $location.path('/empty');
+       });
+       return;         
+    }
+    saveProjects(projects);
     var pList = setProjects(projects);
     if(pList.length >= 0) {
       $scope.loading = false;
