@@ -43,6 +43,10 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
 
   //função para calcular a porcentagem cumulativa
   $scope.eloCalc = function(project){
+    if(project.completed === true) {
+        project.elo =100;
+        return;
+      }
     var target;
     var today = new Date();
     var dateElements = project.creation.split("/")
@@ -109,23 +113,27 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
 
 
   $scope.setSystem = function () {
-//  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-//      chrome.tabs.sendMessage(tabs[0].id, {request: "getId"}, function (projectId) {
-	var projectId = null;
-        if(projectId === null) {
-          $scope.showProjects()
-        } else {
-          $scope.metrics.getProject(projectId, function (project) {
-            var setProject = setProjects(project);
-            $scope.$apply(function() {
-              $scope.sendProject(setProject[0]);
-              $state.go('charts');
-            });
-            console.log("done");
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {request: "getId"}, function (projectId) {
+      if(projectId === null) {
+        $scope.showProjects()
+      } else {
+        $scope.metrics.getProject(projectId, GoToProject,
+          function(error) {
+            getFromStorage(projectId, GoToProject);
           });
-        }
-//      });
-//    });
+        };
+      });
+    });
+  }
+  
+
+  function GoToProject(project) {
+    $scope.$apply(function() {
+      var setProject = setProjects([project]);
+      $scope.sendProject(setProject[0]);
+      $state.go('charts');
+    });
   }
 
 function attemptStorage(callback, callbackError) {
@@ -142,10 +150,17 @@ function saveProjects(projects) {
         projects.concat(storedItem.projects);
       chrome.storage.local.set({ 'projects': projects });
     });
-  }
-  
-});
+  }  
 
+  function getFromStorage(projectId, callback) {
+    chrome.storage.local.get('projects', function(storedItems) {
+      storedItems.projects.forEach(function (project) {
+        if (project.id == projectId) callback(project);
+      });
+    });
+  }
+
+});
 /*angular.module('metricsApp').component('projects', {
   bindings: { projects: '<' }
 })*/

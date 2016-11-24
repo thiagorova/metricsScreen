@@ -39,24 +39,22 @@ myApp.config(function($stateProvider) {
 
 myApp.controller('indexController', function($scope, $location, $state, $window){
 
-  if (navigator.onLine === true) {
-    document.getElementById("online_offline").innerHTML = "User is online";
-    checkStorage();
-  } else {
-    document.getElementById("online_offline").innerHTML = "User is offline";
-  }
-  
   $scope.updateOnlineStatus = function () {
-    document.getElementById("online_offline").innerHTML = "User is online";
+    document.getElementById("online_offline").innerHTML = "Online mode";
+    checkStorage();
   }
 
   $scope.updateOfflineStatus = function () {
-    document.getElementById("online_offline").innerHTML = "User is offline";
+    document.getElementById("online_offline").innerHTML = "Offline mode";
   }
   
   $window.addEventListener('online',  $scope.updateOnlineStatus);
   $window.addEventListener('offline', $scope.updateOfflineStatus);
-  
+  if (navigator.onLine === true) {
+    $scope.updateOnlineStatus();
+  } else {
+    $scope.updateOfflineStatus();
+  }  
   //  $scope.metrics = new Metrics("eJwNyDsOgDAMBNETgTZre+10XAVSICQ+9++INHrFELAQmEF3V/OiuhhtPqUbyAT6wmpUWc7Qw8mqtGaQDBMVIoy2jO+493c7n/261/E9P8cBFlU=");
   $scope.metrics = new Metrics("eJxFijkOgEAMxF4EmiSbYzq+QoEEBQJx/B+o6CzbkhWhYciISDjhBnWzlgSFns5K6xT1BjaWahHvE8Zm5oHPOkSqqXTjfc3bcc7LPvzYr9MDnkAaIw==");
   $state.go("projects");
@@ -78,14 +76,15 @@ myApp.controller('indexController', function($scope, $location, $state, $window)
               console.log(property);
               var id = parseInt(property.replace("project", ""));
               storedItem[property].data.forEach(function (metric) {
-                metrics.saveLater(projectId, metric.time, metric.message);
+                $scope.metrics.saveLater(id, metric.time, metric.message);
               });
             }
           }
         }
       }
-      chrome.storage.local.clean();
+      chrome.storage.local.clear();
     });
+    
   }
   
 });

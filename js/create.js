@@ -162,7 +162,6 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
         newProjects = newProjects.concat(storedItem.newProjects);
         console.log(newProjects);
       chrome.storage.local.set({ 'newProjects': newProjects });
-      $window.addEventListener('online',  $scope.updateServer);
     });
   }
   
@@ -184,16 +183,5 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
       deadline: (project.milestoneType === "deadline") ? null:project.milestoneMeasure
     };
   }
-
-  $scope.updateServer = function() {
-      chrome.storage.local.get('newProjects', function(storedItem) {
-        if(angular.equals(storedItem, {})  === false) {
-          storedItem.newProjects.forEach(function(project)  {
-            $scope.metrics.createProject(project.projectName, project.totalWords, project.selectMilestone, project.milestoneMeasure);
-          });
-        }
-      }
-  }
-
 
 });
