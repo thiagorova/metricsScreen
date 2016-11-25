@@ -1,4 +1,4 @@
-angular.module('metricsApp').controller('createController', function($scope, $location, $window){
+angular.module('metricsApp').controller('createController', function($scope, $rootScope, $location, $window, $state){
   $scope.period = 'For when is your project';
   $scope.datepickerShow = false;
   $scope.project = {
@@ -93,16 +93,22 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
   $scope.addProject = function(){
     var milestoneMeasure = $scope.project.milestoneMeasure;
     if  (!milestoneMeasure) milestoneMeasure = $scope.project.deadline;
-    $scope.metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure, function () {
-      $scope.project = {};
-      $location.path('/projects');
-    }, function(error) {
+    $scope.metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure, finishCreation, 
+    function(error) {
       saveNewProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure);
-      $scope.project = {};
-      $location.path('/projects');
+      finishCreation();
     });
-
   };
+
+  function finishCreation() {
+      $scope.$apply(function() {
+        $scope.project = {};
+       });
+      $rootScope.$apply(function() {
+        $rootScope.createdProject = true;
+       });
+      $state.go("projects");  
+  }
 
   $scope.printWDays = function() {
     if ($scope.project.totalWords) {
@@ -123,7 +129,6 @@ angular.module('metricsApp').controller('createController', function($scope, $lo
           wordsPerDay = Math.ceil($scope.project.totalWords / numDays);
         }
       }
-      //document.getElementById("output").innerText = "You need to write (approximately): " + wordsPerDay.toString() + " per day.";
       if(typeof wordsPerDay !== "undefined") {
         $scope.output = "You need to write (approximately): " + wordsPerDay.toString() + " per day.";
       }

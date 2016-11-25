@@ -24,7 +24,11 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
        });
        return;         
     }
-    saveProjects(projects);
+   saveProjects(projects);
+    if ((typeof $rootScope.createdProject !== "undefined") && ($rootScope.createdProject === true) ) {
+      GoToProject(projects[projects.length - 1]);
+      return;
+    }
     var pList = setProjects(projects);
     if(pList.length >= 0) {
       $scope.loading = false;
@@ -36,7 +40,8 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
           if (pList[i].completed === "True" ) continue;
           if ( toDays(new Date() - pList[i].lastUpdate) >= 30  ) continue;
           $scope.projectsListView.push(pList[i]);
-        }  
+        }
+          $scope.projectsListView.reverse();
       });
     }
   }
@@ -122,7 +127,7 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, {request: "getId"}, function (projectId) {
       if(projectId == null) {
-        $scope.showProjects()
+        $scope.showProjects();
       } else {
         $scope.metrics.getProject(projectId, GoToProject,
           function(error) {

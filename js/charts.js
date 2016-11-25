@@ -1,8 +1,9 @@
 angular.module('metricsApp').controller('chartsController', function($scope, $rootScope){
 //generating the graph
   var lineGraph = new LineGraph();
-
+  
   $scope.openProject = function(){
+    $rootScope.createdProject = false;
     $scope.dProject = $rootScope.project;  //the project is passed in this var now: $rootScope.project
     $scope.metrics.getMetrics($scope.dProject.id, function (metrics) {
       if(metrics !== "") {
