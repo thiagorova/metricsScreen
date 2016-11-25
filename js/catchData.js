@@ -1,1 +1,14 @@
-var text=document.createElement("textarea");text.style.display="none",text.id="myReallyFakeTextArea";var body=document.getElementsByTagName("body");if(body[0].appendChild(text),"undefined"!=typeof window.tinyMCE)for(var len=window.tinyMCE.editors.length,editors=window.tinyMCE.editors,i=0;len>i;i+=1)text.value=editors[i].getContent({format:"text"});else text.value="";
+var text=document.createElement("textarea");
+text.style.display="none";
+text.id="myReallyFakeTextArea";
+var body=document.getElementsByTagName("body");
+body[0].appendChild(text);
+if(typeof window.tinyMCE !== "undefined") {
+  var len=window.tinyMCE.editors.length;
+  var editors=window.tinyMCE.editors;
+  for(var i = 0; len > i; i++) {
+    text.value += editors[i].getContent({format:"text"});
+  }
+} else { 
+  text.value="";
+}

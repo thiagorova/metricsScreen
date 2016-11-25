@@ -118,15 +118,22 @@ function injectScript(file, node) {
   function sendStorage() {
     var fieldName = "project" + projectId.toString()
     chrome.storage.local.get(fieldName, function(storedItem) {
-      console.log(storedItem)
-      storedItem[fieldName].data.forEach(function (metric) {
-//        var decrypted = CryptoJS.AES.decrypt(item.data, "Secret Passphrase");
-//        var message = decrypted.toString(CryptoJS.enc.Utf8);
-        metrics.saveLater(projectId, metric.time, metric.message);
-        //      chrome.storage.local.remove(fieldName);
-      });
+      if (isEmpty(storedItem)  === false) {
+        storedItem[fieldName].data.forEach(function (metric) {
+          metrics.saveLater(projectId, metric.time, metric.message);
+          chrome.storage.local.remove(fieldName);
+        });
+      }
     });
   }
+
+function isEmpty(obj) {
+    for(var prop in obj) {
+        if(obj.hasOwnProperty(prop))
+            return false;
+    }
+    return JSON.stringify(obj) === JSON.stringify({});
+}
   
   
   var toJSON = function(text) {

@@ -1,5 +1,5 @@
 angular.module('metricsApp').controller('projectsController', function($scope, $rootScope, $location, $state, $window) {
-  $scope.loading = true;
+  $scope.seeProjects = false;
   $scope.showProjects = function(){
     $scope.metrics.getAllProjects(viewProjects,
       function(error) {
@@ -26,12 +26,12 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
     }
    saveProjects(projects);
     if ((typeof $rootScope.createdProject !== "undefined") && ($rootScope.createdProject === true) ) {
-      GoToProject(projects[projects.length - 1]);
+      GoToProject([projects[projects.length - 1]]);
       return;
     }
+    $scope.seeProjects = true;
     var pList = setProjects(projects);
     if(pList.length >= 0) {
-      $scope.loading = false;
       $scope.$apply(function() {
         $scope.projectsList = pList;
         $scope.projectsListView = []
@@ -141,7 +141,7 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
 
   function GoToProject(project) {
     $scope.$apply(function() {
-      var setProject = setProjects([project]);
+      var setProject = setProjects(project);
       $scope.sendProject(setProject[0]);
       $state.go('charts');
     });
