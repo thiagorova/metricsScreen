@@ -316,8 +316,10 @@ footer {
   text-align: center;
   width: 100%;
   color: #808184;
+  padding-top: 10px;
 }
 
 #online_offline {
 	margin-left: 18px;
+	padding-top: 10px;
 }
