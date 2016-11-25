@@ -4,7 +4,7 @@
 }
 
 body {
-  width: 456px;
+  min-width: 456px;
 }
 
 ui-view {
@@ -85,10 +85,15 @@ label{
   outline:none;
 }
 
+h4 + div  {
+  padding-right: 0px !important;
+}
+
 .projects-table tr{
   border-bottom: 1px solid #C5CDCB;
   border-top: 1px solid #C5CDCB;
 }
+
 .projects-table tr:hover{
   background-color: #eaeaea;
 }
@@ -320,9 +325,13 @@ header button:hover {
 footer {
   text-align: center;
   width: 100%;
-  color: #808184;
+  color: #c5cdcb;
   padding-top: 10px;
+  font-size: 12px;
+  font-family: 'Quicksand', sans-serif;
+  padding-bottom: 10px;
 }
+
 
 #online_offline {
 	margin-left: 18px;
