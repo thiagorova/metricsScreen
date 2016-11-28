@@ -25,6 +25,12 @@ var Metrics = function (key) {
       apiCall("POST", this.priv.projectAdd + "create", project, callback, callbackError);
     };
 
+    Metrics.prototype.deleteProject = function (projectId callback, callbackError ) {
+      if (typeof callback === 'undefined') { callback = null; }
+      if (typeof callbackError === 'undefined') { callback = null; }
+        apiCall("POST", this.priv.projectAdd + "delete", buildJSON(this.priv.key, projectId), callback, calbackError);
+    };
+
 //sends the text to the server to create
     Metrics.prototype.analyze = function (text, projectId, callback, callbackError) {
       if (typeof callback === 'undefined') { callback = null; }
