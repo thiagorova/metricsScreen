@@ -1,0 +1,120 @@
+.hLine {
+  fill: none;
+  stroke: #C5CDCB;
+  stroke-width: 1.5px;
+}
+
+.axis--x path {
+
+}
+
+.axis--x path {
+
+}
+
+.line {
+  fill: none;
+  stroke: #1AA7B5;
+  stroke-width: 1.5px;
+}
+
+.axis-text {
+}
+
+.pInfo {
+  display: inline-block;
+  border-right: 1px solid;
+  border-color: #C5CDCB;
+  padding: 0px 20px;
+  text-align: center;
+}
+
+.pInfo:last-child {
+  border-right: none;
+}
+
+.pInfo:first-child {
+  padding-left: 3px;
+}
+
+.pInfo p {
+  margin: 0px;
+  padding: 0px;
+  font-size: 15pt;
+  font-weight: bold;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.pInfo span {
+  font-size: 9pt;
+  font-weight: bold;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.legend {
+  color: #C5CDCB;
+}
+
+.viewTitle {
+  color: #999999;
+  text-align: left;
+  margin-left: 3px;
+  margin-top: 30px;
+  font-family: 'Quicksand', sans-serif;
+  font-size: 22px;
+}
+
+#project-view {
+  min-height: inherit;
+}
+
+#controls {
+  margin-bottom: 10px;
+  text-align:center;
+}
+
+#graph + #controls{
+  margin-top: 10px; 
+}
+
+:not(#graph) + #controls{
+  position: relative;
+  top: 10em;
+}
+
+#graph + #controls{
+  margin-bottom: 20px;
+}
+
+#controls button {
+  margin-right: 25px;
+  padding: 15px 40px;
+}
+
+#controls button img {
+  margin-right: 5px;
+}
+
+#start {
+  background-color: #80B984;
+  color: white;
+}
+
+#pause {
+  background-color: #CEB984;
+  color: white;
+  display: none;
+}
+
+.empty-page p {
+  color: #CDCDCD;
+  font-size: 12pt;
+  text-align: center;
+  width: 60%;
+  margin-left: 20%;
+}
+
+.empty-page b{
+  color: #656565;
+  font-size: 12pt;
+}

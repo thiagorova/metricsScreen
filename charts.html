@@ -1,35 +1,35 @@
+    <link rel="stylesheet" href="css/chart.css" media="screen" title="no title">
       <header>
-        	<button ng-click="createProject()" ui-sref="create" class="btn"> New Project</button>
+        	<button ng-click="createProject()" ui-sref="create" class="btn"> Create a Project</button>
     	<img src="img/metrics_logo.png">
     </header>
 
 <div ng-controller="chartsController" id="project-view" class="view container">
-  <button class="btn right btn-primary backButton" ui-sref="projects">Back</button>
   <h4 class="viewTitle">{{dProject.projectName}}</h4>
   <div id="projectView" class="view">
   
-  <div id="projectInfo">
-    <div class="info">
+  <div id="projectInfos">
+    <div class="pInfo">
       <p>{{dProject.time}}h</p>
       <span class="legend">TIME SPENT</span>
     </div>
-    <div class="info">
+    <div class="pInfo">
       <p>{{dProject.words}}</p>
       <span class="legend">WORDS</span>
     </div>
-    <div class="info">
+    <div class="pInfo">
       <p>{{dProject.milestone.percentage}}%</p>
       <span class="legend">COMPLETED</span>
     </div>
-       <div class="info">
+       <div class="pInfo">
       <p>{{dProject.milestone.words || dProject.milestone.deadline.replace("/20", "/")}}</p>
       <span class="legend">MILESTONE</span>
     </div>
   </div>
   <div id="controls">
-    <h2>Measuring</h2>
     <button class="btn btn-primary" id="start" ng-click="startMeasuring()" ><img src="img/start.png">Start</button>
     <button class="btn btn-primary" id="pause" ng-click="stopMeasuring()" ><img src="img/pause.png">Pause</button>
+     <button class="btn btn-primary" id="chartsBack" ui-sref="projects">Back</button>
 <!--    <button class="btn btn-primary" id="stop" ng-click="stopMeasuring()" ><img src="img/stop.png">Finish</button> -->
   </div>
   </div>

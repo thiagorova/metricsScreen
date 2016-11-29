@@ -1,14 +1,16 @@
 
-<script src="js/storeDocs.js"></script>
+
+  <link rel="stylesheet" href="css/projects.css" media="screen" title="no title">
+
       <header>
-        	<button ng-click="createProject()" ui-sref="create" class="btn"> New Project</button>
+        	<button ng-click="createProject()" ui-sref="create" class="btn"> Create a Project</button>
     	<img src="img/metrics_logo.png">
     </header>
 
 <div class="projects-view container col-md-12 col-xs-12" ng-controller="projectsController" ng-init="setSystem()" >
   
   <div class="container" ng-hide="seeProjects">
-    <span class="glyphicon glyphicon-refresh spinning"></span>  Loading...
+    <img src="img/authorship_loading.gif" class="loading">  Loading...
   </div>
 
   <div ng-show="seeProjects">

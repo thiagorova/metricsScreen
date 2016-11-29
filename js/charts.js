@@ -24,6 +24,7 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
   function measuring() {
     document.getElementById("start").style.display = "none";
     document.getElementById("pause").style.display = "inline-block";  
+    document.getElementById("chartsBack").disabled = true;
    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.browserAction.setIcon({
         path : "img/icons/recording.png",
@@ -35,6 +36,7 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
   function stopped() {
     document.getElementById("start").style.display = "inline-block";
     document.getElementById("pause").style.display = "none";  
+    document.getElementById("chartsBack").disabled = false;
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.browserAction.setIcon({
         path : "img/icons/icon128.png",
