@@ -77,3 +77,10 @@
 	padding-right: 0px !important;
 	margin-right: 0px !important;
 }
+
+.loading {
+  vertical-align:middle;
+  text-align:center;
+  position: relative;
+  top: 8em;
+}
