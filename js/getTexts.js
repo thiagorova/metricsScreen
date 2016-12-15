@@ -1,8 +1,13 @@
 
   var intervalId = null;
   var projectId = null;
-//  var metrics = new Metrics("eJwNyDsOgDAMBNETgTZre+10XAVSICQ+9++INHrFELAQmEF3V/OiuhhtPqUbyAT6wmpUWc7Qw8mqtGaQDBMVIoy2jO+493c7n/261/E9P8cBFlU=");
-  var metrics = new Metrics("eJxFijkOgEAMxF4EmiSbYzq+QoEEBQJx/B+o6CzbkhWhYciISDjhBnWzlgSFns5K6xT1BjaWahHvE8Zm5oHPOkSqqXTjfc3bcc7LPvzYr9MDnkAaIw==");
+  var metrics;
+
+  chrome.storage.local.get('apikey', function(storedItem) {
+      metrics = new Metrics(storedItem.apikey);    
+      chrome.storage.local.set({ 'apikey': storedItem.apikey });
+  });
+  
   var timeInterval = 0.1;  //number of minutes between readings. 0.2 is about 12 seconds
   var projectName;
   
@@ -13,7 +18,6 @@ chrome.runtime.onMessage.addListener( function (request, sender, callback) {
     projectId = request.project;
   } else if (request.request === "stop") {
     stopMeasuring();
-    projectId = null;
     readText();
   } else if (request.request === "getId") {
     callback(projectId);
@@ -93,16 +97,17 @@ function injectScript(file, node) {
         var message = data;
         metrics.analyze(data, projectId, function() { 
           sendStorage();
+          projectId = (intervalId === null) ? null:projectId;
         }, function(error) { 
-          saveToStorage(message)
+          saveToStorage(message);
+          projectId = (intervalId === null) ? null:projectId;
         });
       }
     });
     
   }
-//      <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+
   function  saveToStorage(data) {
-//    var message = CryptoJS.AES.encrypt(data, "Secret Passphrase");
     var message = data;
     var fieldName = "project" + projectId.toString()
     json = {};
@@ -120,7 +125,7 @@ function injectScript(file, node) {
     chrome.storage.local.get(fieldName, function(storedItem) {
       if (isEmpty(storedItem)  === false) {
         storedItem[fieldName].data.forEach(function (metric) {
-          metrics.saveLater(projectId, metric.time, metric.message);
+          metrics.saveLater(metric.text, projectId, metric.time);
           chrome.storage.local.remove(fieldName);
         });
       }

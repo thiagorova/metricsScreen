@@ -5,28 +5,26 @@ myApp.config(function($stateProvider) {
       name:'none',
       url:'/',
       templateUrl:'projects.html'
-    },
-    {
+    }, {
       name: 'empty',
       url: '/empty',
       templateUrl: 'empty.html'
-    },
-
-    {
+    }, {
       name: 'projects',
       url: '/projects',
       templateUrl: 'projects.html'
-
-    },
-    {
+    }, {
       name: 'create',
       url: '/create',
       templateUrl: 'create.html'
-    },
-    {
+    }, {
       name: 'charts',
       url: '/charts',
       templateUrl: 'charts.html'
+    }, {
+      name: 'setKey',
+      url: '/setKey',
+      templateUrl: 'setKey.html'
     }
   ]
 
@@ -37,8 +35,8 @@ myApp.config(function($stateProvider) {
 
 });
 
-myApp.controller('indexController', function($scope, $location, $state, $window){
-
+myApp.controller('indexController', function($scope, $location, $state, $window, $rootScope){
+  $rootScope.metrics;
   $scope.updateOnlineStatus = function () {
     document.getElementById("online_offline").innerHTML = "Online mode";
     checkStorage();
@@ -50,11 +48,6 @@ myApp.controller('indexController', function($scope, $location, $state, $window)
   
   $window.addEventListener('online',  $scope.updateOnlineStatus);
   $window.addEventListener('offline', $scope.updateOfflineStatus);
-  if (navigator.onLine === true) {
-    $scope.updateOnlineStatus();
-  } else {
-    $scope.updateOfflineStatus();
-  }  
   
   $scope.goToAuthorship = function(e) {
     e.preventDefault();
@@ -63,15 +56,12 @@ myApp.controller('indexController', function($scope, $location, $state, $window)
   }
   
   document.getElementById("authorshipLink").addEventListener('click', $scope.goToAuthorship);
-  $scope.metrics = new Metrics("eJxFijkOgEAMxF4EmiSbYzq+QoEEBQJx/B+o6CzbkhWhYciISDjhBnWzlgSFns5K6xT1BjaWahHvE8Zm5oHPOkSqqXTjfc3bcc7LPvzYr9MDnkAaIw==");
-  $state.go("projects");
-  
-  
-  function checkStorage() {
+  var checkStorage = function() {
     chrome.storage.local.get('newProjects', function(storedItem) {
       if(angular.equals(storedItem, {})  === false) {
         storedItem.newProjects.forEach(function(project)  {
-          $scope.metrics.createProject(project.projectName, project.totalWords, project.selectMilestone, project.milestoneMeasure);
+          $rootScope.metrics.metrics.createProject(project.projectName, project.totalWords, project.selectMilestone, project.milestoneMeasure);
+          chrome.storage.local.remove('newProjects');
         });
       }
     });
@@ -80,18 +70,15 @@ myApp.controller('indexController', function($scope, $location, $state, $window)
         for (var property in storedItem) {
           if (storedItem.hasOwnProperty(property)) {
             if (property.match(/project\d+/)) {
-              console.log(property);
               var id = parseInt(property.replace("project", ""));
               storedItem[property].data.forEach(function (metric) {
-                $scope.metrics.saveLater(id, metric.time, metric.message);
+                $rootScope.metrics.saveLater(metric.text, id, metric.time);
               });
             }
           }
         }
       }
-      chrome.storage.local.clear();
     });
-    
   }
   
   

@@ -1,7 +1,7 @@
 angular.module('metricsApp').controller('projectsController', function($scope, $rootScope, $location, $state, $window) {
   $scope.seeProjects = false;
   $scope.showProjects = function(){
-    $scope.metrics.getAllProjects(viewProjects,
+    $rootScope.metrics.getAllProjects(viewProjects,
       function(error) {
         var projects = attemptStorage(viewProjects, 
           function(){
@@ -102,7 +102,7 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
         'projectName':projects[i].name,
         'totalWords':projects[i].finish.toString(),
         'id': projects[i].id.toString(),
-        'time': projects[i].time.hours.toString() + ":" + projects[i].time.minutes.toString(),
+        'time': projects[i].time.hours.toString() + ":" + projects[i].time.minutes.toString()  + ":" + projects[i].time.seconds.toString(),
         'words':projects[i].wordCount.toString(),
         'creation': projects[i].creation,
         'completed' : projects[i].done,
@@ -124,12 +124,28 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
 
 
   $scope.setSystem = function () {
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.storage.local.get('apikey', function(storedItem) {
+      if(angular.equals(storedItem, {})  === false) {
+        $rootScope.metrics = new Metrics(storedItem.apikey);
+        if (navigator.onLine === true) {
+          $scope.updateOnlineStatus();
+        } else {
+          $scope.updateOfflineStatus();
+        }  
+        testOpenProject();
+      } else {
+        $state.go("setKey");
+      }
+    });
+  }
+  
+  testOpenProject = function() {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.sendMessage(tabs[0].id, {request: "getId"}, function (projectId) {
       if(projectId == null) {
         $scope.showProjects();
       } else {
-        $scope.metrics.getProject(projectId, GoToProject,
+        $rootScope.metrics.getProject(projectId, GoToProject,
           function(error) {
             getFromStorage(projectId, GoToProject);
           });
@@ -137,7 +153,6 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
       });
     });
   }
-  
 
   function GoToProject(project) {
     $scope.$apply(function() {
@@ -159,7 +174,7 @@ function saveProjects(projects) {
     chrome.storage.local.get('projects', function(storedItem) {
       if (angular.equals(storedItem, {})  === false)
         projects.concat(storedItem.projects);
-      chrome.storage.local.set({ 'projects': projects });
+        chrome.storage.local.set({ 'projects': projects });
     });
   }  
 

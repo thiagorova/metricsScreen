@@ -62,8 +62,7 @@ LineGraph.hidden.setDateFormat = function(format) {
   if (format==="day_whole") { return function (date) {
       var mainDate = date.split(" ")
       var time = mainDate[1].split(":")
-      console.log(mainDate[0].split("/")[0] + " " + time[0] + ":" + time[1]);
-      return mainDate[0].split("/")[0] + " " + time[0] + ":" + time[1];
+      return mainDate[0].split("/")[0] + " " + time[0] + ":" + time[1] + ":" + time[2];
     };
   }
 };
@@ -111,7 +110,7 @@ LineGraph.prototype.setDateFormat = function(format) {
   if (format==="day-month") this.parseTime = d3.timeParse("%d/%m");
   if (format==="hour-day") this.parseTime = d3.timeParse("%d %H");
   if (format==="minute-hour") this.parseTime = d3.timeParse("%H:%M");
-  if (format==="day_whole") this.parseTime = d3.timeParse("%d %H:%M");
+  if (format==="day_whole") this.parseTime = d3.timeParse("%d %H:%M:%S");
   this.dateFormat = LineGraph.hidden.setDateFormat(format);
 };
 
@@ -144,7 +143,7 @@ LineGraph.prototype.buildAxis = function() {
   this.g.append("g")
       .attr("class", "axis axis--x")
       .attr("transform", "translate(0," + this.height + ")")
-      .call(d3.axisBottom(this.x).ticks(5))
+      .call(d3.axisBottom(this.x).ticks(6))
     .append("text")
       .attr("fill", "#666")
       .attr("y", 29)

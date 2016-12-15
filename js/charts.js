@@ -5,7 +5,7 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
   $scope.openProject = function(){
     $rootScope.createdProject = false;
     $scope.dProject = $rootScope.project;  //the project is passed in this var now: $rootScope.project
-    $scope.metrics.getMetrics($scope.dProject.id, function (metrics) {
+    $rootScope.metrics.getMetrics($scope.dProject.id, function (metrics) {
       if(metrics !== "") {
        var graph = document.getElementById("graph");
        if (graph === null)  {
@@ -39,7 +39,7 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
     document.getElementById("chartsBack").disabled = false;
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.browserAction.setIcon({
-        path : "img/icons/icon128.png",
+        path : "img/icons/imgpsh_fullsize.png",
         tabId: tabs[0].id
       });
     });
