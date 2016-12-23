@@ -102,9 +102,10 @@ function injectScript(file, node) {
           saveToStorage(message);
           projectId = (intervalId === null) ? null:projectId;
         });
+      } else if (intervalId === null) {
+        projectId = null;
       }
     });
-    
   }
 
   function  saveToStorage(data) {

@@ -80,6 +80,7 @@
 :not(#graph) + #controls{
   position: relative;
   top: 10em;
+  margin-bottom: 240px;
 }
 
 #graph + #controls{
@@ -104,17 +105,4 @@
   background-color: #CEB984;
   color: white;
   display: none;
-}
-
-.empty-page p {
-  color: #CDCDCD;
-  font-size: 12pt;
-  text-align: center;
-  width: 60%;
-  margin-left: 20%;
-}
-
-.empty-page b{
-  color: #656565;
-  font-size: 12pt;
 }

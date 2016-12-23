@@ -1,4 +1,4 @@
-angular.module('metricsApp').controller('createController', function($scope, $rootScope, $location, $window, $state){
+metrics.controller('createController', function($scope, $rootScope, $location, $window, $state){
   $scope.period = 'For when is your project';
   $scope.datepickerShow = false;
   $scope.project = {
@@ -115,11 +115,15 @@ angular.module('metricsApp').controller('createController', function($scope, $ro
      var wordsPerDay;
       if($scope.project.selectMilestone === "wDay") {
         if($scope.project.milestoneMeasure) {
-          wordsPerDay = $scope.project.milestoneMeasure;
+          wordsPerDay = ($scope.project.milestoneMeasure > $scope.project.totalWords ) ? 
+            Math.ceil($scope.project.totalWords):
+            Math.ceil($scope.project.milestoneMeasure);
        }
       } else if ($scope.project.selectMilestone === "wMonth") {
         if($scope.project.milestoneMeasure) {
-          wordsPerDay = Math.ceil($scope.project.milestoneMeasure/30);
+          wordsPerDay = ($scope.project.milestoneMeasure > $scope.project.totalWords ) ? 
+            Math.ceil($scope.project.totalWords/30):
+            Math.ceil($scope.project.milestoneMeasure/30);
         }
       } else  if ($scope.project.selectMilestone === "deadline") {
         if($scope.project.deadline) {

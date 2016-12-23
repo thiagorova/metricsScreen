@@ -10,7 +10,15 @@ body {
 ui-view {
   min-height: 356px;
   min-width: 600px;
+  max-height: 356px;
+  max-width: 600px;
+  width: 600px;
+  height: 356px;
   margin-bottom: 40px;  
+}
+
+header img {
+  margin-left: 22px;
 }
 
 .container{
@@ -90,7 +98,7 @@ footer a{
 }
 
 #online_offline {
-	margin-left: 18px;
+	margin-left: 22px;
 	padding-top: 10px;
 }
 

@@ -1,4 +1,4 @@
-angular.module('metricsApp').controller('projectsController', function($scope, $rootScope, $location, $state, $window) {
+metrics.controller('projectsController', function($scope, $rootScope, $location, $state, $window) {
   $scope.seeProjects = false;
   $scope.showProjects = function(){
     $rootScope.metrics.getAllProjects(viewProjects,
@@ -91,7 +91,44 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
       return 'circle icon-ok';
   }
 
-  function setProjects(projects) {
+function attemptStorage(callback, callbackError) {
+    chrome.storage.local.get("projects", function(storedItem) {
+      if (angular.equals(storedItem, {})  === false) 
+        callback(storedItem.projects);
+      else callbackError()
+    });
+}
+
+function saveProjects(projects) {
+    chrome.storage.local.get('projects', function(storedItem) {
+      if (angular.equals(storedItem, {})  === false)
+        projects.concat(storedItem.projects);
+        chrome.storage.local.set({ 'projects': projects });
+    });
+  }
+  
+    function GoToProject(project) {
+    $scope.$apply(function() {
+      var setProject = setProjects(project);
+      $scope.sendProject(setProject[0]);
+      $state.go('charts');
+    });
+  }
+  
+});
+/*angular.module('metricsApp').component('projects', {
+  bindings: { projects: '<' }
+})*/
+
+  var getFromStorage = function(projectId, callback) {
+    chrome.storage.local.get('projects', function(storedItems) {
+      storedItems.projects.forEach(function (project) {
+        if (project.id == projectId) callback(project);
+      });
+    });
+  }
+  
+  var setProjects = function(projects) {
     var percentage;
     var len = projects.length;
     var pList = [];
@@ -117,76 +154,5 @@ angular.module('metricsApp').controller('projectsController', function($scope, $
     }
     return pList;
   }
-
-  $scope.sendProject = function(project){
-    $rootScope.project = project;
-  };
-
-
-  $scope.setSystem = function () {
-    chrome.storage.local.get('apikey', function(storedItem) {
-      if(angular.equals(storedItem, {})  === false) {
-        $rootScope.metrics = new Metrics(storedItem.apikey);
-        if (navigator.onLine === true) {
-          $scope.updateOnlineStatus();
-        } else {
-          $scope.updateOfflineStatus();
-        }  
-        testOpenProject();
-      } else {
-        $state.go("setKey");
-      }
-    });
-  }
   
-  testOpenProject = function() {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, {request: "getId"}, function (projectId) {
-      if(projectId == null) {
-        $scope.showProjects();
-      } else {
-        $rootScope.metrics.getProject(projectId, GoToProject,
-          function(error) {
-            getFromStorage(projectId, GoToProject);
-          });
-        };
-      });
-    });
-  }
-
-  function GoToProject(project) {
-    $scope.$apply(function() {
-      var setProject = setProjects(project);
-      $scope.sendProject(setProject[0]);
-      $state.go('charts');
-    });
-  }
-
-function attemptStorage(callback, callbackError) {
-    chrome.storage.local.get("projects", function(storedItem) {
-      if (angular.equals(storedItem, {})  === false) 
-        callback(storedItem.projects);
-      else callbackError()
-    });
-}
-
-function saveProjects(projects) {
-    chrome.storage.local.get('projects', function(storedItem) {
-      if (angular.equals(storedItem, {})  === false)
-        projects.concat(storedItem.projects);
-        chrome.storage.local.set({ 'projects': projects });
-    });
-  }  
-
-  function getFromStorage(projectId, callback) {
-    chrome.storage.local.get('projects', function(storedItems) {
-      storedItems.projects.forEach(function (project) {
-        if (project.id == projectId) callback(project);
-      });
-    });
-  }
-
-});
-/*angular.module('metricsApp').component('projects', {
-  bindings: { projects: '<' }
-})*/
+  

@@ -1,6 +1,9 @@
 angular.module('metricsApp').controller('chartsController', function($scope, $rootScope){
 //generating the graph
   var lineGraph = new LineGraph();
+  var count = 1000;
+  var start, timeoutId, projectTime;
+  var time = 0;
   
   $scope.openProject = function(){
     $rootScope.createdProject = false;
@@ -14,7 +17,7 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
          document.getElementById("projectView").insertBefore(graph, document.getElementById("controls"));
        }
         lineGraph.clear();
-        lineGraph.build(430, 240);
+        lineGraph.build(440, 240);
         lineGraph.setDateFormat("day_whole");
         lineGraph.setData(metrics);
       }
@@ -31,6 +34,7 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
         tabId: tabs[0].id
       });
     });
+    setCounter();
   }
   
   function stopped() {
@@ -43,6 +47,11 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
         tabId: tabs[0].id
       });
     });
+    clearTimeout(timeoutId);
+    if (typeof projectTime !== "undefined") {
+      var seconds = projectTime.getHours() * 3600 + projectTime.getMinutes() * 60 + projectTime.getSeconds();
+      $rootScope.metrics.setDuration($scope.dProject.id, seconds);
+    }
   }
 
 //setting the messages to start recording the data
@@ -70,5 +79,28 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
       }
     });
   });
-  
+
+function instance() {
+    time += count;
+    var elapsed = Math.floor(count/1000);
+    projectTime.setSeconds(projectTime.getSeconds() + elapsed);
+    $scope.$apply(function(){
+      $scope.dProject.time = projectTime.getHours().toString() + ":" + projectTime.getMinutes().toString() + ":" + projectTime.getSeconds().toString();
+    });
+    var seconds = projectTime.getHours() * 3600 + projectTime.getMinutes() * 60 + projectTime.getSeconds();
+    if (time % 60000 === 0) $rootScope.metrics.setDuration($scope.dProject.id, seconds);
+    var diff = (new Date().getTime() - start) - time;
+    timeoutId = window.setTimeout(instance, (count - diff));
+}
+
+  function setCounter() {
+    projectTime = new Date();
+    var parts = $scope.dProject.time.match(/(\d+):(\d+):(\d+)/);
+    projectTime.setHours(parseInt(parts[1], 10));
+    projectTime.setMinutes(parseInt(parts[2], 10));
+    projectTime.setSeconds(parseInt(parts[3], 10));
+    start = new Date().getTime();
+    timeoutId = window.setTimeout(instance, count);
+  }
+
 });

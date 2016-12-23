@@ -1,4 +1,6 @@
-angular.module('metricsApp').controller('setKeysController', function($scope, $rootScope, $location, $state, $window) {
+  for(var i = 0; i < 100000000; i++);
+
+metrics.controller('setKeysController', function($scope, $rootScope, $location, $state, $window) {
   login = function(e) {
     if(e.keyCode !== 13 && e.currentTarget !== document.getElementById("login"))  return;  //accept on Enter key presses or lgin button pushed
     var email = document.getElementById("email").value;
@@ -29,7 +31,9 @@ angular.module('metricsApp').controller('setKeysController', function($scope, $r
     var xhttp = createXHTTP( function(response) {
       if (xhttp.readyState == 4) {
         if (xhttp.status == 200) {
-          chrome.storage.local.set({ 'apikey': JSON.parse(xhttp.responseText).key });
+          key = JSON.parse(xhttp.responseText).key;
+          chrome.storage.local.set({ 'apikey': key });
+          $rootScope.metrics = new Metrics(key);
           $state.go("projects");  
         } else if (xhttp.status == 401) {
           document.getElementById("message").innerHTML = "login invalid";
@@ -45,5 +49,4 @@ angular.module('metricsApp').controller('setKeysController', function($scope, $r
   document.getElementById("login").addEventListener('click', login);
   document.getElementById("password").addEventListener('keypress', login);
   document.getElementById("online_offline").innerHTML = "";  
-    
 });

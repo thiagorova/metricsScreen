@@ -31,6 +31,16 @@ var Metrics = function (key) {
         apiCall("DELETE", this.priv.projectAdd + "delete", buildJSON(this.priv.key, projectId), callback, callbackError);
     };
 
+    Metrics.prototype.setDuration = function (projectId, time, callback, callbackError) {
+      if (typeof callback === 'undefined') { callback = null; }
+      if (typeof callbackError === 'undefined') { callbackError = null; }
+        apiCall("PUT", this.priv.projectAdd + "update", buildUpdateJSON(this.priv.key, projectId, "duration", time), function(response) {
+          if (response !== "") response = JSON.parse( response );
+          if(callback !== null) callback();
+        },
+        callbackError);
+    };
+
 //sends the text to the server to create
     Metrics.prototype.analyze = function (text, projectId, callback, callbackError) {
       if (typeof callback === 'undefined') { callback = null; }
@@ -157,6 +167,17 @@ var buildJSON = function(key, project, text, time) {
       text: text,
       project: project,
       time: time
+    };
+}
+
+var buildUpdateJSON = function(key, projectId, toUpdateName, toUpdateData) {
+   return {
+      apikey: key,
+      project: projectId,
+      toUpdate: [{
+        key: toUpdateName,
+        value: toUpdateData
+      }]
     };
 }
 

@@ -4,14 +4,13 @@
   font-size: 20px;
   margin: 0px;
   min-height: inherit;
+  padding-top: 20px;
 }
 
 .empty-page h1{
     margin: 5px;
 }
-.empty-page{
-  padding-top: 20px;
-}
+
 .empty-page h2{
   margin: 5px;
   font-size: 26px;
@@ -26,9 +25,20 @@
   font-size: 50px;
 }
 
-.empty-page p{
+.empty-page p {
+  color: #CDCDCD;
+  font-size: 12pt;
+  text-align: center;
+  width: 60%;
+  margin-left: 20%;
   margin: 0px;
 }
+
+.empty-page b{
+  color: #656565;
+  font-size: 12pt;
+}
+
 .empty-page .btn{
   margin-top: 5px;
   margin-bottom: 10px;
