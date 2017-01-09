@@ -10,16 +10,7 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
     $scope.dProject = $rootScope.project;  //the project is passed in this var now: $rootScope.project
     $rootScope.metrics.getMetrics($scope.dProject.id, function (metrics) {
       if(metrics !== "") {
-       var graph = document.getElementById("graph");
-       if (graph === null)  {
-         graph = document.createElement("div");
-         graph.id = "graph";
-         document.getElementById("projectView").insertBefore(graph, document.getElementById("controls"));
-       }
-        lineGraph.clear();
-        lineGraph.build(440, 240);
-        lineGraph.setDateFormat("day_whole");
-        lineGraph.setData(metrics);
+       buildGraph(metrics);
       }
     });
   };
@@ -103,4 +94,91 @@ function instance() {
     timeoutId = window.setTimeout(instance, count);
   }
 
+  function setData(metrics) {
+    var data = [], 
+    dataPos, 
+    knownDataLen, 
+    current,
+    len = metrics.length;
+  for (var i = 0; i < len; i++) {
+    current = metrics[i].date.split(" ")[0]
+    knownDataLen = data.length;
+    dataPos = -1;
+    for (var j = 0; j < knownDataLen; j++) {
+      if (data[j].day === current) {
+        dataPos = j; 
+        break;
+      }
+    }
+    if (dataPos < 0) {
+      var datum = {};
+      datum.count = metrics[i].count;
+      datum.fdate = metrics[i].date;
+      datum.day = current;
+      data.push(datum)
+    } else {
+      if (datum.fdate.split(" ")[1] < metrics[i].date.split(" ")[1]) {
+        data[dataPos].count = metrics[i].count;
+        data[dataPos].fdate = metrics[i].date;
+      }
+    }
+  }
+  console.log(data);
+  return data;
+  }
+
+  function buildGraph(metrics) {
+    // Any of the following formats may be used
+    var data = setData(metrics);
+    data.sort(function(a,b) {
+      a = a.day.split('/').reverse().join('');
+      b = b.day.split('/').reverse().join('');
+      return a > b ? 1 : a < b ? -1 : 0;
+    });
+    var numWords = data.map(function (datum) {return datum.count;});
+    var dates = data.map(function (datum) {return datum.day;});
+    $scope.drawChart(dates, numWords);
+  }
+  
+  $scope.drawChart = function(dates, numWords) {
+    var ctx = document.getElementById("myChart");
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: dates,
+        datasets: [{
+          label: '# of Words',
+          data: numWords,
+          backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)',
+            'rgba(255, 159, 64, 0.2)',
+            'rgba(255, 99, 132, 0.2)'
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)',
+            'rgba(255, 159, 64, 1)',
+            'rgba(255,99,132,1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero:true
+            }
+          }]
+        }
+      }
+  });
+}
 });

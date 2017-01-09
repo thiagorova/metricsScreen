@@ -106,3 +106,5 @@
   color: white;
   display: none;
 }
+
+*{padding:0px;margin:0px}body{height:100%;width:100%;font-family:sans-serif}.metrics-container{width:456px;margin:0 auto}.authorship-metrics-indicators{background-color:#F3F3F3;height:110px;width:100%;padding:15px 0 15px 0;color:#4C4C4C}.authorship-metrics-indicators li{list-style:none;float:left;text-align:center;padding-right:3%;width:30%}.authorship-metrics-indicators .authorship-metrics-indicators-title{padding-top:5px;font-size:20px}.authorship-metrics-indicators .authorship-metrics-indicators-description{padding-top:5px;font-size:12px}

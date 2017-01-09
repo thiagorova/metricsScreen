@@ -49,7 +49,6 @@ metrics.controller('indexController', function($scope, $state, $window, $rootSco
     $window.addEventListener('offline', $scope.updateOfflineStatus);
     document.getElementById("authorshipLink").addEventListener('click', $scope.goToAuthorship);
     chrome.storage.local.get('apikey', function(storedItem) {
-      chrome.storage.local.remove('apikey');
       if(angular.equals(storedItem, {})  === false) {
         $rootScope.metrics = new Metrics(storedItem.apikey);
         if (navigator.onLine === true) {
