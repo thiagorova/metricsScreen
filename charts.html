@@ -24,18 +24,12 @@
       <p class="authorship-metrics-indicators-description">{{dProject.milestone.words || dProject.milestone.deadline.replace("/20", "/")}} WORDS PER DAY</p>
     </li>
   </ul>
-  <canvas id="myChart" width="400" height="400"></canvas>
-</div>
-  
+  <canvas id="myChart" width="400" height="200"></canvas>
   <div id="controls">
     <button class="btn btn-primary" id="start" ng-click="startMeasuring()" ><img src="img/start.png">Start</button>
     <button class="btn btn-primary" id="pause" ng-click="stopMeasuring()" ><img src="img/pause.png">Pause</button>
      <button class="btn btn-primary" id="chartsBack" ui-sref="projects">Back</button>
 <!--    <button class="btn btn-primary" id="stop" ng-click="stopMeasuring()" ><img src="img/stop.png">Finish</button> -->
   </div>
-</div>
-  <script>
-    
-  </script>
-  
+  </div>
 </div>

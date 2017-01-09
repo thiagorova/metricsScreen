@@ -1,24 +1,16 @@
-.hLine {
-  fill: none;
-  stroke: #C5CDCB;
-  stroke-width: 1.5px;
+* {
+  padding:0px;
+  margin:0px;
 }
 
-.axis--x path {
+body{height:100%;width:100%;font-family:sans-serif}
 
+p {
+  margin-bottom: 0px;
 }
 
-.axis--x path {
-
-}
-
-.line {
-  fill: none;
-  stroke: #1AA7B5;
-  stroke-width: 1.5px;
-}
-
-.axis-text {
+canvas {
+  background-color: white;
 }
 
 .pInfo {
@@ -58,10 +50,10 @@
 .viewTitle {
   color: #999999;
   text-align: left;
-  margin-left: 3px;
-  margin-top: 30px;
+  margin-top: 10px;
+  margin-bottom: 0px;
   font-family: 'Quicksand', sans-serif;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 #project-view {
@@ -73,18 +65,8 @@
   text-align:center;
 }
 
-#graph + #controls{
+canvas + #controls{
   margin-top: 10px; 
-}
-
-:not(#graph) + #controls{
-  position: relative;
-  top: 10em;
-  margin-bottom: 240px;
-}
-
-#graph + #controls{
-  margin-bottom: 20px;
 }
 
 #controls button {
@@ -107,4 +89,8 @@
   display: none;
 }
 
-*{padding:0px;margin:0px}body{height:100%;width:100%;font-family:sans-serif}.metrics-container{width:456px;margin:0 auto}.authorship-metrics-indicators{background-color:#F3F3F3;height:110px;width:100%;padding:15px 0 15px 0;color:#4C4C4C}.authorship-metrics-indicators li{list-style:none;float:left;text-align:center;padding-right:3%;width:30%}.authorship-metrics-indicators .authorship-metrics-indicators-title{padding-top:5px;font-size:20px}.authorship-metrics-indicators .authorship-metrics-indicators-description{padding-top:5px;font-size:12px}
+.metrics-container{width:456px;margin:0 auto}
+.authorship-metrics-indicators{height:110px;width:100%;padding:15px 0 15px 0; margin-bottom:18px;}
+.authorship-metrics-indicators li{list-style:none;float:left;text-align:center;padding-right:3%;width:30%}
+.authorship-metrics-indicators-title{padding-top:5px;font-size:20px; color: #4C4C4C;}
+.authorship-metrics-indicators-description{padding-top:0px;font-size:12px; color:#4C4C4C;}
