@@ -1,6 +1,14 @@
 metrics.controller('projectsController', function($scope, $rootScope, $location, $state, $window) {
   $scope.seeProjects = false;
   $scope.showProjects = function(){
+  window.setTimeout(
+    function() {
+       $scope.getProjects();
+    },
+    100);
+  }
+  
+  $scope.getProjects = function() {
     $rootScope.metrics.getAllProjects(viewProjects,
       function(error) {
         var projects = attemptStorage(viewProjects, 
@@ -154,5 +162,3 @@ function saveProjects(projects) {
     }
     return pList;
   }
-  
-  
