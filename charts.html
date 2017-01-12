@@ -21,7 +21,7 @@
     <li>
       <img src="img/milestone.png" alt="">
       <p class="authorship-metrics-indicators-title">{{dProject.milestone.percentage}}%</p>
-      <p class="authorship-metrics-indicators-description">{{dProject.milestone.words || dProject.milestone.deadline.replace("/20", "/")}} WORDS PER DAY</p>
+      <p class="authorship-metrics-indicators-description">{{milestoneText}}</p>
     </li>
   </ul>
   <canvas id="myChart" width="400" height="200"></canvas>

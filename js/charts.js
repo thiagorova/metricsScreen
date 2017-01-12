@@ -8,6 +8,11 @@ angular.module('metricsApp').controller('chartsController', function($scope, $ro
   $scope.openProject = function(){
     $rootScope.createdProject = false;
     $scope.dProject = $rootScope.project;  //the project is passed in this var now: $rootScope.project
+    if ($scope.dProject.milestone.words) {
+      $scope.milestoneText = $scope.dProject.milestone.words + " WORDS PER DAY";
+    } else {
+      $scope.milestoneText = $scope.dProject.milestone.deadline.replace("/20", "/");
+    }
     $rootScope.metrics.getMetrics($scope.dProject.id, function (metrics) {
       if(metrics !== "") {
        buildGraph(metrics);
