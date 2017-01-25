@@ -2,7 +2,7 @@
   var intervalId = null;
   var projectId = null;
   var metrics;
-
+  var heldProject;
   chrome.storage.local.get('apikey', function(storedItem) {
       metrics = new Metrics(storedItem.apikey);    
       chrome.storage.local.set({ 'apikey': storedItem.apikey });
@@ -10,7 +10,7 @@
   
   var timeInterval = 0.1;  //number of minutes between readings. 0.2 is about 12 seconds
   var projectName;
-  
+  var heldData;
 chrome.runtime.onMessage.addListener( function (request, sender, callback) {
   //main program, that will be executed every time a button is pressed
   if(request.request === "start") {
@@ -23,6 +23,11 @@ chrome.runtime.onMessage.addListener( function (request, sender, callback) {
     callback(projectId);
   } else if (request.request === "isMeasuring") {
     callback(intervalId !== null);
+  } else if (request.request === "holdData") {
+    heldData = request.project
+    callback();
+  } else if (request.request === "getData") {
+    callback(heldData);
   }
   return true;
 });

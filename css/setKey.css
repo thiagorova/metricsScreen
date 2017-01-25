@@ -1,3 +1,7 @@
+body {
+  height: 356px;
+}
+
 header {
   margin-left: 30%;
 }
@@ -6,7 +10,7 @@ a {
 	font-size: 9pt;
 }
 
-ui-view > div {
+main {
    width: 80%;
    margin-left: auto;
 }

@@ -1,7 +1,5 @@
-  for(var i = 0; i < 100000000; i++);
 
-metrics.controller('setKeysController', function($scope, $rootScope, $location, $state, $window) {
-  login = function(e) {
+  var login = function(e) {
     if(e.keyCode !== 13 && e.currentTarget !== document.getElementById("login"))  return;  //accept on Enter key presses or lgin button pushed
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
@@ -33,8 +31,7 @@ metrics.controller('setKeysController', function($scope, $rootScope, $location, 
         if (xhttp.status == 200) {
           key = JSON.parse(xhttp.responseText).key;
           chrome.storage.local.set({ 'apikey': key });
-          $rootScope.metrics = new Metrics(key);
-          $state.go("projects");  
+          window.location.href = "projects.html";
         } else if (xhttp.status == 401) {
           document.getElementById("message").innerHTML = "login invalid";
         }
@@ -45,8 +42,19 @@ metrics.controller('setKeysController', function($scope, $rootScope, $location, 
     xhttp.setRequestHeader("Origin", window.top.location.href.split("?")[0]);
     xhttp.send(JSON.stringify( data ));
   };
-    
+
+  var createAccount = function(e) {
+    e.preventDefault();
+    chrome.tabs.create({ url: "http://metrics.authorship.me/users/sign_up"});
+    return false;
+  }
+
+window.onload=function(){
   document.getElementById("login").addEventListener('click', login);
   document.getElementById("password").addEventListener('keypress', login);
+  document.getElementById("authorshipCreateAccount").addEventListener('click', createAccount);
   document.getElementById("online_offline").innerHTML = "";  
-});
+  setSystem();
+}    
+
+

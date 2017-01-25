@@ -1,152 +1,160 @@
-metrics.controller('createController', function($scope, $rootScope, $location, $window, $state){
-  $scope.period = 'For when is your project';
-  $scope.datepickerShow = false;
-  $scope.project = {
-    'projectName':'',
-    'selectMilestone' : '',
-    'totalWords':'',
-    'milestoneMeasure':'',
-    'deadline':''
+
+  var project = {
+    'projectName': null,
+    'selectMilestone' : null,
+    'totalWords': null,
+    'milestoneMeasure': null,
+    'deadline':null
     };
-  $scope.projectsList = [];
+  var metricsApi;
+  
     //This is a watcher function, which changes the milestone parameter based on the select field
-  $scope.$watch('project.selectMilestone', function() {
-    if($scope.project.selectMilestone == 'wDay'){
-      $scope.period = 'How many words do you want to write per day';
-      $scope.datepickerShow = false;
-    } else if($scope.project.selectMilestone == 'wMonth'){
-      $scope.period = 'How many words do you want to write per month';
-      $scope.datepickerShow = false;
-   } else if($scope.project.selectMilestone == 'deadline'){
-      $scope.period = 'For when is your project'
-      $scope.datepickerShow = true;
+  var setMilestone = function(e) {
+    var deadline = document.getElementById("deadlineDiv");
+    var wordCount = document.getElementById("wordMilestoneDiv");
+    project.selectMilestone = document.getElementById("selectMilestone").value;
+     deadline.style.display = "none";
+    wordCount.style.display = "block";
+    if(project.selectMilestone == 'wDay'){
+      document.getElementById("milestoneMeasureLabel").innerHTML = 'How many words do you want to write per day';
+    } else if(project.selectMilestone == 'wMonth'){
+      document.getElementById("milestoneMeasureLabel").innerHTML = 'How many words do you want to write per month';
+   } else if(project.selectMilestone == 'deadline'){
+      deadline.style.display = "block";
+      wordCount.style.display = "none";
     }
-  });
+    enable();
+  };
 
-  $scope.dateValidation = function(date){
-
+  dateValidation = function(e){
+   var source = e.target || e.srcElement;
+     var deadlineParts = source.value.split("-");
+     var date = new Date(deadlineParts[0], deadlineParts[1] - 1, deadlineParts[2]);
     if(date){
       var today = new Date();
       if(date < today || date.getDate() < 1 || date.getDate() > 31 || date.getMonth() < 0
           || date.getMonth() > 11){
+        project.deadline = null;
+        document.getElementById("deadlineError").style.display = "block";
         return false;
       }
       else {
+        project.deadline = date;
+        document.getElementById("deadlineError").style.display = "none";
+        enable();
         return true;
       }
     }
   }
-  $scope.nameValidation = function(name){
+  
+  var nameValidation = function(e){
+   var source = e.target || e.srcElement;
+    var name = source.value;
     if(name){
       if(name.length <=0){
+        project.projectName = null;
+        document.getElementById("nameError").style.display = "block";
         return false;
       }
       else {
+        project.projectName = name;
+        document.getElementById("nameError").style.display = "none";
+        enable();
         return true;
       }
     }
   }
-  $scope.numberValidation = function(number){
+  var numberValidation = function(e){
+   var source = e.target || e.srcElement;
+    var number = source.value;
     if(number){
       if(number <= 0){
+        if (source.id === "milestoneMeasure") {
+          project.milestoneMeasure = null;
+          document.getElementById("milestoneError").style.display = "block";
+        } else {
+         project.totalWords = null;
+         document.getElementById("wordsError").style.display = "block";
+       }
         return false;
       }
       else {
+        if (source.id === "milestoneMeasure") {
+          project.milestoneMeasure = number;
+          document.getElementById("milestoneError").style.display = "none";
+        }  else {
+          project.totalWords = number;
+          document.getElementById("wordsError").style.display = "none";
+        }
+        enable();
         return true;
       }
     }
   }
-  $scope.disable = function(){
-    switch ($scope.datepickerShow) {
-      case true:
-        if($scope.dateValidation($scope.project.deadline) &&
-            $scope.numberValidation($scope.project.totalWords)
-          && $scope.nameValidation($scope.project.projectName)){
-          return false;
-        }
-        else {
-          return true;
-        }
-        break;
-      case false:
-        if($scope.numberValidation($scope.project.totalWords) &&
-         $scope.numberValidation($scope.project.milestoneMeasure)
-          && $scope.nameValidation($scope.project.projectName)){
-          return false;
-        }
-        else {
-          return true;
-        }
-        break;
-      default:
-        if($scope.dateValidation($scope.project.deadline) &&
-            $scope.numberValidation($scope.project.totalWords)
-          && $scope.nameValidation($scope.project.projectName)){
-          return false;
-        }
-        else {
-          return true;
-        }
+  
+  var enable = function(){
+    var count = 0;
+    for (var property in project) {
+      if (project.hasOwnProperty(property)  && project[property] !== null) {
+        count++;
+      }
+    }
+    if (count === 4) {			//the form has 4 fields
+      document.getElementById("create").disabled = false;
     }
   };
+  
    //function to create a project
-  $scope.addProject = function(){
-    var milestoneMeasure = $scope.project.milestoneMeasure;
-    if  (!milestoneMeasure) milestoneMeasure = $scope.project.deadline;
-    $rootScope.metrics.createProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure, finishCreation, 
-    function(error) {
-      saveNewProject($scope.project.projectName, $scope.project.totalWords, $scope.project.selectMilestone, milestoneMeasure);
-      finishCreation();
-    });
+  var addProject = function(){
+    var milestoneMeasure = (!project.milestoneMeasure) ? project.deadline:project.milestoneMeasure;
+    metricsApi.createProject(project.projectName, 
+      project.totalWords, 
+      project.selectMilestone, 
+      milestoneMeasure, 
+      function () {
+        metricsApi.getProjectId(project.projectName, function (projectId) {
+          metricsApi.getProject(projectId, GoToProject);
+      });
+      }, 
+      function(error) {
+        saveNewProject(project.projectName, project.totalWords, project.selectMilestone, milestoneMeasure);
+        changeLocation("projects.html");
+      });
   };
 
-  function finishCreation() {
-      $scope.$apply(function() {
-        $scope.project = {};
-       });
-      $rootScope.$apply(function() {
-        $rootScope.createdProject = true;
-       });
-      $state.go("projects");  
-  }
-
-  $scope.printWDays = function() {
-    if ($scope.project.totalWords) {
+  var printWDays = function() {
+    var totalWords = parseInt(document.getElementById("totalWords").value);
+    if (! isNaN(totalWords)) {
      var wordsPerDay;
-      if($scope.project.selectMilestone === "wDay") {
-        if($scope.project.milestoneMeasure) {
-          wordsPerDay = ($scope.project.milestoneMeasure > $scope.project.totalWords ) ? 
-            Math.ceil($scope.project.totalWords):
-            Math.ceil($scope.project.milestoneMeasure);
+     var wordCount = parseInt(document.getElementById("milestoneMeasure").value);
+     var deadlineParts = document.getElementById("deadline").value.split("-");
+     console.log(deadlineParts);
+     var deadlineValue = new Date(deadlineParts[0], deadlineParts[1] - 1, deadlineParts[2]);
+      if(project.selectMilestone === "wDay") {
+        if(! isNaN(wordCount)) {
+          wordsPerDay = (wordCount > totalWords ) ? 
+            Math.ceil(totalWords):
+            Math.ceil(wordCount);
        }
-      } else if ($scope.project.selectMilestone === "wMonth") {
-        if($scope.project.milestoneMeasure) {
-          wordsPerDay = ($scope.project.milestoneMeasure > $scope.project.totalWords ) ? 
-            Math.ceil($scope.project.totalWords/30):
-            Math.ceil($scope.project.milestoneMeasure/30);
+      } else if (project.selectMilestone === "wMonth") {
+        if(! isNaN(wordCount)) {
+          wordsPerDay = (wordCount > totalWords ) ? 
+            Math.ceil(totalWords/30):
+            Math.ceil(wordCount/30);
         }
-      } else  if ($scope.project.selectMilestone === "deadline") {
-        if($scope.project.deadline) {
-          var numDays = Math.ceil(toDays($scope.project.deadline - new Date()));
+      } else  if (project.selectMilestone === "deadline") {
+        if(! isNaN(deadlineValue.getTime())) {
+          var numDays = Math.ceil(toDays(deadlineValue - new Date()));
           if (numDays <= 0) numDays = 1;
           else numDays++;
-          wordsPerDay = Math.ceil($scope.project.totalWords / numDays);
+          wordsPerDay = Math.ceil(totalWords / numDays);
         }
       }
       if(typeof wordsPerDay !== "undefined") {
-        $scope.output = "You need to write (approximately): " + wordsPerDay.toString() + " per day.";
+        document.getElementById("output").innerHTML = "You need to write (approximately): " + wordsPerDay.toString() + " per day.";
       }
     }
   }
-
-  function toDays(date){
-    return (date/86400000);
-  }
-
-  $scope.$watch('project', function(){
-    $scope.disable();
-  }, true);
-
 
   function saveNewProject(projectName, totalWords, milestoneType, milestoneMeasure) {
     var newProject = {
@@ -162,7 +170,6 @@ metrics.controller('createController', function($scope, $rootScope, $location, $
       } else {
         var statusArray = [createProjectStatus(newProject, 0)]
       }
-      console.log(statusArray);
       chrome.storage.local.set({ 'projects': statusArray });
     });
     chrome.storage.local.get('newProjects', function(storedItem) {
@@ -193,4 +200,28 @@ metrics.controller('createController', function($scope, $rootScope, $location, $
     };
   }
 
-});
+window.onload = function () {
+  document.getElementById("back").addEventListener('click', function(e){ changeLocation("projects.html");} );
+  document.getElementById("create").addEventListener('click', addProject );
+  document.getElementById("create").disabled = true;
+  document.getElementById("projectName").addEventListener('blur', nameValidation );
+  var milestoneSelect = document.getElementById("selectMilestone");
+  var totalWords = document.getElementById("totalWords");
+  var milestoneMeasure = document.getElementById("milestoneMeasure");
+  var deadline = document.getElementById("deadline");
+  
+  milestoneSelect.addEventListener('change', setMilestone );
+  totalWords.addEventListener('keyup', numberValidation );
+  milestoneMeasure.addEventListener('keyup', numberValidation );
+  deadline.addEventListener('change', dateValidation );
+  deadline.addEventListener('keyup', dateValidation );
+  milestoneSelect.addEventListener('change', printWDays );
+  totalWords.addEventListener('keyup', printWDays );
+  milestoneMeasure.addEventListener('keyup', printWDays );
+  deadline.addEventListener('change', printWDays );
+  deadline.addEventListener('keyup', printWDays );
+  setMilestone();
+  setSystem(function(metrics) {
+    metricsApi = metrics;
+  });
+}

@@ -71,6 +71,15 @@ var Metrics = function (key) {
       callbackError);
     };
 
+    Metrics.prototype.getProjectId = function (projectName, callback, callbackError) {
+      if (typeof callback === 'undefined') { callback = null; }
+      if (typeof callbackError === 'undefined') { callbackError = null; }
+      apiCall("GET", this.priv.projectAdd + "getId", buildJSON(this.priv.key, projectName), function(response) {
+        if(callback !== null) callback(JSON.parse( response ).id);
+      },
+      callbackError);
+    };
+
     Metrics.prototype.getAllProjects = function (callback, callbackError) {
       if (typeof callback === 'undefined') { callback = null; }
       if (typeof callbackError === 'undefined') { callbackError = null; }

@@ -18,4 +18,5 @@ label{
 .bg-danger{
   padding: 5px;
   border-radius: 5px;
+  display: none;
 }

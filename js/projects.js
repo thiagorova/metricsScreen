@@ -1,67 +1,99 @@
-metrics.controller('projectsController', function($scope, $rootScope, $location, $state, $window) {
-  $scope.seeProjects = false;
-  $scope.showProjects = function(){
-  window.setTimeout(
-    function() {
-       $scope.getProjects();
-    },
-    100);
-  }
-  
-  $scope.getProjects = function() {
-    $rootScope.metrics.getAllProjects(viewProjects,
+
+
+  var showProjects = function(metrics) {
+    metrics.getAllProjects(viewProjects,
       function(error) {
         var projects = attemptStorage(viewProjects, 
-          function(){
-            $scope.$apply(function() {
-              $location.path('/empty');
-            });
+        function(){
+          changeLocation("empty.html");
         });
       });
-    $scope.projectsListView = $scope.projectsList;
   };
-
-  $scope.seeAllProjects = function() {
-     $scope.projectsListView = $scope.projectsList;
-  }
 
   function viewProjects(projects) {
     if (projects === "") {
-         $scope.$apply(function() {
-           $location.path('/empty');
-       });
-       return;         
+      changeLocation("empty.html");
+      return;         
     }
    saveProjects(projects);
-    if ((typeof $rootScope.createdProject !== "undefined") && ($rootScope.createdProject === true) ) {
-      GoToProject([projects[projects.length - 1]]);
-      return;
-    }
-    $scope.seeProjects = true;
+    document.getElementById("loading").style.display = "none";
+
+   //setting up the projects as easy to work with objects, in the most appropirate display order
     var pList = setProjects(projects);
     if(pList.length >= 0) {
-      $scope.$apply(function() {
-        $scope.projectsList = pList;
-        $scope.projectsListView = []
-        var len = pList.length;
-        for (i = 0; i < len; i ++) {
-          if (pList[i].completed === "True" ) continue;
-          if ( toDays(new Date() - pList[i].lastUpdate) >= 30  ) continue;
-          $scope.projectsListView.push(pList[i]);
-        }
-          $scope.projectsListView.reverse();
-      });
+//      projectsList = pList;
+      projectsListView = pList;
+/*      var len = pList.length;
+      for (i = 0; i < len; i ++) {
+        if (pList[i].completed === "True" ) continue;
+        if ( toDays(new Date() - pList[i].lastUpdate) >= 30  ) continue;
+        projectsListView.push(pList[i]);
+      }*/
+      projectsListView.reverse();
+      displayProjects(projectsListView);
     }
   }
 
-  //convert miliseconds to days
-  function toDays(date){
-    return (date/86400000);
+  function displayProjects(projects) {		//here is where the projects actively appear on the page
+    projects.forEach(function (project) {
+      var line = document.createElement("TR");
+      var pStatusTD = document.createElement("TD");
+      var pStatusDiv = document.createElement("DIV");
+      pStatusDiv.setAttribute("class", "projectStatus");
+      pStatusDiv.setAttribute("class", projectStatus(project));
+      pStatusTD.appendChild(pStatusDiv);
+      line.appendChild(pStatusTD);
+      
+      var pNameTD = document.createElement("TD");
+      var pNameButton = document.createElement("BUTTON");
+      pNameButton.setAttribute("class", "btn-project-name");
+      pNameButton.innerHTML = project.projectName;
+      pNameButton.addEventListener("click", function(e) {GoToProject(project, true)});
+      pNameTD.setAttribute("class", "td-project-name");
+      pNameTD.appendChild(pNameButton);
+      line.appendChild(pNameTD);
+      
+      var mPercentageTD = document.createElement("TD");
+      var mPercentageP = document.createElement("P");
+      var mPercentageSpan = document.createElement("SPAN");
+      mPercentageSpan.innerHTML = "COMPLETE";
+      mPercentageP.setAttribute("class", "milestonePercentage");
+      mPercentageP.innerHTML = project.milestone.percentage;
+      mPercentageTD.setAttribute("class", "info");
+      mPercentageTD.appendChild(mPercentageSpan);
+      mPercentageTD.appendChild(mPercentageP);
+      line.appendChild(mPercentageTD);
+      
+      var pWordsTD = document.createElement("TD");
+      var pWordsP = document.createElement("P");
+      var pWordsSpan = document.createElement("SPAN");
+      pWordsSpan.innerHTML = "WORDS";
+      pWordsP.setAttribute("class", "projectWords");
+      pWordsP.innerHTML = project.words;
+      pWordsTD.setAttribute("class", "info");
+      pWordsTD.appendChild(pWordsSpan);
+      pWordsTD.appendChild(pWordsP);
+      line.appendChild(pWordsTD);
+
+      var mValueTD = document.createElement("TD");
+      var mValueP = document.createElement("P");
+      var mValueSpan = document.createElement("SPAN");
+      mValueSpan.setAttribute("class", "milestoneText");
+      mValueSpan.innerHTML = (project.milestone.type === "deadline") ? "DEADLINE" :  (project.milestone.type === "wDay") ? "DAILY": "MONTHLY";
+      mValueP.setAttribute("class", "milestoneValue");
+      mValueP.innerHTML = project.milestone.words || project.milestone.deadline.replace("/20", "/");
+      mValueTD.setAttribute("class", "info");
+      mValueTD.appendChild(mValueSpan);
+      mValueTD.appendChild(mValueP);
+      line.appendChild(mValueTD);
+      
+      document.getElementsByTagName("table")[0].appendChild(line);
+    });
   }
 
 
   //função para calcular a porcentagem cumulativa
-  $scope.eloCalc = function(project){
+  var eloCalc = function(project){
     if(project.completed === true) {
         project.elo =100;
         return;
@@ -84,10 +116,10 @@ metrics.controller('projectsController', function($scope, $rootScope, $location,
     project.elo = (project.words * 100)/target;
   };
 
-  //função para retornar as classes certas das bolinhas
-  $scope.projectStatus = function(project){
+  //função para retornar as cores certas das bolinhas (definido pelas classes)
+  var projectStatus = function(project) {
     if (typeof project.elo === "undefined") {
-      $scope.eloCalc(project)
+      eloCalc(project);
     }
     if(project.elo >= 99)
       return 'circle icon-success';
@@ -101,7 +133,7 @@ metrics.controller('projectsController', function($scope, $rootScope, $location,
 
 function attemptStorage(callback, callbackError) {
     chrome.storage.local.get("projects", function(storedItem) {
-      if (angular.equals(storedItem, {})  === false) 
+      if (isEmpty(storedItem)  === false) 
         callback(storedItem.projects);
       else callbackError()
     });
@@ -109,24 +141,11 @@ function attemptStorage(callback, callbackError) {
 
 function saveProjects(projects) {
     chrome.storage.local.get('projects', function(storedItem) {
-      if (angular.equals(storedItem, {})  === false)
+      if (isEmpty(storedItem)  === false)
         projects.concat(storedItem.projects);
         chrome.storage.local.set({ 'projects': projects });
     });
   }
-  
-    function GoToProject(project) {
-    $scope.$apply(function() {
-      var setProject = setProjects(project);
-      $scope.sendProject(setProject[0]);
-      $state.go('charts');
-    });
-  }
-  
-});
-/*angular.module('metricsApp').component('projects', {
-  bindings: { projects: '<' }
-})*/
 
   var getFromStorage = function(projectId, callback) {
     chrome.storage.local.get('projects', function(storedItems) {
@@ -136,29 +155,7 @@ function saveProjects(projects) {
     });
   }
   
-  var setProjects = function(projects) {
-    var percentage;
-    var len = projects.length;
-    var pList = [];
-    for (var i = 0; i < len; i ++) {
-      percentage = Math.round((projects[i].wordCount / projects[i].finish)*100)
-      if (percentage > 100) percentage = 100;
-      pList.push({
-        'projectName':projects[i].name,
-        'totalWords':projects[i].finish.toString(),
-        'id': projects[i].id.toString(),
-        'time': projects[i].time.hours.toString() + ":" + projects[i].time.minutes.toString()  + ":" + projects[i].time.seconds.toString(),
-        'words':projects[i].wordCount.toString(),
-        'creation': projects[i].creation,
-        'completed' : projects[i].done,
-        'lastUpdate' : projects[i].lastUpdate,
-        'milestone':{
-          'type': projects[i].milestoneType,
-          'percentage': percentage.toString(),
-          'words':(typeof projects[i].milestoneAverage === "undefined") ? null: projects[i].milestoneAverage.toString(),
-          'deadline': (typeof projects[i].deadline === "undefined") ? null: projects[i].deadline.toString()
-        }
-      });
-    }
-    return pList;
-  }
+window.onload = function() {
+  setSystem(function(metrics) {showProjects(metrics);} );
+  
+}
