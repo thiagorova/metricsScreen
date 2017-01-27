@@ -97,8 +97,25 @@ canvas + #controls{
 
 .time-spent{
   background-color: #fff;
+  color: #4C4C4C !important;
+
+}
+.time-spent p{
+  color: #4C4C4C;
+  line-height: 2.5;
 }
 .time-spent h4{
-  text-align: center;
   color: #4C4C4C;
+}
+.center{
+  text-align: center;
+}
+.exportButton{
+  text-align: center;
+
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
+#export{
+  padding: 10px 30px 10px 30px;
 }

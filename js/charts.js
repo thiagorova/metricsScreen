@@ -24,6 +24,7 @@
         metricsApi.getMetrics(dProject.id, function (metricsData) {
           projectMetrics = metricsData;
           if(metricsData !== "") {
+            
             buildGraph(metricsData);
             wordsPerHour(metricsData);
           } else {
@@ -218,5 +219,3 @@ function chart_startSystem() {
   });
   });
 }
-
-

@@ -54,7 +54,7 @@
       </div>
   </li>
   </ul>
-  
+
   <ul class="tab">
     <li><button id="chart_tab" class="tablink active">Chart</button></li>
     <li><button id="daily_tab" class="tablink" >Daily</button></li>
@@ -70,8 +70,27 @@
     </div>
 
     <div id="daily" class="tabcontent time-spent container">
-      <h4>Time Spent</h4>
-      <div class="row"></div>
+      <h4 class="center">TIME SPENT</h4>
+      <div class="row">
+        <div class="col-xs-4">
+          <h4>Date</h4>
+          <div id="date-container">
+          </div>
+        </div>
+        <div class="col-xs-4 center">
+          <h4>Words</h4>
+          <div id="words-container" class="">
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <h4>Hours</h4>
+          <div id="time-container">
+          </div>
+        </div>
+      </div>
+      <div class="exportButton">
+        <button class="btn createProject" id="export">Export</button>
+      </div>
     </div>
 
     <footer class="container">
