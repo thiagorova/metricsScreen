@@ -38,7 +38,7 @@ ul.tab li button:focus, .active {
 /* Style the tab content */
 .tabcontent {
   display: none;
-  padding: 6px 12px;
+  padding: 0;
 }
 
 .tabcontent {

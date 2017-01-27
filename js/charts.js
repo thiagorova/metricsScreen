@@ -28,8 +28,8 @@
             buildGraph(metricsData);
             wordsPerHour(metricsData);
           } else {
-            var canvas = document.getElementsByTagName("canvas");
-            if (canvas) canvas.parentNode.removeChild(element);
+            var canvas = document.getElementsByTagName("canvas")[0];
+            if (canvas) canvas.parentNode.removeChild(canvas);
           }
         });
         callback();
