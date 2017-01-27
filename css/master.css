@@ -6,7 +6,7 @@
 body {
   width: 500px;
   height: 356px;
-  margin-bottom: 40px;  
+  margin-bottom: 40px;
 }
 
 header img {
@@ -80,13 +80,14 @@ footer {
   color: #808184;
   font-size: 12px;
   font-family: 'Quicksand', sans-serif;
-  padding-top: 10px;
-  padding-bottom: 10px;
+
 }
 
+footer span{
+  margin-top: 30px;
+}
 footer a{
   color: #c5cdcb;  color: #808184;
-  padding-top: 10px;
 }
 
 #online_offline {
@@ -99,4 +100,3 @@ footer a{
   margin 0 auto;
   height:
 }
-

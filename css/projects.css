@@ -1,6 +1,15 @@
 .projects-view{
    min-height: inherit;
-   padding-right: 0px !important;
+   padding-left: 0px!important;
+   padding-right: 0px;
+}
+.projects-view h4{
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.col-md-12, col-xs-12{
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .projects-container h3, h4{
@@ -10,7 +19,7 @@
 }
 
 .circle{
-  border-radius: 50%;
+  border-radius: 15%;
   width: 10px;
   height: 10px;
 }
@@ -28,6 +37,11 @@
   background-color: #f2f302;
 }
 
+.projects-table{
+  padding-left: 0px!important;
+  padding-right: 0px!important;
+}
+
 .projects-table tr{
   border-bottom: 1px solid #C5CDCB;
   border-top: 1px solid #C5CDCB;
@@ -40,6 +54,10 @@
   border-top: 1px solid #C5CDCB;
   border-bottom: none;
 }
+.projects-table td:first-child{
+  padding-left: 15px;
+}
+
 .td-project-name{
   max-width: 195px;
 }
@@ -61,7 +79,7 @@
 .btn-project-name{
   border:none;
   background: none;
-  padding: 25px;
+
   outline:none;
 }
 
@@ -69,14 +87,14 @@
   display: inline-block;
   border-right: 1px solid;
   border-color: #C5CDCB;
-  padding: 0px 15px 0px 15px;
+  padding: 0px 25px 10px 25px;
+
 }
 
-.ng-scope td:last-child {
-	border: none;
-	padding-right: 0px !important;
-	margin-right: 0px !important;
+.projects-table td:last-child{
+  border-right: none;
 }
+
 
 .loading {
   vertical-align:middle;

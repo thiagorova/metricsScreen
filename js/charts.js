@@ -3,12 +3,14 @@
   var time = 0;
   var dProject;
   var metricsApi;
-  
+
+
   var openProject = function(callback){
     var createdProject = false;
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {request: "getData"}, function (project) {
         dProject = project;
+
         document.getElementById("projectName").innerHTML = dProject.projectName  ;
         document.getElementById("projectTime").innerHTML = dProject.time  + "h";
         document.getElementById("wordCount").innerHTML = dProject.words;
@@ -21,20 +23,26 @@
         document.getElementById("milestoneText").innerHTML = milestoneText  ;
         metricsApi.getMetrics(dProject.id, function (metricsData) {
           if(metricsData !== "") {
-           buildGraph(metricsData);
+
+            //var metricsData = [{"date":"14/12/16 10:00:00","count":4},{"date":"14/12/16 11:00:00","count":10},{"date":"14/12/16 10:54:35","count":463}];
+
+            buildGraph(metricsData);
+            wordsPerHour(metricsData);
           }
         });
         callback();
       });
-    });  
+    });
   }
+
+
 
   function measuring() {
     document.getElementById("start").style.display = "none";
-    document.getElementById("pause").style.display = "inline-block";  
+    document.getElementById("pause").style.display = "inline-block";
     document.getElementById("chartsBack").disabled = true;
     document.getElementById("createProject").disabled = true;
-   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.browserAction.setIcon({
         path : "img/icons/recording.png",
         tabId: tabs[0].id
@@ -42,10 +50,10 @@
     });
     setCounter();
   }
-  
+
   function stopped() {
     document.getElementById("start").style.display = "inline-block";
-    document.getElementById("pause").style.display = "none";  
+    document.getElementById("pause").style.display = "none";
     document.getElementById("chartsBack").disabled = false;
     document.getElementById("createProject").disabled = false;
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -99,9 +107,9 @@ function instance() {
   }
 
   function setData(metricsData) {
-    var data = [], 
-    dataPos, 
-    knownDataLen, 
+    var data = [],
+    dataPos,
+    knownDataLen,
     current,
     len = metricsData.length;
   for (var i = 0; i < len; i++) {
@@ -110,7 +118,7 @@ function instance() {
     dataPos = -1;
     for (var j = 0; j < knownDataLen; j++) {
       if (data[j].day === current) {
-        dataPos = j; 
+        dataPos = j;
         break;
       }
     }
@@ -130,6 +138,7 @@ function instance() {
   return data;
   }
 
+
   function buildGraph(metricsData) {
     // Any of the following formats may be used
     var data = setData(metricsData);
@@ -142,7 +151,7 @@ function instance() {
     var dates = data.map(function (datum) {return datum.day;});
     drawChart(dates, numWords);
   }
-  
+
   var drawChart = function(dates, numWords) {
     var ctx = document.getElementById("myChart");
     var myChart = new Chart(ctx, {
@@ -207,4 +216,7 @@ window.onload= function () {
     });
   });
   });
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
 }
