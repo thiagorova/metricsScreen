@@ -1,0 +1,57 @@
+ul.tab {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* Float the list items side by side */
+ul.tab li {
+  display: inline-block;
+}
+
+/* Style the links inside the list items */
+ul.tab li button {
+  display: inline-block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  transition: 0.3s;
+  font-size: 17px;
+  outline: none;
+  background-color: inherit;
+  border: 0.5px solid #999;
+}
+
+/* Change background color of links on hover */
+ul.tab li button:hover {
+  background-color: #ddd !important;
+  }
+
+/* Create an active/current tablink class */
+ul.tab li button:focus, .active {
+  background-color: #fff  !important;
+  }
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+}
+
+.tabcontent {
+  -webkit-animation: fadeEffect 1s;
+  animation: fadeEffect 1s; /* Fading effect takes 1 second */
+}
+
+@-webkit-keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}

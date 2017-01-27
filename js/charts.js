@@ -3,7 +3,7 @@
   var time = 0;
   var dProject;
   var metricsApi;
-
+  var projectMetrics;
 
   var openProject = function(callback){
     var createdProject = false;
@@ -22,12 +22,13 @@
         }
         document.getElementById("milestoneText").innerHTML = milestoneText  ;
         metricsApi.getMetrics(dProject.id, function (metricsData) {
+          projectMetrics = metricsData;
           if(metricsData !== "") {
-
-            //var metricsData = [{"date":"14/12/16 10:00:00","count":4},{"date":"14/12/16 11:00:00","count":10},{"date":"14/12/16 10:54:35","count":463}];
-
             buildGraph(metricsData);
             wordsPerHour(metricsData);
+          } else {
+            var canvas = document.getElementsByTagName("canvas");
+            if (canvas) canvas.parentNode.removeChild(element);
           }
         });
         callback();
@@ -198,7 +199,7 @@ function goBack() {
   changeLocation("projects.html");
 }
 
-window.onload= function () {
+function chart_startSystem() {
   document.getElementById("chartsBack").addEventListener('click', goBack);
   document.getElementById("start").addEventListener('click', startMeasuring);
   document.getElementById("pause").addEventListener('click', stopMeasuring);
@@ -216,7 +217,6 @@ window.onload= function () {
     });
   });
   });
-  $( function() {
-    $( "#tabs" ).tabs();
-  } );
 }
+
+

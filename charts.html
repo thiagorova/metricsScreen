@@ -5,20 +5,17 @@
     <title>Metrics</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
      integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/master.css" media="screen" title="no title">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link rel="stylesheet" href="css/master.css" media="screen" title="no title">
+    <link rel="stylesheet" href="css/tabs.css" media="screen" title="no title">
     <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script src="js/Chart.min.js"></script>
     <script type="text/javascript" src="js/metricsApi.js"></script>
     <script src="js/master.js"></script>
-
+    <script type="text/javascript" src="js/tabs.js"></script>
     <script type="text/javascript" src="js/charts.js"></script>
-    <script type="text/javascript" src="js/timeSpent.js"></script>
-
-
-
+    <script type="text/javascript" src="js/dailyProgress.js"></script>
 
   </head>
   <body>
@@ -32,61 +29,50 @@
 <div id="project-view" class="view container">
   <h4 class="viewTitle" id="projectName"></h4>
 <div class="metrics-container">
-  <div id="tabs">
-  <ul class="container-fluid authorship-metrics-indicators">
+  <ul class="authorship-metrics-indicators">
     <li>
-      <a href = "#tabs-1">
         <div class="col-md-4 col-xs-4">
           <img src="img/milestone.png" alt="">
           <p class="authorship-metrics-indicators-title" id="milestonePercentage">%</p>
           <p class="authorship-metrics-indicators-description" id="milestoneText"></p>
         </div>
-      </a>
     </li>
 
   <li>
-    <a href = "#tabs-2">
       <div class="col-md-4 col-xs-4">
         <img src="img/time.png" alt="">
         <p class="authorship-metrics-indicators-title" id="projectTime"></p>
         <p class="authorship-metrics-indicators-description">TIME SPENT</p>
       </div>
-    </a>
   </li>
 
   <li>
-    <a href = "#tabs-3">
       <div class="col-md-4 col-xs-4">
         <img src="img/word_count.png" alt="">
         <p class="authorship-metrics-indicators-title" id="wordCount"></p>
         <p class="authorship-metrics-indicators-description">WORDS WRITTEN</p>
       </div>
-    </a>
   </li>
   </ul>
-    <div id="tabs-1">
-      <canvas id="myChart" width="400" height="200"></canvas>
+  
+  <ul class="tab">
+    <li><button id="chart_tab" class="tablink active">Chart</button></li>
+    <li><button id="daily_tab" class="tablink" >Daily</button></li>
+  </ul>
+
+    <div id="chart" class="tabcontent">
       <div id="controls">
+        <canvas id="myChart" width="400" height="200"></canvas>
         <button class="btn btn-primary" id="start" ><img src="img/start.png">Start</button>
         <button class="btn btn-primary" id="pause" ><img src="img/pause.png">Pause</button>
          <button class="btn btn-primary" id="chartsBack">Back</button>
       </div>
     </div>
-    <div id="tabs-2">
-      <div class="time-spent container">
-        <h4>Time Spent</h4>
-        <div class="row">
 
-        </div>
-
-      </div>
+    <div id="daily" class="tabcontent time-spent container">
+      <h4>Time Spent</h4>
+      <div class="row"></div>
     </div>
-    <div id="tabs-3">
-      <h1>ABA 3</h1>
-    </div>
-  </div>
-  </div>
-</div>
 
     <footer class="container">
      <span> © Copyright <a href="www.authorship.me" id="authorshipLink">Authorship.me</a> All rights reserved.</span>

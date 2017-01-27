@@ -66,3 +66,7 @@ function wordsPerHour(metricsData){
   }
   console.log(timeDif);
 }
+
+function daily_startSystem(metricsData) {			//all tabs should initiate from a method with a name like this "tab_startSystem". All will recieve metricsData, even if they dont need it....
+	console.log(metricsData);
+}
