@@ -14,26 +14,33 @@ ul.tab li {
 /* Style the links inside the list items */
 ul.tab li button {
   display: inline-block;
-  color: black;
+
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   transition: 0.3s;
-  font-size: 17px;
   outline: none;
-  background-color: inherit;
-  border: 0.5px solid #999;
+  color: white;
+  background-color: #bfbfbf;
+  font-size: 14px;
+  min-width: 100px;
+  border: none;
 }
 
 /* Change background color of links on hover */
 ul.tab li button:hover {
-  background-color: #ddd !important;
-  }
+  background-color: #c9c9c9;
+}
 
 /* Create an active/current tablink class */
-ul.tab li button:focus, .active {
+ul.tab li button.active {
   background-color: #fff  !important;
-  }
+  margin-bottom: -1px;
+  color: #1aa7b5;
+  font-size: 14px;
+  margin-right: 3px;
+  min-width: 100px;
+}
 
 /* Style the tab content */
 .tabcontent {
