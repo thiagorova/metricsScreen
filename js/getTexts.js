@@ -1,8 +1,11 @@
-
+  var count = 10000;
   var intervalId = null;
   var projectId = null;
+  var projectTime;
   var metrics;
   var heldProject;
+  var start, timeoutId, projectTime;
+  
   chrome.storage.local.get('apikey', function(storedItem) {
       metrics = new Metrics(storedItem.apikey);    
       chrome.storage.local.set({ 'apikey': storedItem.apikey });
@@ -16,6 +19,7 @@ chrome.runtime.onMessage.addListener( function (request, sender, callback) {
   if(request.request === "start") {
     startMeasuring();
     projectId = request.project;
+    setCounter(request.time)
   } else if (request.request === "stop") {
     stopMeasuring();
     readText();
@@ -112,6 +116,38 @@ function injectScript(file, node) {
       }
     });
   }
+
+  function setCounter(time) {
+    projectTime = new Date();
+    var parts = time.match(/(\d+):(\d+):(\d+)/);
+    projectTime.setHours(parseInt(parts[1], 10));
+    projectTime.setMinutes(parseInt(parts[2], 10));
+    projectTime.setSeconds(parseInt(parts[3], 10)); 
+    start = new Date().getTime();
+    timeoutId = window.setTimeout(instance, count);
+  }
+
+function instance() {
+    time += count;
+    var elapsed = Math.floor(count/10000);
+    totalTime.setSeconds(totalTime.getSeconds() + elapsed);
+    var seconds = totalTime.getHours() * 3600 + totalTime.getMinutes() * 60 + totalTime.getSeconds();
+    metricsApi.setDuration(projectId, seconds);
+    metrics.setDuration = function (projectId, time, callback, callbackError) {
+    var diff = (new Date().getTime() - start) - time;
+    timeoutId = window.setTimeout(instance, (count - diff));
+}
+
+  function setCounter() {
+    projectTime = new Date();
+    var parts = dProject.time.match(/(\d+):(\d+):(\d+)/);
+    projectTime.setHours(parseInt(parts[1], 10));
+    projectTime.setMinutes(parseInt(parts[2], 10));
+    projectTime.setSeconds(parseInt(parts[3], 10)); projectTime.getHours().toString() + ":" + projectTime.getMinutes().toString() + ":" + projectTime.getSeconds().toString();
+    start = new Date().getTime();
+    timeoutId = window.setTimeout(instance, count);
+  }
+
 
   function  saveToStorage(data) {
     var message = data;

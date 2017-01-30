@@ -110,7 +110,7 @@ function startSystem() {
 //setting the messages to start recording the data
   startMeasuring = function(){
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {request: "start", project: dProject.id}, null);
+      chrome.tabs.sendMessage(tabs[0].id, {request: "start", project: dProject.id, time: dProject.time}, null);
     });
     measuring();
   };
@@ -128,7 +128,7 @@ function instance() {
     projectTime.setSeconds(projectTime.getSeconds() + elapsed);
     dProject.time = projectTime.getHours().toString() + ":" + projectTime.getMinutes().toString() + ":" + projectTime.getSeconds().toString();
     var seconds = projectTime.getHours() * 3600 + projectTime.getMinutes() * 60 + projectTime.getSeconds();
-    if (time % 60000 === 0) metricsApi.setDuration(dProject.id, seconds);
+//    if (time % 60000 === 0) metricsApi.setDuration(dProject.id, seconds);
     document.getElementById("projectTime").innerHTML = dProject.time
     var diff = (new Date().getTime() - start) - time;
     timeoutId = window.setTimeout(instance, (count - diff));
