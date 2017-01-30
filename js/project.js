@@ -63,6 +63,18 @@ function startSystem() {
     });
   }
 
+  function getStartDate(project) {
+    return "";  
+  }
+
+  function getLastUpdate(project) {
+    return "";  
+  }
+  
+  function getCharacterCount(project) {
+    return "";
+  }
+
   function measuring() {
     document.getElementById("start").style.display = "none";
     document.getElementById("pause").style.display = "inline-block";
@@ -142,7 +154,7 @@ function instance() {
         duration: time  // 2 seconds
       });
       $('.authorship-metrics-indicators').animate({
-        height: '230px'
+        height: '235px'
       }, {
         duration: time  // 2 seconds
       });
@@ -154,7 +166,7 @@ function instance() {
         duration: time  // 2 seconds
       });
       $('.authorship-metrics-indicators').animate({
-        height: '110px'
+        height: '135px'
       }, {
         duration: time  // 2 seconds
       });  
