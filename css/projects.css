@@ -1,6 +1,7 @@
 .projects-view{
    min-height: inherit;
    padding-right: 0px !important;
+   height: inherit;
 }
 
 .projects-container h3, h4{

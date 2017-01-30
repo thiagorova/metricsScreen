@@ -5,6 +5,7 @@
   margin: 0px;
   min-height: inherit;
   padding-top: 20px;
+  height: inherit;
 }
 
 .empty-page h1{
@@ -31,7 +32,6 @@
   text-align: center;
   width: 60%;
   margin-left: 20%;
-  margin: 0px;
 }
 
 .empty-page b{
