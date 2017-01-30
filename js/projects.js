@@ -11,6 +11,7 @@
   };
 
   function viewProjects(projects) {
+    console.log(projects);
     if (projects === "") {
       changeLocation("empty.html");
       return;         

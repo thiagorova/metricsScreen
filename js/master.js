@@ -55,6 +55,8 @@
     document.getElementById("authorshipLink").addEventListener('click', goToAuthorship);
     var createButton = document.getElementById("createProject");
     if (createButton !== null) createButton.addEventListener('click', function (e) {changeLocation("create.html");});
+    var hrefParts = window.location.href.split("/");
+    if(hrefParts[hrefParts.length - 1] === "empty.html") return;
     chrome.storage.local.get('apikey', function(storedItem) {
       if(isEmpty(storedItem)  === false) {
         metrics = new Metrics(storedItem.apikey);
@@ -65,7 +67,7 @@
         }
         var hrefParts = window.location.href.split("/");
         if (hrefParts[hrefParts.length - 1] !== "project.html") testOpenProject();
-        callback(metrics);
+        if (callback !== null) callback(metrics);
       } else {
         changeLocation("setKey.html");
       }
@@ -113,6 +115,7 @@ function GoToProject(project, projectSet) {
         'creation': projects[i].creation,
         'completed' : projects[i].done,
         'lastUpdate' : projects[i].lastUpdate,
+        'charCount': projects[i].charCount,
         'milestone':{
           'type': projects[i].milestoneType,
           'percentage': percentage.toString(),
@@ -139,4 +142,10 @@ function GoToProject(project, projectSet) {
   function changeLocation(local) {
     var hrefParts = window.location.href.split("/");
     if(hrefParts[hrefParts.length - 1] !== local) window.location.href = local;
+  }
+  
+  if (window.onload === null) {
+    window.onload = function () {
+      setSystem(null);
+    }
   }
