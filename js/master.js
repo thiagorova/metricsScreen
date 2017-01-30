@@ -16,27 +16,36 @@
   }
 
   var checkStorage = function() {
+//all API calls in checkStorage are occuring inside timed intervals, to avoid throttling both chrome and the server with request. Since they are all asynchronous, its not a huge issue on the pages performance
+    interval = 0;
+    basePause = 5000; //5 seconds
     chrome.storage.local.get('newProjects', function(storedItem) {
       if(isEmpty(storedItem)  === false) {
         storedItem.newProjects.forEach(function(project)  {
-          metrics.createProject(project.projectName, project.totalWords, project.selectMilestone, project.milestoneMeasure);
-          chrome.storage.local.remove('newProjects');
+          setTimeout(function () {
+            metrics.createProject(project.projectName, project.totalWords, project.selectMilestone, project.milestoneMeasure);
+            chrome.storage.local.remove('newProjects');
+          }, interval);
+          interval += basePause;
         });
       }
-    });
-    chrome.storage.local.get(null, function(storedItem) {
-      if(isEmpty(storedItem)  === false) {
-        for (var property in storedItem) {
-          if (storedItem.hasOwnProperty(property)) {
-            if (property.match(/project\d+/)) {
-              var id = parseInt(property.replace("project", ""));
-              storedItem[property].data.forEach(function (metric) {
-                metrics.saveLater(metric.text, id, metric.time);
-              });
+      chrome.storage.local.get(null, function(storedItem) {
+        if(isEmpty(storedItem)  === false) {
+          for (var property in storedItem) {
+            if (storedItem.hasOwnProperty(property)) {
+              if (property.match(/project\d+/)) {
+                var id = parseInt(property.replace("project", ""));
+                storedItem[property].data.forEach(function (metric) {
+                  setTimeout(function () {
+                    metrics.saveLater(metric.text, id, metric.time);
+                  }, interval);
+                  interval += basePause;
+                });
+              }
             }
           }
         }
-      }
+      });
     });
   }
   
@@ -55,7 +64,7 @@
           updateOfflineStatus();
         }
         var hrefParts = window.location.href.split("/");
-        if (hrefParts[hrefParts.length - 1] !== "charts.html") testOpenProject();
+        if (hrefParts[hrefParts.length - 1] !== "project.html") testOpenProject();
         callback(metrics);
       } else {
         changeLocation("setKey.html");
@@ -82,7 +91,7 @@ function GoToProject(project, projectSet) {
   }
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {request: "holdData", project: project}, function () {
-        changeLocation("charts.html");
+        changeLocation("project.html");
       });
   });
   

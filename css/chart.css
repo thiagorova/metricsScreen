@@ -116,6 +116,61 @@ canvas {
   color:#4C4C4C;
 }
 
+ul {
+  display: block;
+  height: 100px;
+}
+
+ul div {
+  width: 100%;
+  height: 100px;
+}
+
+#sometimes {
+  height: 0px;
+  overflow:hidden;
+}
+
+#showMore {
+  margin-bottom: 10px;
+}
+
+#showMore button{
+  outline:none;
+  background: inherit;
+  border: none;
+  width:100%; 
+} 
+
+#showMore button {
+    overflow: hidden;
+    text-align: center;
+}
+
+#showMore button:before,
+#showMore button:after {
+    background-color: #ddd;
+    content: "";
+    display: inline-block;
+    height: 1px;
+    position: relative;
+    vertical-align: middle;
+    width: 50%;
+}
+#showMore button:before {
+    right: 0.5em;
+    margin-left: -50%;
+}
+#showMore button:after {
+    left: 0.5em;
+    margin-right: -50%;
+}
+
+.more {
+  transform: rotate(180deg);
+}
+
+
 .time-spent {
   background-color: #fff;
   color: #4C4C4C !important;
