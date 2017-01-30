@@ -132,8 +132,7 @@ function instance() {
     var elapsed = Math.floor(count/10000);
     totalTime.setSeconds(totalTime.getSeconds() + elapsed);
     var seconds = totalTime.getHours() * 3600 + totalTime.getMinutes() * 60 + totalTime.getSeconds();
-    metricsApi.setDuration(projectId, seconds);
-    metrics.setDuration = function (projectId, time, callback, callbackError) {
+    metrics.setDuration(projectId, time);
     var diff = (new Date().getTime() - start) - time;
     timeoutId = window.setTimeout(instance, (count - diff));
 }
