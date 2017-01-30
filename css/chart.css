@@ -102,6 +102,7 @@ canvas {
   list-style:none;
   margin-bottom: 0;
   margin-top: 0;
+  display: block;
   height: 135px;
 }
 
@@ -116,13 +117,7 @@ canvas {
   color:#4C4C4C;
 }
 
-ul {
-  display: block;
-  height: 100px;
-}
-
-ul div {
-  width: 100%;
+.authorship-metrics-indicators div {
   height: 100px;
 }
 
@@ -191,6 +186,14 @@ ul div {
 
 #date-container {
 	padding: 0 !important;
+}
+
+.col-xs-5 + .col-xs-3 {
+	margin-left: -20px;
+}
+
+.col-xs-3 + .col-xs-3 {
+	margin-left: 40px;
 }
 
 .exportButton{
