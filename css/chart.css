@@ -97,35 +97,34 @@ canvas {
 
 .authorship-metrics-indicators{
   text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 10px;
   list-style:none;
   margin-bottom: 0;
   margin-top: 0;
   display: block;
-  height: 135px;
+  height: 105px;
 }
 
 .authorship-metrics-indicators-title{
   padding-top:5px;
-  font-size:20px;
+  font-size:18px;
   color: #4C4C4C;
 }
 .authorship-metrics-indicators-description{
   padding-top:0px;
-  font-size:12px;
+  font-size:11px;
   color:#4C4C4C;
 }
 
 .authorship-metrics-indicators div {
   height: 100px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
 }
 
 #sometimes {
   height: 0px;
   overflow:hidden;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 #showMore {
@@ -202,6 +201,10 @@ canvas {
   text-align: center;
   margin-top: 15px;
   margin-bottom: 10px;
+}
+
+.time-spent > .col-xs-5 > h4 {
+  font-size: 16px;
 }
 
 #export{

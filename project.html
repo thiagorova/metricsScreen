@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" href="css/master.css" media="screen" title="no title">
     <link rel="stylesheet" href="css/tabs.css" media="screen" title="no title">
+    <link rel="stylesheet" href="css/chart.css" media="screen" title="no title">
     <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
     <script src="js/Chart.min.js"></script>
     <script type="text/javascript" src="js/metricsApi.js"></script>
@@ -20,115 +21,100 @@
   </head>
   <body>
     <p id="online_offline"></p>
-    <link rel="stylesheet" href="css/chart.css" media="screen" title="no title">
-      <header>
-        	<button class="btn createProject" id="createProject"> Create a Project</button>
-    	<img src="img/metrics_logo.png">
+    <header>
+      <button class="btn createProject" id="createProject"> Create a Project</button>
+      <img src="img/metrics_logo.png">
     </header>
-
-<div id="project-view" class="view container">
-  <h4 class="viewTitle" id="projectName"></h4>
-<div class="metrics-container">
-  <ul class="authorship-metrics-indicators">
-    <div id="always_appear">
-    <li>
-        <div class="col-md-4 col-xs-4">
-          <img src="img/milestone.png" alt="">
-          <p class="authorship-metrics-indicators-title" id="milestonePercentage">%</p>
-          <p class="authorship-metrics-indicators-description" id="milestoneText"></p>
+    <div id="project-view" class="view container">
+      <h4 class="viewTitle" id="projectName"></h4>
+      <div class="metrics-container">
+        <ul class="authorship-metrics-indicators">
+          <div id="always_appear">
+            <li>
+              <div class="col-md-4 col-xs-4">
+                <img src="img/milestone.png" alt="">
+                  <p class="authorship-metrics-indicators-title" id="milestonePercentage">%</p>
+                  <p class="authorship-metrics-indicators-description" id="milestoneText"></p>
+              </div>
+            </li>
+            <li>
+              <div class="col-md-4 col-xs-4">
+                <img src="img/time.png" alt="">
+                <p class="authorship-metrics-indicators-title" id="projectTime"></p>
+                <p class="authorship-metrics-indicators-description">TIME SPENT</p>
+              </div>
+            </li>
+            <li>
+              <div class="col-md-4 col-xs-4">
+                <img src="img/word_count.png" alt="">
+                <p class="authorship-metrics-indicators-title" id="wordCount"></p>
+                <p class="authorship-metrics-indicators-description">WORDS WRITTEN</p>
+              </div>
+            </li>
+          </div>
+          <div id="sometimes">
+            <li>
+              <div class="col-md-4 col-xs-4">
+                <img src="img/calendar.png" alt="">
+                <p class="authorship-metrics-indicators-title" id="beganWriting">%</p>
+                <p class="authorship-metrics-indicators-description">BEGAN WRITING</p>
+              </div>
+            </li>
+            <li>
+              <div class="col-md-4 col-xs-4">
+                <img src="img/update.png" alt="">
+                <p class="authorship-metrics-indicators-title" id="lastUpdate"></p>
+                <p class="authorship-metrics-indicators-description">LAST UPDATE</p>
+              </div>
+            </li>
+            <li>
+              <div class="col-md-4 col-xs-4">
+                <img src="img/character.png" alt="">
+                <p class="authorship-metrics-indicators-title" id="characterCount"></p>
+                <p class="authorship-metrics-indicators-description">CHARACTER COUNT</p>
+              </div>
+            </li>
+          </div>
+        </ul>
+        <div id="showMore">
+          <button><img src="img/arrow.png" class="more"></button>
         </div>
-    </li>
-
-  <li>
-      <div class="col-md-4 col-xs-4">
-        <img src="img/time.png" alt="">
-        <p class="authorship-metrics-indicators-title" id="projectTime"></p>
-        <p class="authorship-metrics-indicators-description">TIME SPENT</p>
-      </div>
-  </li>
-
-  <li>
-      <div class="col-md-4 col-xs-4">
-        <img src="img/word_count.png" alt="">
-        <p class="authorship-metrics-indicators-title" id="wordCount"></p>
-        <p class="authorship-metrics-indicators-description">WORDS WRITTEN</p>
-      </div>
-  </li>
-  </div>
-  
-  <div id="sometimes">
-      <li>
-        <div class="col-md-4 col-xs-4">
-          <img src="img/calendar.png" alt="">
-          <p class="authorship-metrics-indicators-title" id="beganWriting">%</p>
-          <p class="authorship-metrics-indicators-description">BEGAN WRITING</p>
+        <ul class="tab">
+          <li><button id="chart_tab" class="tablink active">General</button></li>
+          <li><button id="daily_tab" class="tablink" >Detailed</button></li>
+    <!--      <li><button id="daily_tab" class="tablink" >Production</button></li>  -->
+        </ul>
+        <div id="chart" class="tabcontent">
+          <canvas id="myChart" width="400" height="190"></canvas>
         </div>
-    </li>
-
-  <li>
-      <div class="col-md-4 col-xs-4">
-        <img src="img/update.png" alt="">
-        <p class="authorship-metrics-indicators-title" id="lastUpdate"></p>
-        <p class="authorship-metrics-indicators-description">LAST UPDATE</p>
-      </div>
-  </li>
-
-  <li>
-      <div class="col-md-4 col-xs-4">
-        <img src="img/character.png" alt="">
-        <p class="authorship-metrics-indicators-title" id="characterCount"></p>
-        <p class="authorship-metrics-indicators-description">CHARACTER COUNT</p>
-      </div>
-  </li>
-  </div>
-
-  </ul>
-
-  <div id="showMore">
-    <button><img src="img/arrow.png" class="more"></button>
-    <span class="line"></span>
-  </div>
-
-  <ul class="tab">
-    <li><button id="chart_tab" class="tablink active">General</button></li>
-    <li><button id="daily_tab" class="tablink" >Detailed</button></li>
-    <li><button id="daily_tab" class="tablink" >Production</button></li>
-  </ul>
-
-    <div id="chart" class="tabcontent">
-      <canvas id="myChart" width="400" height="190"></canvas>
-    </div>
-
-    <div id="daily" class="tabcontent time-spent container">
-      <h4 class="center">PRODUCTION</h4>
-      <div class="col-md-12">
-        <div class="col-xs-5">
-          <h4>Date</h4>
-          <div id="date-container">
+        
+        <div id="daily" class="tabcontent time-spent container">
+          <h4 class="center">PRODUCTION</h4>
+          <div class="col-md-12">
+            <div class="col-xs-5">
+              <h4>Date</h4>
+              <div id="date-container"></div>
+            </div>
+            <div class="col-xs-3 center">
+              <h4>Words</h4>
+              <div id="words-container" class=""></div>
+            </div>
+            <div class="col-xs-3">
+              <h4>Hours</h4>
+              <div id="time-container"></div>
+            </div>
+          </div>
+          <div class="exportButton">
+<!--         <button class="btn createProject" id="export">Export</button>  -->
           </div>
         </div>
-        <div class="col-xs-3 center">
-          <h4>Words</h4>
-          <div id="words-container" class="">
-          </div>
-        </div>
-        <div class="col-xs-3">
-          <h4>Hours</h4>
-          <div id="time-container">
-          </div>
+        <div id="controls">
+          <button class="btn btn-primary" id="start" ><img src="img/start.png">Start</button>
+          <button class="btn btn-primary" id="pause" ><img src="img/pause.png">Pause</button>
+          <button class="btn btn-primary" id="chartsBack">Back</button>
         </div>
       </div>
-      <div class="exportButton">
-<!--        <button class="btn createProject" id="export">Export</button>  -->
-      </div>
     </div>
-
-    <div id="controls">
-      <button class="btn btn-primary" id="start" ><img src="img/start.png">Start</button>
-      <button class="btn btn-primary" id="pause" ><img src="img/pause.png">Pause</button>
-      <button class="btn btn-primary" id="chartsBack">Back</button>
-    </div>
-
     <footer class="container">
      <span> © Copyright <a href="www.authorship.me" id="authorshipLink">Authorship.me</a> All rights reserved.</span>
     </footer>

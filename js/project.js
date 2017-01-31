@@ -37,8 +37,10 @@ function startSystem() {
         document.getElementById("projectTime").innerHTML = dProject.time  + "h";
         document.getElementById("wordCount").innerHTML = dProject.words;
         document.getElementById("milestonePercentage").innerHTML = dProject.milestone.percentage + "%" ;
-        if (dProject.milestone.words) {
+        if (dProject.milestone.type == "wDay") {
           var milestoneText = dProject.milestone.words + " WORDS PER DAY";
+        } else if (dProject.milestone.type == "wMonth") {
+          var milestoneText = dProject.milestone.words + " WORDS PER MONTH";
         } else {
           var milestoneText = dProject.milestone.deadline.replace("/20", "/");
         }
@@ -143,7 +145,7 @@ function instance() {
 
   function changeView () {
     var height = document.getElementById("sometimes").style.height;
-    var time = 1000;
+    var time = 450;
     if (height === "0px" || height === "") {
       $('#sometimes').animate({
         height: '100px'
@@ -151,7 +153,7 @@ function instance() {
         duration: time  // 2 seconds
       });
       $('.authorship-metrics-indicators').animate({
-        height: '250px'
+        height: '235px'
       }, {
         duration: time  // 2 seconds
       });
@@ -163,7 +165,7 @@ function instance() {
         duration: time  // 2 seconds
       });
       $('.authorship-metrics-indicators').animate({
-        height: '135px'
+        height: '105px'
       }, {
         duration: time  // 2 seconds
       });

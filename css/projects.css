@@ -86,13 +86,8 @@ td:last-child {
 }
 
 .loading {
-  vertical-align:middle;
-  text-align:center;
-  position: relative;
-  top: 10.5em;
-  left: -7.5em;
-  margin-bottom: 300px;
-  margin-left: 230px;
+  margin-top: 175px;
+  margin-left: 190px;
 }
 .col-xs-12{
   padding: 0px;
