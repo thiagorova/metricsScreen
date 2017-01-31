@@ -6,7 +6,7 @@
 body {
   width: 500px;
   height: 356px;
-  margin-bottom: 40px;  
+  margin-bottom: 40px;
 }
 
 header img {
@@ -69,6 +69,9 @@ header button {
 header button:hover {
   color:white !important;
 }
+button span{
+  color: #FFF;
+}
 
 .right {
   float: right;
@@ -99,4 +102,3 @@ footer a{
   margin 0 auto;
   height:
 }
-
