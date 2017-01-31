@@ -96,9 +96,9 @@ canvas {
 }
 
 .authorship-metrics-indicators{
-  text-align: center; 
-  padding-top: 20px; 
-  padding-bottom: 20px; 
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
   list-style:none;
   margin-bottom: 0;
   margin-top: 0;
@@ -108,12 +108,12 @@ canvas {
 
 .authorship-metrics-indicators-title{
   padding-top:5px;
-  font-size:20px; 
+  font-size:20px;
   color: #4C4C4C;
 }
 .authorship-metrics-indicators-description{
   padding-top:0px;
-  font-size:12px; 
+  font-size:12px;
   color:#4C4C4C;
 }
 
@@ -124,6 +124,7 @@ canvas {
 #sometimes {
   height: 0px;
   overflow:hidden;
+  margin-top: 10px;
 }
 
 #showMore {
@@ -134,8 +135,8 @@ canvas {
   outline:none;
   background: inherit;
   border: none;
-  width:100%; 
-} 
+  width:100%;
+}
 
 #showMore button {
     overflow: hidden;
@@ -205,4 +206,3 @@ canvas {
 #export{
   padding: 10px 30px 10px 30px;
 }
-

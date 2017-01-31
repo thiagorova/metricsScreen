@@ -1,6 +1,6 @@
 .projects-view{
    min-height: inherit;
-   padding-right: 0px !important;
+   padding: 0px !important;
    height: inherit;
 }
 
@@ -37,15 +37,21 @@
 .projects-table tr:hover{
   background-color: #eaeaea;
 }
+.projects-table tr td:first-child{
+  padding-left: 20px;
+}
 .projects-table tr:last-child{
   border-top: 1px solid #C5CDCB;
   border-bottom: none;
+}
+.projects-table tr:first-child{
+  padding-left: 20px;
 }
 .td-project-name{
   max-width: 195px;
 }
 .projects-table .info{
-  padding-top: 10px;
+  padding: 7px 20px 7px 20px;
   text-align: center;
 }
 
@@ -62,7 +68,7 @@
 .btn-project-name{
   border:none;
   background: none;
-  padding: 25px;
+
   outline:none;
 }
 
@@ -87,4 +93,7 @@ td:last-child {
   left: -7.5em;
   margin-bottom: 300px;
   margin-left: 230px;
+}
+.col-xs-12{
+  padding: 0px;
 }
