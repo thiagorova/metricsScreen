@@ -5,6 +5,7 @@
   var metricsApi;
   var projectMetrics;
 
+
 function startSystem() {
   document.getElementById("chartsBack").addEventListener('click', goBack);
   document.getElementById("start").addEventListener('click', startMeasuring);
@@ -50,6 +51,7 @@ function startSystem() {
             document.getElementById("characterCount").innerHTML = getCharacterCount(dProject);
             buildGraph(metricsData);
             wordsPerHour(metricsData);
+
           } else {
             document.getElementById("beganWriting").innerHTML = dProject.creation;
             document.getElementById("lastUpdate").innerHTML = dProject.creation;
@@ -64,15 +66,14 @@ function startSystem() {
   }
 
   function getStartDate(project) {
-    return "";  
+    return project.creation;
   }
-
   function getLastUpdate(project) {
-    return "";  
+    var date = new Date(project.lastUpdate);
+    return date.getDate() + '/' + date.getMonth()+1 + '/' + date.getFullYear();
   }
-  
   function getCharacterCount(project) {
-    return "";
+    return project.charCount;
   }
 
   function measuring() {
@@ -169,7 +170,7 @@ function instance() {
         height: '135px'
       }, {
         duration: time  // 2 seconds
-      });  
+      });
       $('.less ').addClass("more").removeClass("less");
     }
   }

@@ -66,4 +66,3 @@ function writeTable(newData){
     $('#words-container').append('<p>' + newData[i].words + '</p>');
   }
 }
-

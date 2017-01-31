@@ -1,5 +1,5 @@
   var metrics;
-  
+
   var updateOnlineStatus = function () {
     document.getElementById("online_offline").innerHTML = "Online mode";
     checkStorage();
@@ -48,7 +48,7 @@
       });
     });
   }
-  
+
   var setSystem = function (callback) {
     window.addEventListener('online',  updateOnlineStatus);
     window.addEventListener('offline', updateOfflineStatus);
@@ -73,7 +73,7 @@
       }
     });
   }
-  
+
   testOpenProject = function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {request: "getId"}, function (projectId) {
@@ -96,7 +96,7 @@ function GoToProject(project, projectSet) {
         changeLocation("project.html");
       });
   });
-  
+
 }
 
   var setProjects = function(projects) {
@@ -138,12 +138,12 @@ function GoToProject(project, projectSet) {
     }
     return JSON.stringify(obj) === JSON.stringify({});
 }
-  
+
   function changeLocation(local) {
     var hrefParts = window.location.href.split("/");
     if(hrefParts[hrefParts.length - 1] !== local) window.location.href = local;
   }
-  
+
   if (window.onload === null) {
     window.onload = function () {
       setSystem(null);
