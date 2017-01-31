@@ -1,19 +1,20 @@
-  var count = 10000;
+  var count = 5000;
+  var time = 0;
   var intervalId = null;
   var projectId = null;
   var projectTime;
   var metrics;
   var heldProject;
   var start, timeoutId, projectTime;
-  
+  var timeInterval = 0.1;  //number of minutes between readings. 0.2 is about 12 seconds
+  var projectName;
+  var heldData;  
+
+
   chrome.storage.local.get('apikey', function(storedItem) {
       metrics = new Metrics(storedItem.apikey);    
       chrome.storage.local.set({ 'apikey': storedItem.apikey });
   });
-  
-  var timeInterval = 0.1;  //number of minutes between readings. 0.2 is about 12 seconds
-  var projectName;
-  var heldData;
 chrome.runtime.onMessage.addListener( function (request, sender, callback) {
   //main program, that will be executed every time a button is pressed
   if(request.request === "start") {
@@ -23,6 +24,8 @@ chrome.runtime.onMessage.addListener( function (request, sender, callback) {
   } else if (request.request === "stop") {
     stopMeasuring();
     readText();
+    instance();
+    clearTimeout(timeoutId);
   } else if (request.request === "getId") {
     callback(projectId);
   } else if (request.request === "isMeasuring") {
@@ -118,35 +121,24 @@ function injectScript(file, node) {
   }
 
   function setCounter(time) {
-    projectTime = new Date();
+    totalTime = new Date();
     var parts = time.match(/(\d+):(\d+):(\d+)/);
-    projectTime.setHours(parseInt(parts[1], 10));
-    projectTime.setMinutes(parseInt(parts[2], 10));
-    projectTime.setSeconds(parseInt(parts[3], 10)); 
+    totalTime.setHours(parseInt(parts[1], 10));
+    totalTime.setMinutes(parseInt(parts[2], 10));
+    totalTime.setSeconds(parseInt(parts[3], 10)); 
     start = new Date().getTime();
     timeoutId = window.setTimeout(instance, count);
   }
 
-function instance() {
+function instance(once) {
     time += count;
-    var elapsed = Math.floor(count/10000);
+    var elapsed = Math.floor(count/1000);
     totalTime.setSeconds(totalTime.getSeconds() + elapsed);
     var seconds = totalTime.getHours() * 3600 + totalTime.getMinutes() * 60 + totalTime.getSeconds();
-    metrics.setDuration(projectId, time);
+    metrics.setDuration(projectId, time/1000);
     var diff = (new Date().getTime() - start) - time;
-    timeoutId = window.setTimeout(instance, (count - diff));
+    if(typeof once === "undefined") timeoutId = window.setTimeout(instance, (count - diff));
 }
-
-  function setCounter() {
-    projectTime = new Date();
-    var parts = dProject.time.match(/(\d+):(\d+):(\d+)/);
-    projectTime.setHours(parseInt(parts[1], 10));
-    projectTime.setMinutes(parseInt(parts[2], 10));
-    projectTime.setSeconds(parseInt(parts[3], 10)); projectTime.getHours().toString() + ":" + projectTime.getMinutes().toString() + ":" + projectTime.getSeconds().toString();
-    start = new Date().getTime();
-    timeoutId = window.setTimeout(instance, count);
-  }
-
 
   function  saveToStorage(data) {
     var message = data;
