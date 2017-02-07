@@ -109,6 +109,10 @@ window.onload = function
       });
     });
     clearTimeout(timeoutId);
+    if (typeof projectTime !== "undefined") {
+      var seconds = projectTime.getHours() * 3600 + projectTime.getMinutes() * 60 + projectTime.getSeconds();
+      metricsApi.setDuration(dProject.id, seconds);
+    }
   }
 
 //setting the messages to start recording the data
@@ -130,8 +134,9 @@ function instance() {
     time += count;
     var elapsed = Math.floor(count/1000);
     projectTime.setSeconds(projectTime.getSeconds() + elapsed);
-    dProject.time = projectTime.getHours().toString() + ":" + projectTime.getMinutes().toString() + ":" + projectTime.getSeconds().toString() + "h";
+    dProject.time = projectTime.getHours().toString() + ":" + projectTime.getMinutes().toString() + ":" + projectTime.getSeconds().toString();
     var seconds = projectTime.getHours() * 3600 + projectTime.getMinutes() * 60 + projectTime.getSeconds();
+//    if (time % 60000 === 0) metricsApi.setDuration(dProject.id, seconds);
     document.getElementById("projectTime").innerHTML = dProject.time
     var diff = (new Date().getTime() - start) - time;
     timeoutId = window.setTimeout(instance, (count - diff));
@@ -142,8 +147,7 @@ function instance() {
     var parts = dProject.time.match(/(\d+):(\d+):(\d+)/);
     projectTime.setHours(parseInt(parts[1], 10));
     projectTime.setMinutes(parseInt(parts[2], 10));
-    projectTime.setSeconds(parseInt(parts[3], 10)); 
-    projectTime.getHours().toString() + ":" + projectTime.getMinutes().toString() + ":" + projectTime.getSeconds().toString();
+    projectTime.setSeconds(parseInt(parts[3], 10)); projectTime.getHours().toString() + ":" + projectTime.getMinutes().toString() + ":" + projectTime.getSeconds().toString();
     start = new Date().getTime();
     timeoutId = window.setTimeout(instance, count);
   }

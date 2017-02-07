@@ -1,3 +1,4 @@
+var exportData;
 
 function formatDate(metricsData) {
 
@@ -54,7 +55,7 @@ function wordsPerHour(metricsData){
     }
     i++;
   }
-
+  exportData = newData;
   writeTable(newData);
 }
 
