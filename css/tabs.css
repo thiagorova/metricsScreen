@@ -14,7 +14,6 @@ ul.tab li {
 /* Style the links inside the list items */
 ul.tab li button {
   display: inline-block;
-
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;

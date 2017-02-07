@@ -86,9 +86,15 @@ td:last-child {
 }
 
 .loading {
-  margin-top: 175px;
+  margin-top: 105px;
   margin-left: 190px;
+  margin-bottom: 105px;
 }
+
+#projects {
+  display: none;
+}
+
 .col-xs-12{
   padding: 0px;
 }

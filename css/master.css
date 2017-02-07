@@ -9,8 +9,38 @@ body {
   max-height: 356px;
 }
 
-header img {
+header #goUser {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  border-left: 1px #1AA7B5 dotted;
+  background: inherit;
+  float: right;
+  margin-top: 14px;
+  margin-right: 15px;
+}
+
+header {
+  margin-bottom: 20px;
+  height: 66px;
+}
+
+header > img {
+  display: inline-block;
   margin-left: 22px;
+}
+
+header #createProject {
+  float: right;
+  background-color: #1AA7B5;
+  border: none;
+  color: white;
+  margin: 16px 30px 18px 10px; !important
+  cursor:pointer;
+}
+
+header #createProject:hover {
+  color:white !important;
 }
 
 .container{
@@ -46,28 +76,6 @@ header img {
 
 h4 + div  {
   padding-right: 0px !important;
-}
-
-header {
-  margin-bottom: 20px;
-  height: 66px;
-}
-
-header img {
-  display: inline-block;
-}
-
-header button {
-  float: right;
-  background-color: #1AA7B5;
-  border: none;
-  color: white;
-  margin: 16px 30px 18px 10px; !important
-  cursor:pointer;
-}
-
-header button:hover {
-  color:white !important;
 }
 
 .right {

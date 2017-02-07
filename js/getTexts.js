@@ -159,8 +159,8 @@ function instance(once) {
       if (isEmpty(storedItem)  === false) {
         storedItem[fieldName].data.forEach(function (metric) {
           metrics.saveLater(metric.text, projectId, metric.time);
-          chrome.storage.local.remove(fieldName);
         });
+        chrome.storage.local.remove(fieldName);
       }
     });
   }

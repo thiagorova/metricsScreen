@@ -1,6 +1,6 @@
 
 
-window.onload= function () {
+function buildTabs(firstTab) {
   tabs = document.getElementsByClassName("tablink");  
   var len = tabs.length;
   for (var i = 0; i < len; i++) {
@@ -8,9 +8,10 @@ window.onload= function () {
       openTab(e, e.target.id.split("_")[0]);
     });
   }
-  
-  startSystem();			//this does NOT only build the graph! it also does the work of getting the metrics. below, on openTab, we work on opening each projects startSystem!
-  document.getElementById("chart_tab").click();
+  start = document.getElementById(firstTab);
+  if (start !== null) {
+    start.click();
+  }
 }
 
 

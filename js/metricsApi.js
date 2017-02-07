@@ -9,8 +9,8 @@ var Metrics = function (key) {
     this.priv = {}
     this.priv.key = key;
     this.priv.project = null;
-//    var mainAdd = "http://localhost:4000/";
     var mainAdd = "https://www.metrics.api.authorship.me/"
+    var mainAdd = "http://localhost:4000/";
     this.priv.metricsAdd = mainAdd + "metrics/";
     this.priv.userAdd = mainAdd + "users/";
     this.priv.projectAdd = mainAdd + "projects/";
@@ -55,6 +55,13 @@ var Metrics = function (key) {
     Metrics.prototype.saveLater = function (text, projectId, time, callback, callbackError) {
       if (typeof callback === 'undefined') { callback = null; }
       if (typeof callbackError === 'undefined') { callbackError = null; }
+      if (time[4] === "/") {
+        var month = "0" + (parseInt(time[3]) + 1)
+        time = [time.slice(0, 3), month, time.slice(4)].join('');
+      } else {
+        var month =  (parseInt(time.slice(3,5) ) + 1).toString()
+        time = [time.slice(0, 3), month, time.slice(5)].join('');
+      }
         apiCall("POST", this.priv.metricsAdd + "saveAsIs", buildJSON(this.priv.key, projectId, text, time), function(response) {
           if(callback !== null) callback(JSON.parse( response ));
         },
@@ -109,6 +116,14 @@ var Metrics = function (key) {
       }, callbackError);
     };
 
+    Metrics.prototype.getUserProductivity = function (callback, callbackError) {
+      if (typeof callback === 'undefined') { callback = null; }
+      if (typeof callbackError === 'undefined') { callbackError = null; }
+      apiCall("GET", this.priv.userAdd + "getProductivity", {"apikey": this.priv.key }, function (response) {
+        var productivity = JSON.parse( response );
+        if (callback !== null) callback(productivity.user_data);
+      }, callbackError);
+    };
 
     var createXHTTP = function(callback) {
         var xhttp;

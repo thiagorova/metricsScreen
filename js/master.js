@@ -41,6 +41,7 @@
                   }, interval);
                   interval += basePause;
                 });
+               chrome.storage.local.remove(property);
               }
             }
           }
@@ -53,6 +54,7 @@
     window.addEventListener('online',  updateOnlineStatus);
     window.addEventListener('offline', updateOfflineStatus);
     document.getElementById("authorshipLink").addEventListener('click', goToAuthorship);
+    document.getElementById("goUser").addEventListener('click', GoToUserScreen);
     var createButton = document.getElementById("createProject");
     if (createButton !== null) createButton.addEventListener('click', function (e) {changeLocation("create.html");});
     var hrefParts = window.location.href.split("/");
@@ -96,7 +98,10 @@ function GoToProject(project, projectSet) {
         changeLocation("project.html");
       });
   });
+}
 
+function GoToUserScreen() {
+   changeLocation("userScreen.html");
 }
 
   var setProjects = function(projects) {

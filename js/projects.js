@@ -1,5 +1,4 @@
 
-
   var showProjects = function(metrics) {
     metrics.getAllProjects(viewProjects,
       function(error) {
@@ -11,14 +10,13 @@
   };
 
   function viewProjects(projects) {
-    console.log(projects);
     if (projects === "") {
       changeLocation("empty.html");
       return;         
     }
    saveProjects(projects);
     document.getElementById("loading").style.display = "none";
-
+    document.getElementById("projects").style.display = "block";
    //setting up the projects as easy to work with objects, in the most appropirate display order
     var pList = setProjects(projects);
     if(pList.length >= 0) {

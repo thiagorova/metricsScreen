@@ -6,11 +6,13 @@
   var projectMetrics;
 
 
-function startSystem() {
+window.onload = function
+() {
   document.getElementById("chartsBack").addEventListener('click', goBack);
   document.getElementById("start").addEventListener('click', startMeasuring);
   document.getElementById("pause").addEventListener('click', stopMeasuring);
   document.getElementById("showMore").addEventListener('click', changeView);
+  buildTabs("chart_tab");
   setSystem(function (metrics) {
      metricsApi = metrics;
     openProject(function () {
@@ -32,50 +34,51 @@ function startSystem() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {request: "getData"}, function (project) {
         dProject = project;
-
         document.getElementById("projectName").innerHTML = dProject.projectName;
         document.getElementById("projectTime").innerHTML = dProject.time  + "h";
         document.getElementById("wordCount").innerHTML = dProject.words;
         document.getElementById("milestonePercentage").innerHTML = dProject.milestone.percentage + "%" ;
-        if (dProject.milestone.type == "wDay") {
-          var milestoneText = dProject.milestone.words + " WORDS PER DAY";
-        } else if (dProject.milestone.type == "wMonth") {
-          var milestoneText = dProject.milestone.words + " WORDS PER MONTH";
-        } else {
-          var milestoneText = dProject.milestone.deadline.replace("/20", "/");
-        }
-        document.getElementById("milestoneText").innerHTML = milestoneText  ;
+        document.getElementById("milestoneText").innerHTML = getMilestoneText(dProject) ;
+        document.getElementById("lastUpdate").innerHTML = getLastUpdate(dProject);
+        document.getElementById("characterCount").innerHTML = dProject.charCount;
         metricsApi.getMetrics(dProject.id, function (metricsData) {
           projectMetrics = metricsData;
           if(metricsData !== "") {
-            document.getElementById("beganWriting").innerHTML = getStartDate(dProject);
-            document.getElementById("lastUpdate").innerHTML = getLastUpdate(dProject);
-            document.getElementById("characterCount").innerHTML = getCharacterCount(dProject);
+            var firstMetric = metricsData.reduce(function(a, b) {return (a.date < b.date) ?  a: b;});
+            var firstDate = firstMetric.date.split(" ")[0] ;
+            var firstDate = [firstDate.slice(0, 6), "20", firstDate.slice(6)].join('');
+            document.getElementById("beganWriting").innerHTML = firstDate;
             buildGraph(metricsData);
             wordsPerHour(metricsData);
-
           } else {
             document.getElementById("beganWriting").innerHTML = dProject.creation;
-            document.getElementById("lastUpdate").innerHTML = dProject.creation;
-            document.getElementById("characterCount").innerHTML = 0;
-            var canvas = document.getElementsByTagName("canvas")[0];
-            if (canvas) canvas.parentNode.removeChild(canvas);
+            buildGraph([]);
           }
+        }, function (error) {
+            document.getElementById("beganWriting").innerHTML = dProject.creation;
+            buildGraph([]);
         });
         callback();
       });
     });
   }
 
-  function getStartDate(project) {
-    return project.creation;
+  function getMilestoneText(project) {
+    if (project.milestone.type == "wDay" || project.milestone.type == "Words per Day") {
+      return project.milestone.words + " WORDS PER DAY";
+    } else if (dProject.milestone.type == "wMonth") {
+      return project.milestone.words + " WORDS PER MONTH";
+    } else {
+      return project.milestone.deadline.replace("/20", "/");
+    }
   }
+
   function getLastUpdate(project) {
-    var date = new Date(project.lastUpdate);
-    return date.getDate() + '/' + date.getMonth()+1 + '/' + date.getFullYear();
-  }
-  function getCharacterCount(project) {
-    return project.charCount;
+    dateParts = project.lastUpdate.split("T")[0].split("-")
+    var date = new Date(dateParts[0], parseInt(dateParts[1])-1, dateParts[2] );
+    var day = (date.getDate() < 10) ? "0" + date.getDate():date.getDate();
+    var month = (date.getMonth() < 9) ? "0" + (date.getMonth() + 1):date.getMonth() + 1;
+    return day + '/' + month + '/' + date.getFullYear();
   }
 
   function measuring() {
@@ -83,6 +86,7 @@ function startSystem() {
     document.getElementById("pause").style.display = "inline-block";
     document.getElementById("chartsBack").disabled = true;
     document.getElementById("createProject").disabled = true;
+    document.getElementById("goUser").disabled = true;
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.browserAction.setIcon({
         path : "img/icons/recording.png",
@@ -97,6 +101,7 @@ function startSystem() {
     document.getElementById("pause").style.display = "none";
     document.getElementById("chartsBack").disabled = false;
     document.getElementById("createProject").disabled = false;
+    document.getElementById("goUser").disabled = false;
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.browserAction.setIcon({
         path : "img/icons/imgpsh_fullsize.png",
