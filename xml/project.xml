@@ -1,0 +1,210 @@
+<xml>
+  <en>
+    <createProject>
+      Create Project
+    </createProject>
+
+    <projectTimeLabel>
+      TIME SPENT
+    </projectTimeLabel>
+
+    <wordCountLabel>
+      WORDS WRITTEN
+    </wordCountLabel>
+
+    <beganWritingLabel>
+      BEGAN WRITING
+    </beganWritingLabel>
+
+    <lastUpdateLabel>
+      LAST UPDATE
+    </lastUpdateLabel>
+
+    <characterCountLabel>
+      CHARACTER COUNT
+    </characterCountLabel>
+
+    <chart_tab>
+      General
+    </chart_tab>
+
+    <daily_tab>
+      Detailed
+    </daily_tab>
+
+    <productionLabel>
+      PRODUCTION
+    </productionLabel>
+
+    <dateLabel>
+      Date
+    </dateLabel>
+
+    <wordsLabel>
+      Words
+    </wordsLabel>
+
+    <hoursLabel>
+      Hours
+    </hoursLabel>
+
+    <export>
+      Export
+    </export>
+
+    <start>
+      Start
+    </start>
+
+    <pause>
+      Pause
+    </pause>
+
+    <chartsBack>
+      Back
+    </chartsBack>
+
+    <authorshipLink>
+      Authorship.me</a> All rights reserved.
+    </authorshipLink>
+  </en>
+
+  <de>
+    <createProject>
+      Create ProjectDE
+    </createProject>
+
+    <projectTimeLabel>
+      TIME SPENTDE
+    </projectTimeLabel>
+
+    <wordCountLabel>
+      WORDS WRITTENDE
+    </wordCountLabel>
+
+    <beganWritingLabel>
+      BEGAN WRITINGDE
+    </beganWritingLabel>
+
+    <lastUpdateLabel>
+      LAST UPDATEDE
+    </lastUpdateLabel>
+
+    <characterCountLabel>
+      CHARACTER COUNTDE
+    </characterCountLabel>
+
+    <chart_tab>
+      GeneralDE
+    </chart_tab>
+
+    <daily_tab>
+      DetailedDE
+    </daily_tab>
+
+    <productionLabel>
+      PRODUCTIONDE
+    </productionLabel>
+
+    <dateLabel>
+      DateDE
+    </dateLabel>
+
+    <wordsLabel>
+      wordsDE
+    </wordsLabel>
+
+    <hoursLabel>
+      HoursDE
+    </hoursLabel>
+
+    <export>
+      ExportDE
+    </export>
+
+    <start>
+      StartDE
+    </start>
+
+    <pause>
+      PauseDE
+    </pause>
+
+    <chartsBack>
+      BackDE
+    </chartsBack>
+
+    <authorshipLink>
+      Authorship.me</a> All rights reserved.DE
+    </authorshipLink>
+  </de>
+  <pt>
+    <createProject>
+      Criar Projeto
+    </createProject>
+
+    <projectTimeLabel>
+      TEMPO GASTO
+    </projectTimeLabel>
+
+    <wordCountLabel>
+      PALAVRAS ESCRITAS
+    </wordCountLabel>
+
+    <beganWritingLabel>
+      COMEÇOU A ESCREVER
+    </beganWritingLabel>
+
+    <lastUpdateLabel>
+      ÚLTIMA ATUALIZAÇÃO
+    </lastUpdateLabel>
+
+    <characterCountLabel>
+      CONTAGEM DE CARACTERES
+    </characterCountLabel>
+
+    <chart_tab>
+      Geral
+    </chart_tab>
+
+    <daily_tab>
+      Detalhado
+    </daily_tab>
+
+    <productionLabel>
+      PRODUÇÃO
+    </productionLabel>
+
+    <dateLabel>
+      Data
+    </dateLabel>
+
+    <wordsLabel>
+      Palavras
+    </wordsLabel>
+
+    <hoursLabel>
+      Horas
+    </hoursLabel>
+
+    <export>
+      Exportar
+    </export>
+
+    <start>
+      Começar
+    </start>
+
+    <pause>
+      Pausar
+    </pause>
+
+    <chartsBack>
+      Voltar
+    </chartsBack>
+
+    <authorshipLink>
+      Authorship.me</a> Todos os direitos reservados.
+    </authorshipLink>
+  </de>
+</xml>
