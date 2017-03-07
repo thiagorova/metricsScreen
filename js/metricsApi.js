@@ -10,7 +10,7 @@ var Metrics = function (key) {
     this.priv.key = key;
     this.priv.project = null;
     var mainAdd = "https://www.metrics.api.authorship.me/"
-    var mainAdd = "http://localhost:4000/";
+//    var mainAdd = "http://localhost:4000/";
     this.priv.metricsAdd = mainAdd + "metrics/";
     this.priv.userAdd = mainAdd + "users/";
     this.priv.projectAdd = mainAdd + "projects/";
@@ -31,10 +31,40 @@ var Metrics = function (key) {
         apiCall("DELETE", this.priv.projectAdd + "delete", buildJSON(this.priv.key, projectId), callback, callbackError);
     };
 
-    Metrics.prototype.setDuration = function (projectId, time, callback, callbackError) {
+    Metrics.prototype.addDuration = function (projectId, time, callback, callbackError) {
       if (typeof callback === 'undefined') { callback = null; }
       if (typeof callbackError === 'undefined') { callbackError = null; }
         apiCall("PUT", this.priv.projectAdd + "update", buildUpdateJSON(this.priv.key, projectId, "duration", time), function(response) {
+          if (response !== "") response = JSON.parse( response );
+          if(callback !== null) callback();
+        },
+        callbackError);
+    };
+
+    Metrics.prototype.UpdateProject = function (projectId, name, totalWords, milestoneType, milestoneValue, isDeadline, callback, callbackError) {
+      updateNames = [];
+      updateValues = [];
+      if (name !== null) { 
+        updateNames.push("projectName");
+        updateValues.push(name);
+      }
+      if (totalWords !== null) { 
+        updateNames.push("totalWords");
+        updateValues.push(totalWords);
+      }
+      if (milestoneType !== null) { 
+        updateNames.push("milestoneType");
+        updateValues.push(milestoneType);
+      }
+      if (milestoneValue == null) { 
+        if (isDeadline) updateNames.push("deadline");
+        else updateNames.push("milestoneCount");
+        updateValues.push(milestoneValue);
+      }
+      if (typeof callback === 'undefined') { callback = null; }
+      if (typeof callbackError === 'undefined') { callbackError = null; }
+      if (name !== null)
+      apiCall("PUT", this.priv.projectAdd + "update", buildUpdateJSON(this.priv.key, projectId, "duration", time), function(response) {
           if (response !== "") response = JSON.parse( response );
           if(callback !== null) callback();
         },

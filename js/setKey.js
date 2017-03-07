@@ -8,7 +8,8 @@
         "email": email, 
         "password": password
       },
-      tool: "metrics"  
+      tool: "metrics",
+      platform: "google chrome"
     }
     testLogin(data);
   }
@@ -37,7 +38,8 @@
         }
       }
     });
-    xhttp.open('POST', 'http://metrics.authorship.me/users/login', true);
+    xhttp.open('POST', 'https://metrics.authorship.me/users/login', true);
+//    xhttp.open('POST', 'http://metrics.localhost.me:3000/users/login', true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.setRequestHeader("Origin", window.top.location.href.split("?")[0]);
     xhttp.send(JSON.stringify( data ));

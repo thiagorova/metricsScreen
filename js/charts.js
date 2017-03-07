@@ -19,11 +19,11 @@ chart = null;
     if (dataPos < 0) {
       var datum = {};
       datum.count = metricsData[i].count;
-      datum.fdate = metricsData[i].date;
+      datum.fdate = metricsData[i].date.split(" ")[1];
       datum.day = current;
       data.push(datum)
     } else {
-      if (datum.fdate.split(" ")[1] < metricsData[i].date.split(" ")[1]) {
+      if (datum.fdate < metricsData[i].date.split(" ")[1]) {
         data[dataPos].count = metricsData[i].count;
         data[dataPos].fdate = metricsData[i].date;
       }

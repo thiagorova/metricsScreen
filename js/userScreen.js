@@ -68,6 +68,18 @@ window.onload = function() {
         hourly[hour] += data[i].count;
       }
     }
+    var today = new Date();
+    var timeZoneDiff = -today.getTimezoneOffset()/60;   //this method returns time difference in minuts
+    console.log(timeZoneDiff);
+    if (timeZoneDiff >= 0) {
+      var keyOrder = Object.keys(hourly);
+    } else {
+     var keyOrder = Object.keys(hourly).reverse()
+    }
+    keyOrder.map(function (hour) { 
+      hourly[hour - timeZoneDiff] = hourly[hour];
+      delete hourly[hour];
+    });
     return hourly;
   }
   

@@ -85,11 +85,25 @@
       mValueTD.appendChild(mValueSpan);
       mValueTD.appendChild(mValueP);
       line.appendChild(mValueTD);
+
+      var exOtTD = document.createElement("TD");
+      var exOtButton = document.createElement("BUTTON");
+      var exOtImg = document.createElement("IMG");
+      exOtImg.src = "img/menu-options.png";
+      exOtButton.setAttribute("class", "moreOptions");
+      exOtButton.addEventListener("click", function(e) { openOptions(project); });
+      exOtTD.setAttribute("class", "info");
+      exOtButton.appendChild(exOtImg);
+      exOtTD.appendChild(exOtButton);
+      line.appendChild(exOtTD);
       
       document.getElementsByTagName("table")[0].appendChild(line);
     });
   }
 
+  function openOptions(project) {
+  
+  }
 
   //função para calcular a porcentagem cumulativa
   var eloCalc = function(project){

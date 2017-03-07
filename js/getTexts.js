@@ -9,7 +9,7 @@
   var timeInterval = 0.1;  //number of minutes between readings. 0.2 is about 12 seconds
   var projectName;
   var heldData;  
-
+  var lastMeasure = 0;
 
   chrome.storage.local.get('apikey', function(storedItem) {
       metrics = new Metrics(storedItem.apikey);    
@@ -24,8 +24,7 @@ chrome.runtime.onMessage.addListener( function (request, sender, callback) {
   } else if (request.request === "stop") {
     stopMeasuring();
     readText();
-    instance();
-    clearTimeout(timeoutId);
+    instance(true);
   } else if (request.request === "getId") {
     callback(projectId);
   } else if (request.request === "isMeasuring") {
@@ -55,7 +54,7 @@ function injectScript(file, node) {
 
   function startMeasuring(){
     if(!intervalId) {
-      intervalId = setInterval(readText, timeInterval * 60 * 1000);
+      intervalId = window.setTimeout(readText, timeInterval * 60 * 1000);
       window.onunload=function() {
         return "are you sure you want to leave? The system will stop recording.";
       };
@@ -64,11 +63,16 @@ function injectScript(file, node) {
 
   function stopMeasuring() {
     if(intervalId) {
-      clearInterval(intervalId);
-      intervalId = null;
-      window.onunload=null;
+      //clearInterval(intervalId);
+      clearTimeout(intervalId);
     }
-  };
+    if(timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    intervalId = null;
+    timeoutId = null;
+    window.onunload=null;
+  }
     
   function readText() {  
     if(!document.getElementById('myReallyFakeTextArea')) {
@@ -107,6 +111,17 @@ function injectScript(file, node) {
       data = data.trim();
       if (data !== "") {
         var message = data;
+       if (intervalId !== null) intervalId = window.setTimeout(readText, timeInterval * 60 * 1000);
+        if (lastMeasure === data.length) {
+          timeInterval *= 2;
+          if (timeInterval >= 12.8) {
+            stopMeasuring();
+            timeInterval = 0.1;
+          }
+        } else {
+          lastMeasure = data.length;
+          timeInterval = 0.1;
+        }
         metrics.analyze(data, projectId, function() { 
           sendStorage();
           projectId = (intervalId === null) ? null:projectId;
@@ -133,9 +148,9 @@ function injectScript(file, node) {
 function instance(once) {
     time += count;
     var elapsed = Math.floor(count/1000);
-    totalTime.setSeconds(totalTime.getSeconds() + elapsed);
-    var seconds = totalTime.getHours() * 3600 + totalTime.getMinutes() * 60 + totalTime.getSeconds();
-    metrics.setDuration(projectId, time/1000);
+//    totalTime.setSeconds(totalTime.getSeconds() + elapsed);
+//    var seconds = totalTime.getHours() * 3600 + totalTime.getMinutes() * 60 + totalTime.getSeconds();
+    metrics.addDuration(projectId, count/1000);
     var diff = (new Date().getTime() - start) - time;
     if(typeof once === "undefined") timeoutId = window.setTimeout(instance, (count - diff));
 }

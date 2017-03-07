@@ -80,12 +80,14 @@ h1 {
 }
 
 #chartControls button.pressed{
-  background-color: #E5E5E5;
+  background-color: #d8d8d8;
 }
 
 #back{
   float: left;
   color: white;
-  cursor: pointer
+  cursor: pointer;
+  background-color: #b4b4b4;
+  padding: 10px 20px 10px 20px;
 }
 

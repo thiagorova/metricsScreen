@@ -1,4 +1,5 @@
 
+  var metricsApi;
   var project = {
     'projectName': null,
     'selectMilestone' : null,
@@ -6,7 +7,7 @@
     'milestoneMeasure': null,
     'deadline':null
     };
-  var metricsApi;
+
   
     //This is a watcher function, which changes the milestone parameter based on the select field
   var setMilestone = function(e) {

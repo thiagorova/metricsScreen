@@ -6,8 +6,7 @@
   var projectMetrics;
 
 
-window.onload = function
-() {
+window.onload = function() {
   document.getElementById("chartsBack").addEventListener('click', goBack);
   document.getElementById("start").addEventListener('click', startMeasuring);
   document.getElementById("pause").addEventListener('click', stopMeasuring);
@@ -35,7 +34,7 @@ window.onload = function
       chrome.tabs.sendMessage(tabs[0].id, {request: "getData"}, function (project) {
         dProject = project;
         document.getElementById("projectName").innerHTML = dProject.projectName;
-        document.getElementById("projectTime").innerHTML = dProject.time  + "h";
+        document.getElementById("projectTime").innerHTML = setTimeString(dProject.time);
         document.getElementById("wordCount").innerHTML = dProject.words;
         document.getElementById("milestonePercentage").innerHTML = dProject.milestone.percentage + "%" ;
         document.getElementById("milestoneText").innerHTML = getMilestoneText(dProject) ;
@@ -130,14 +129,22 @@ window.onload = function
     stopped();
   };
 
+function setTimeString(time) {
+    var parts = time.match(/(\d+):(\d+):(\d+)/);
+    var time = new Date(0,0,0,parts[1], parts[2], parts[3]);
+    var hours = (time.getHours() < 10) ? "0" + time.getHours().toString():time.getHours().toString();
+    var minutes = (time.getMinutes() < 10) ? "0" + time.getMinutes().toString():time.getMinutes().toString();
+    var seconds = (time.getSeconds() < 10) ? "0" + time.getSeconds().toString():time.getSeconds().toString();
+    return hours + ":" + minutes + ":" + seconds + "h";  
+}
+
 function instance() {
     time += count;
     var elapsed = Math.floor(count/1000);
     projectTime.setSeconds(projectTime.getSeconds() + elapsed);
-    dProject.time = projectTime.getHours().toString() + ":" + projectTime.getMinutes().toString() + ":" + projectTime.getSeconds().toString();
+    dProject.time = setTimeString(projectTime.getHours().toString() + ":" + projectTime.getMinutes().toString() + ":" + projectTime.getSeconds().toString())
     var seconds = projectTime.getHours() * 3600 + projectTime.getMinutes() * 60 + projectTime.getSeconds();
-//    if (time % 60000 === 0) metricsApi.setDuration(dProject.id, seconds);
-    document.getElementById("projectTime").innerHTML = dProject.time
+    document.getElementById("projectTime").innerHTML = dProject.time;
     var diff = (new Date().getTime() - start) - time;
     timeoutId = window.setTimeout(instance, (count - diff));
 }
@@ -147,7 +154,8 @@ function instance() {
     var parts = dProject.time.match(/(\d+):(\d+):(\d+)/);
     projectTime.setHours(parseInt(parts[1], 10));
     projectTime.setMinutes(parseInt(parts[2], 10));
-    projectTime.setSeconds(parseInt(parts[3], 10)); projectTime.getHours().toString() + ":" + projectTime.getMinutes().toString() + ":" + projectTime.getSeconds().toString();
+    projectTime.setSeconds(parseInt(parts[3], 10)); 
+    projectTime.getHours().toString() + ":" + projectTime.getMinutes().toString() + ":" + projectTime.getSeconds().toString();
     start = new Date().getTime();
     timeoutId = window.setTimeout(instance, count);
   }

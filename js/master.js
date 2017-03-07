@@ -54,9 +54,9 @@
     window.addEventListener('online',  updateOnlineStatus);
     window.addEventListener('offline', updateOfflineStatus);
     document.getElementById("authorshipLink").addEventListener('click', goToAuthorship);
-    document.getElementById("goUser").addEventListener('click', GoToUserScreen);
-    var createButton = document.getElementById("createProject");
-    if (createButton !== null) createButton.addEventListener('click', function (e) {changeLocation("create.html");});
+    if (document.getElementById("goUser") !== null) document.getElementById("goUser").addEventListener('click', GoToUserScreen);
+    if (document.getElementById("createProject") !== null) document.getElementById("createProject").addEventListener('click', function (e) {changeLocation("create.html");});
+    
     var hrefParts = window.location.href.split("/");
     if(hrefParts[hrefParts.length - 1] === "empty.html") return;
     chrome.storage.local.get('apikey', function(storedItem) {
@@ -67,16 +67,18 @@
         } else {
           updateOfflineStatus();
         }
-        var hrefParts = window.location.href.split("/");
-        if (hrefParts[hrefParts.length - 1] !== "project.html") testOpenProject();
-        if (callback !== null) callback(metrics);
+        if (hrefParts[hrefParts.length - 1] !== "project.html") {
+          testOpenProject(metrics, callback);
+        } else {
+          if (callback !== null) callback(metrics);
+        }
       } else {
         changeLocation("setKey.html");
       }
     });
   }
 
-  testOpenProject = function() {
+  function testOpenProject(metrics, callback) {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {request: "getId"}, function (projectId) {
         if(projectId !== null && typeof projectId !== "undefined") {
@@ -84,6 +86,8 @@
             function(error) {
               getFromStorage(projectId, GoToProject);
             });
+          } else {
+              if (callback !== null) callback(metrics);
           }
       });
     });
