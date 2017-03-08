@@ -2,13 +2,12 @@
 <xml>
   <en>
     <createProject>Create Project</createProject>
-    <project>
-      <projectTimeLabel>TIME SPENT</projectTimeLabel>
-      <wordCountLabel> WORDS WRITTEN</wordCountLabel>
-      <beganWritingLabel>BEGAN WRITING</beganWritingLabel>
-      <lastUpdateLabel>LAST UPDATE</lastUpdateLabel>
-      <characterCountLabel> CHARACTER COUNT</characterCountLabel>
-      <chart_tab>General</chart_tab>
+    <projectTimeLabel>TIME SPENT</projectTimeLabel>
+    <wordCountLabel> WORDS WRITTEN</wordCountLabel>
+    <beganWritingLabel>BEGAN WRITING</beganWritingLabel>
+    <lastUpdateLabel>LAST UPDATE</lastUpdateLabel>
+    <characterCountLabel> CHARACTER COUNT</characterCountLabel>
+    <chart_tab>General</chart_tab>
     <daily_tab> Detailed</daily_tab>
     <productionLabel>PRODUCTION</productionLabel>
     <dateLabel>Date</dateLabel>
@@ -17,9 +16,9 @@
     <export-text> Export </export-text>
     <start>Start</start>
     <pause> Pause</pause>
-    <chartsBack> Back </chartsBack> 
+    <chartsBack> Back </chartsBack>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name> 
+    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>All rights reserved.</footer-end-text>
   </en>
 
@@ -32,28 +31,27 @@
     <characterCountLabel> BUCHSTAB ZAHL </characterCountLabel>
     <chart_tab> Allgemein </chart_tab>
     <daily_tab> Ausführlich </daily_tab>
-    <productionLabel> PRODUKTION</productionLabel>     
+    <productionLabel> PRODUKTION</productionLabel>
     <dateLabel> Datum </dateLabel>
     <wordsLabel> Wörter </wordsLabel>
     <hoursLabel> Stunde </hoursLabel>
     <export-text> Exporr</export-text>
     <start> Anfangen </start>
-    <pause> Pause </pause> 
+    <pause> Pause </pause>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name> 
+    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
   </de>
-  
+
   <pt>
     <createProject>Criar Projeto </createProject>
-    <projects>
     <projectTimeLabel> TEMPO GASTO </projectTimeLabel>
     <wordCountLabel> PALAVRAS ESCRITAS </wordCountLabel>
     <beganWritingLabel> COMEÇOU A ESCREVER </beganWritingLabel>
     <lastUpdateLabel> ÚLTIMA ATUALIZAÇÃO </lastUpdateLabel>
     <characterCountLabel> CONTAGEM DE CARACTERES </characterCountLabel>
     <chart_tab> Geral </chart_tab>
-    <daily_tab> detalhado
+    <daily_tab> Detalhado
     </daily_tab>
     <productionLabel>
       PRODUÇÃO
@@ -80,7 +78,7 @@
       Voltar
     </chartsBack>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name> 
+    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Todos os direitos reservados.</footer-end-text>
   </pt>
 </xml>

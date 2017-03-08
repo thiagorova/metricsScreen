@@ -135,7 +135,7 @@ function setTimeString(time) {
     var hours = (time.getHours() < 10) ? "0" + time.getHours().toString():time.getHours().toString();
     var minutes = (time.getMinutes() < 10) ? "0" + time.getMinutes().toString():time.getMinutes().toString();
     var seconds = (time.getSeconds() < 10) ? "0" + time.getSeconds().toString():time.getSeconds().toString();
-    return hours + ":" + minutes + ":" + seconds + "h";  
+    return hours + ":" + minutes + ":" + seconds + "h";
 }
 
 function instance() {
@@ -154,7 +154,7 @@ function instance() {
     var parts = dProject.time.match(/(\d+):(\d+):(\d+)/);
     projectTime.setHours(parseInt(parts[1], 10));
     projectTime.setMinutes(parseInt(parts[2], 10));
-    projectTime.setSeconds(parseInt(parts[3], 10)); 
+    projectTime.setSeconds(parseInt(parts[3], 10));
     projectTime.getHours().toString() + ":" + projectTime.getMinutes().toString() + ":" + projectTime.getSeconds().toString();
     start = new Date().getTime();
     timeoutId = window.setTimeout(instance, count);
@@ -165,12 +165,12 @@ function instance() {
     var time = 450;
     if (height === "0px" || height === "") {
       $('#sometimes').animate({
-        height: '100px'
+        height: '150px'
       }, {
         duration: time  // 2 seconds
       });
       $('.authorship-metrics-indicators').animate({
-        height: '235px'
+        height: '245px'
       }, {
         duration: time  // 2 seconds
       });
