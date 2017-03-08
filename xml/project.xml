@@ -1,126 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <xml>
 
   <en>
-    <createProject>
-      Create Project
-    </createProject>
+    <createProject>Create Project</createProject>
 
-    <projectTimeLabel>
-      TIME SPENT
-    </projectTimeLabel>
+    <projectTimeLabel>TIME SPENT</projectTimeLabel>
 
-    <wordCountLabel>
-      WORDS WRITTEN
-    </wordCountLabel>
+    <wordCountLabel> WORDS WRITTEN</wordCountLabel>
 
-    <beganWritingLabel>
-      BEGAN WRITING
-    </beganWritingLabel>
+    <beganWritingLabel>BEGAN WRITING</beganWritingLabel>
 
-    <lastUpdateLabel>
-      LAST UPDATE
-    </lastUpdateLabel>
+    <lastUpdateLabel>LAST UPDATE</lastUpdateLabel>
 
-    <characterCountLabel>
-      CHARACTER COUNT
-    </characterCountLabel>
+    <characterCountLabel> CHARACTER COUNT</characterCountLabel>
 
-    <chart_tab>
-      General
-    </chart_tab>
+    <chart_tab>General</chart_tab>
 
-    <daily_tab>
-      Detailed
-    </daily_tab>
+    <daily_tab> Detailed</daily_tab>
 
-    <productionLabel>
-      PRODUCTION
-    </productionLabel>
+    <productionLabel>PRODUCTION</productionLabel>
 
-    <dateLabel>
-      Date
-    </dateLabel>
+    <dateLabel>Date</dateLabel>
 
-    <wordsLabel>
-      Words
-    </wordsLabel>
+    <wordsLabel>  Words</wordsLabel>
 
-    <hoursLabel>
-      Hours
-    </hoursLabel>
+    <hoursLabel> Hours</hoursLabel>
 
     <export>
       <button class="btn createProject" id="export">
         <span class="glyphicon glyphicon-export"></span>
-         Export
-       </button>
+        Export
+      </button>
     </export>
 
-    <start>
-      Start
-    </start>
+    <start>Start</start>
 
-    <pause>
-      Pause
-    </pause>
+    <pause> Pause</pause>
 
     <chartsBack>
       Back
-    </chartsBack>
-
+    </chartsBack> 
     <authorshipLink>
       <span> © Copyright <a href="www.authorship.me" >Authorship.me</a> All rights reserved.</span>
     </authorshipLink>
   </en>
 
   <de>
-    <createProject>
-      Create ProjectDE
-    </createProject>
+    <createProject> Create ProjectDE </createProject>
 
-    <projectTimeLabel>
-      TIME SPENTDE
-    </projectTimeLabel>
+    <projectTimeLabel> TIME SPENTDE </projectTimeLabel>
 
-    <wordCountLabel>
-      WORDS WRITTENDE
-    </wordCountLabel>
+    <wordCountLabel> WORDS WRITTENDE </wordCountLabel>
 
-    <beganWritingLabel>
-      BEGAN WRITINGDE
-    </beganWritingLabel>
+    <beganWritingLabel> BEGAN WRITINGDE </beganWritingLabel>
 
-    <lastUpdateLabel>
-      LAST UPDATEDE
-    </lastUpdateLabel>
+    <lastUpdateLabel> LAST UPDATEDE </lastUpdateLabel>
 
-    <characterCountLabel>
-      CHARACTER COUNTDE
-    </characterCountLabel>
+    <characterCountLabel> CHARACTER COUNTDE </characterCountLabel>
 
-    <chart_tab>
-      GeneralDE
-    </chart_tab>
+    <chart_tab> GeneralDE </chart_tab>
 
-    <daily_tab>
-      DetailedDE
-    </daily_tab>
+    <daily_tab> DetailedDE </daily_tab>
 
-    <productionLabel>
-      PRODUCTIONDE
-    </productionLabel>
+    <productionLabel> PRODUCTIONDE</productionLabel> 
+    
+    <dateLabel> DateDE </dateLabel>
 
-    <dateLabel>
-      DateDE
-    </dateLabel>
+    <wordsLabel> wordsDE </wordsLabel>
 
-    <wordsLabel>
-      wordsDE
-    </wordsLabel>
-
-    <hoursLabel>
-      HoursDE
-    </hoursLabel>
+    <hoursLabel> HoursDE </hoursLabel>
 
     <export>
       <button class="btn createProject" id="export">
@@ -129,22 +77,17 @@
        </button>
     </export>
 
-    <start>
-      StartDE
-    </start>
+    <start> StartDE </start>
 
-    <pause>
-      PauseDE
-    </pause>
-
-    <chartsBack>
-      BackDE
-    </chartsBack>
+    <pause> PauseDE </pause> 
+    
+    <chartsBack> BackDE </chartsBack>
 
     <authorshipLink>
       <span> © Copyright <a href="www.authorship.me" >Authorship.me</a> All rights reservedDE.</span>
     </authorshipLink>
   </de>
+  
   <pt>
     <createProject>
       Criar Projeto
@@ -216,5 +159,5 @@
     <authorshipLink>
       <span> © Copyright <a href="www.authorship.me" >Authorship.me</a> Todos os direitos reservados.</span>
     </authorshipLink>
-  </de>
+  </pt>
 </xml>
