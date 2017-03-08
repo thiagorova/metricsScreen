@@ -1,163 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xml>
-
   <en>
     <createProject>Create Project</createProject>
-
-    <projectTimeLabel>TIME SPENT</projectTimeLabel>
-
-    <wordCountLabel> WORDS WRITTEN</wordCountLabel>
-
-    <beganWritingLabel>BEGAN WRITING</beganWritingLabel>
-
-    <lastUpdateLabel>LAST UPDATE</lastUpdateLabel>
-
-    <characterCountLabel> CHARACTER COUNT</characterCountLabel>
-
-    <chart_tab>General</chart_tab>
-
+    <project>
+      <projectTimeLabel>TIME SPENT</projectTimeLabel>
+      <wordCountLabel> WORDS WRITTEN</wordCountLabel>
+      <beganWritingLabel>BEGAN WRITING</beganWritingLabel>
+      <lastUpdateLabel>LAST UPDATE</lastUpdateLabel>
+      <characterCountLabel> CHARACTER COUNT</characterCountLabel>
+      <chart_tab>General</chart_tab>
     <daily_tab> Detailed</daily_tab>
-
     <productionLabel>PRODUCTION</productionLabel>
-
     <dateLabel>Date</dateLabel>
-
     <wordsLabel>  Words</wordsLabel>
-
     <hoursLabel> Hours</hoursLabel>
-
-    <export>
-      <button class="btn createProject" id="export">
-        <span class="glyphicon glyphicon-export"></span>
-        Export
-      </button>
-    </export>
-
+    <export-text> Export </export-text>
     <start>Start</start>
-
     <pause> Pause</pause>
-
-    <chartsBack>
-      Back
-    </chartsBack> 
-    <authorshipLink>
-      <span> © Copyright <a href="www.authorship.me" >Authorship.me</a> All rights reserved.</span>
-    </authorshipLink>
+    <chartsBack> Back </chartsBack> 
+    <footer-start-text>© Copyright </footer-start-text>
+    <authorship-name>Authorship.me</authorship-name> 
+    <footer-end-text>All rights reserved.</footer-end-text>
   </en>
 
   <de>
-    <createProject> Create ProjectDE </createProject>
-
-    <projectTimeLabel> TIME SPENTDE </projectTimeLabel>
-
+    <createProject> Projekt Anfangen </createProject>
+    <projectTimeLabel> ZEIT AUFGEWENDET </projectTimeLabel>
     <wordCountLabel> WORDS WRITTENDE </wordCountLabel>
-
-    <beganWritingLabel> BEGAN WRITINGDE </beganWritingLabel>
-
-    <lastUpdateLabel> LAST UPDATEDE </lastUpdateLabel>
-
-    <characterCountLabel> CHARACTER COUNTDE </characterCountLabel>
-
-    <chart_tab> GeneralDE </chart_tab>
-
-    <daily_tab> DetailedDE </daily_tab>
-
-    <productionLabel> PRODUCTIONDE</productionLabel> 
-    
-    <dateLabel> DateDE </dateLabel>
-
-    <wordsLabel> wordsDE </wordsLabel>
-
-    <hoursLabel> HoursDE </hoursLabel>
-
-    <export>
-      <button class="btn createProject" id="export">
-        <span class="glyphicon glyphicon-export"></span>
-         ExportDE
-       </button>
-    </export>
-
-    <start> StartDE </start>
-
-    <pause> PauseDE </pause> 
-    
-    <chartsBack> BackDE </chartsBack>
-
-    <authorshipLink>
-      <span> © Copyright <a href="www.authorship.me" >Authorship.me</a> All rights reservedDE.</span>
-    </authorshipLink>
+    <beganWritingLabel> FANG AN ZU SCHREIBEN </beganWritingLabel>
+    <lastUpdateLabel> LETZT AKTUALISIERUNG </lastUpdateLabel>
+    <characterCountLabel> BUCHSTAB ZAHL </characterCountLabel>
+    <chart_tab> Allgemein </chart_tab>
+    <daily_tab> Ausführlich </daily_tab>
+    <productionLabel> PRODUKTION</productionLabel>     
+    <dateLabel> Datum </dateLabel>
+    <wordsLabel> Wörter </wordsLabel>
+    <hoursLabel> Stunde </hoursLabel>
+    <export-text> Exporr</export-text>
+    <start> Anfangen </start>
+    <pause> Pause </pause> 
+    <footer-start-text>© Copyright </footer-start-text>
+    <authorship-name>Authorship.me</authorship-name> 
+    <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
   </de>
   
   <pt>
-    <createProject>
-      Criar Projeto
-    </createProject>
-
-    <projectTimeLabel>
-      TEMPO GASTO
-    </projectTimeLabel>
-
-    <wordCountLabel>
-      PALAVRAS ESCRITAS
-    </wordCountLabel>
-
-    <beganWritingLabel>
-      COMEÇOU A ESCREVER
-    </beganWritingLabel>
-
-    <lastUpdateLabel>
-      ÚLTIMA ATUALIZAÇÃO
-    </lastUpdateLabel>
-
-    <characterCountLabel>
-      CONTAGEM DE CARACTERES
-    </characterCountLabel>
-
-    <chart_tab>
-      Geral
-    </chart_tab>
-
-    <daily_tab>
-      Detalhado
+    <createProject>Criar Projeto </createProject>
+    <projects>
+    <projectTimeLabel> TEMPO GASTO </projectTimeLabel>
+    <wordCountLabel> PALAVRAS ESCRITAS </wordCountLabel>
+    <beganWritingLabel> COMEÇOU A ESCREVER </beganWritingLabel>
+    <lastUpdateLabel> ÚLTIMA ATUALIZAÇÃO </lastUpdateLabel>
+    <characterCountLabel> CONTAGEM DE CARACTERES </characterCountLabel>
+    <chart_tab> Geral </chart_tab>
+    <daily_tab> detalhado
     </daily_tab>
-
     <productionLabel>
       PRODUÇÃO
     </productionLabel>
-
     <dateLabel>
       Data
     </dateLabel>
-
     <wordsLabel>
       Palavras
     </wordsLabel>
-
     <hoursLabel>
       Horas
     </hoursLabel>
-
-    <export>
-      <button class="btn createProject" id="export">
-        <span class="glyphicon glyphicon-export"></span>
+    <export-text>
          Exportar
-       </button>
-    </export>
-
+    </export-text>
     <start>
       Começar
     </start>
-
     <pause>
       Pausar
     </pause>
-
     <chartsBack>
       Voltar
     </chartsBack>
-
-    <authorshipLink>
-      <span> © Copyright <a href="www.authorship.me" >Authorship.me</a> Todos os direitos reservados.</span>
-    </authorshipLink>
+    <footer-start-text>© Copyright </footer-start-text>
+    <authorship-name>Authorship.me</authorship-name> 
+    <footer-end-text>Todos os direitos reservados.</footer-end-text>
   </pt>
 </xml>
