@@ -8,18 +8,20 @@
     'deadline':null
     };
 
-  
+
     //This is a watcher function, which changes the milestone parameter based on the select field
   var setMilestone = function(e) {
     var deadline = document.getElementById("deadlineDiv");
     var wordCount = document.getElementById("wordMilestoneDiv");
     project.selectMilestone = document.getElementById("selectMilestone").value;
-     deadline.style.display = "none";
+    deadline.style.display = "none";
     wordCount.style.display = "block";
     if(project.selectMilestone == 'wDay'){
-      document.getElementById("milestoneMeasureLabel").innerHTML = 'How many words do you want to write per day';
+      document.getElementById("milestoneMeasureLabel").innerHTML = '<span id="milestoneDayLabel">How many words do you want to write per day</span>';
+      openXml(pageName);
     } else if(project.selectMilestone == 'wMonth'){
-      document.getElementById("milestoneMeasureLabel").innerHTML = 'How many words do you want to write per month';
+      document.getElementById("milestoneMeasureLabel").innerHTML = '<span id="milestoneMonthLabel">How many words do you want to write per month</span>';
+      openXml(pageName);
    } else if(project.selectMilestone == 'deadline'){
       deadline.style.display = "block";
       wordCount.style.display = "none";
@@ -47,7 +49,7 @@
       }
     }
   }
-  
+
   var nameValidation = function(e){
    var source = e.target || e.srcElement;
     var name = source.value;
@@ -92,7 +94,7 @@
       }
     }
   }
-  
+
   var enable = function(){
     var count = 0;
     for (var property in project) {
@@ -104,19 +106,19 @@
       document.getElementById("create").disabled = false;
     }
   };
-  
+
    //function to create a project
   var addProject = function(){
     var milestoneMeasure = (!project.milestoneMeasure) ? project.deadline:project.milestoneMeasure;
-    metricsApi.createProject(project.projectName, 
-      project.totalWords, 
-      project.selectMilestone, 
-      milestoneMeasure, 
+    metricsApi.createProject(project.projectName,
+      project.totalWords,
+      project.selectMilestone,
+      milestoneMeasure,
       function () {
         metricsApi.getProjectId(project.projectName, function (projectId) {
           metricsApi.getProject(projectId, GoToProject);
       });
-      }, 
+      },
       function(error) {
         saveNewProject(project.projectName, project.totalWords, project.selectMilestone, milestoneMeasure);
         changeLocation("projects.html");
@@ -133,13 +135,13 @@
      var deadlineValue = new Date(deadlineParts[0], deadlineParts[1] - 1, deadlineParts[2]);
       if(project.selectMilestone === "wDay") {
         if(! isNaN(wordCount)) {
-          wordsPerDay = (wordCount > totalWords ) ? 
+          wordsPerDay = (wordCount > totalWords ) ?
             Math.ceil(totalWords):
             Math.ceil(wordCount);
        }
       } else if (project.selectMilestone === "wMonth") {
         if(! isNaN(wordCount)) {
-          wordsPerDay = (wordCount > totalWords ) ? 
+          wordsPerDay = (wordCount > totalWords ) ?
             Math.ceil(totalWords/30):
             Math.ceil(wordCount/30);
         }
@@ -181,7 +183,7 @@
       chrome.storage.local.set({ 'newProjects': newProjects });
     });
   }
-  
+
   function createProjectStatus(project, numProjects) {
     return {
       name: project.projectName,
@@ -210,7 +212,7 @@ window.onload = function () {
   var totalWords = document.getElementById("totalWords");
   var milestoneMeasure = document.getElementById("milestoneMeasure");
   var deadline = document.getElementById("deadline");
-  
+
   milestoneSelect.addEventListener('change', setMilestone );
   totalWords.addEventListener('keyup', numberValidation );
   milestoneMeasure.addEventListener('keyup', numberValidation );

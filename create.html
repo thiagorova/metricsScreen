@@ -9,9 +9,13 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" href="css/create.css" media="screen" title="no title">
+    <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
     <script type="text/javascript" src="js/metricsApi.js"></script>
+    <script type="text/javascript" src="js/translation.js"></script>
     <script type="text/javascript" src="js/create.js"></script>
     <script src="js/master.js"></script>
+
+
   </head>
   <body>
     <p id="online_offline"></p>
@@ -21,44 +25,45 @@
 
 <div class="container col-md-12 col-sm-12 col-xs-12">
      <button class="btn right btn-primary backButton" id="back">Back</button>
-      <h4 class="viewTitle">Create Project</h4>
+      <h4 class="viewTitle" id="createProjectLabel">Create Project</h4>
       <div class="col-md-12 col-xs-12">
         <div class="cpj-form col-md-10 col-md-offset-1 col-xs-12">
           <form name="form">
             <div class="form-group">
-              <label for="project-title">Title</label>
+              <label for="project-title" id="projectTitleLabel">Title</label>
               <input type="text" class="form-control" id="projectName">
               <div class="bg-danger" id="nameError">
-                <span class="glyphicon glyphicon-exclamation-sign"></span>  Empty field
+                <span class="glyphicon glyphicon-exclamation-sign"></span>
+                <span id="emptyFieldLabel">Empty field</span>
               </div>
             </div>
             <div class="form-group">
-              <label for="total-words">Total number of words</label>
+              <label for="total-words" id="totalWordsLabel">Total number of words</label>
               <input type="number" class="form-control" id="totalWords">
               <div class="bg-danger"  id="wordsError">
-                <span class="glyphicon glyphicon-exclamation-sign"></span>  Please, put a number greater than 0.
+                <span class="glyphicon glyphicon-exclamation-sign"></span><span id="wordsErrorLabel">Please, put a number greater than 0.</span>
               </div>
             </div>
             <div class="form-group">
-              <label for="milestone">Milestone</label>
+              <label for="milestone" id="milestoneLabel">Milestone</label>
               <select class="form-control" id="selectMilestone">
-                <option value="wDay" selected>Words per Day</option>
-                <option value="wMonth">Words per Month</option>
-                <option value="deadline">Deadline</option>
+                <option value="wDay" selected id="wDayLabel">Words per Day</option>
+                <option value="wMonth" id="wMonthLabel">Words per Month</option>
+                <option value="deadline" id="deadlineLabelOption">Deadline</option>
               </select>
             </div>
               <div class="form-group" id="wordMilestoneDiv">
                 <label for="milestoneMeasure" id="milestoneMeasureLabel"></label>
                 <input type="number" class="form-control" id="milestoneMeasure">
                 <div class="bg-danger"  id="milestoneError">
-                  <span class="glyphicon glyphicon-exclamation-sign"></span> Please, put a number greater than 0.
+                  <span class="glyphicon glyphicon-exclamation-sign"></span><span id="milestoneErrorLabel">Please, put a number greater than 0.
                 </div>
               </div>
               <div class="form-group"id="deadlineDiv">
                 <label for="deadline" id="deadlineLabel">For when is your project</label>
                 <input type="date" class="form-control" id="deadline">
                 <div class="bg-danger"  id="deadlineError">
-                  <span class="glyphicon glyphicon-exclamation-sign"></span> Invalid date.
+                  <span class="glyphicon glyphicon-exclamation-sign"></span><span id="deadlineErrorLabel"> Invalid date.</span>
                 </div>
               </div>
               <span id="output"></span>
@@ -67,10 +72,17 @@
               </div>
           </form>
         </div>
-      </div>  
-</div>
-    <footer class="container">
-     <span> © Copyright <a href="www.authorship.me" id="authorshipLink">Authorship.me</a> All rights reserved.</span>
+      </div>
+    </div>
+    <div class="languages">
+      <a id="lEn">en</a>
+      <a  id="lDe">de</a>
+      <a  id="lPt">pt</a>
+    </div>
+    <footer class="container" id="authorshipLink">
+     <span id="footer-start-text"> © Copyright </span>
+     <a href="www.authorship.me" id="authorship-name">Authorship.me</a>
+     <span id="footer-end-text"> All rights reserved.</span>
     </footer>
   </body>
 </html>
