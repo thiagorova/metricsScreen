@@ -9,8 +9,11 @@
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
   <link rel="stylesheet" href="css/projects.css" media="screen" title="no title">
+  <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+
   <script type="text/javascript" src="js/metricsApi.js"></script>
   <script type="text/javascript" src="js/projects.js"></script>
+  <script type="text/javascript" src="js/translation.js"></script>
   <script src="js/master.js"></script>
 </head>
 <body>
@@ -28,15 +31,23 @@
       </div>
 
       <div id="projects">
-        <h4 class="viewTitle">Your Projects</h4>
+        <h4 class="viewTitle" id="title">Your Projects</h4>
         <div class="col-xs-12">
           <table class="projects-table col-xs-12 ">
             <tr></tr>
           </table>
         </div>
       </div>
-      <footer class="container">
-        <span> © Copyright <a href="www.authorship.me" id="authorshipLink">Authorship.me</a> All rights reserved.</span>
+
+      <footer class="container" id="authorshipLink">
+       <span id="footer-start-text"> © Copyright </span>
+       <a href="www.authorship.me" id="authorship-name">Authorship.me</a>
+       <span id="footer-end-text"> All rights reserved.</span>
       </footer>
+      <div class="languages">
+        <a id="lEn">en</a>
+        <a  id="lDe">de</a>
+        <a  id="lPt">pt</a>
+      </div>
 </body>
 </html>

@@ -2,7 +2,7 @@
   var showProjects = function(metrics) {
     metrics.getAllProjects(viewProjects,
       function(error) {
-        var projects = attemptStorage(viewProjects, 
+        var projects = attemptStorage(viewProjects,
         function(){
           changeLocation("empty.html");
         });
@@ -12,7 +12,7 @@
   function viewProjects(projects) {
     if (projects === "") {
       changeLocation("empty.html");
-      return;         
+      return;
     }
    saveProjects(projects);
     document.getElementById("loading").style.display = "none";
@@ -42,7 +42,7 @@
       pStatusDiv.setAttribute("class", projectStatus(project));
       pStatusTD.appendChild(pStatusDiv);
       line.appendChild(pStatusTD);
-      
+
       var pNameTD = document.createElement("TD");
       var pNameButton = document.createElement("BUTTON");
       pNameButton.setAttribute("class", "btn-project-name");
@@ -51,18 +51,18 @@
       pNameTD.setAttribute("class", "td-project-name");
       pNameTD.appendChild(pNameButton);
       line.appendChild(pNameTD);
-      
+
       var mPercentageTD = document.createElement("TD");
       var mPercentageP = document.createElement("P");
       var mPercentageSpan = document.createElement("SPAN");
-      mPercentageSpan.innerHTML = "COMPLETE";
+      mPercentageSpan.innerHTML = "<span id='completeLabel'>COMPLETE</span>";
       mPercentageP.setAttribute("class", "milestonePercentage");
       mPercentageP.innerHTML = project.milestone.percentage;
       mPercentageTD.setAttribute("class", "info");
       mPercentageTD.appendChild(mPercentageSpan);
       mPercentageTD.appendChild(mPercentageP);
       line.appendChild(mPercentageTD);
-      
+
       var pWordsTD = document.createElement("TD");
       var pWordsP = document.createElement("P");
       var pWordsSpan = document.createElement("SPAN");
@@ -96,13 +96,13 @@
       exOtButton.appendChild(exOtImg);
       exOtTD.appendChild(exOtButton);
       line.appendChild(exOtTD);
-      
+
       document.getElementsByTagName("table")[0].appendChild(line);
     });
   }
 
   function openOptions(project) {
-  
+
   }
 
   //função para calcular a porcentagem cumulativa
@@ -146,7 +146,7 @@
 
 function attemptStorage(callback, callbackError) {
     chrome.storage.local.get("projects", function(storedItem) {
-      if (isEmpty(storedItem)  === false) 
+      if (isEmpty(storedItem)  === false)
         callback(storedItem.projects);
       else callbackError()
     });
@@ -167,8 +167,8 @@ function saveProjects(projects) {
       });
     });
   }
-  
+
 window.onload = function() {
   setSystem(function(metrics) {showProjects(metrics);} );
-  
+
 }

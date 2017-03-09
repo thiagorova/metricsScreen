@@ -1,4 +1,4 @@
-var language = null;
+var language = 'en';
 var pageName = location.href.split("/").slice(-1)[0].split(".").slice(-2)[0];
 $( document ).ready(function() {
   openXml(pageName);
@@ -18,7 +18,7 @@ $( document ).ready(function() {
 
 
 function openXml(pageName){
-  language = localStorage.getItem('language');  
+  language = localStorage.getItem('language');
   var xhttp = new XMLHttpRequest();
   xhttp.overrideMimeType('text/xml');
   xhttp.onreadystatechange = function() {

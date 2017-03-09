@@ -5,6 +5,9 @@
     <projectTimeLabel>TIME SPENT</projectTimeLabel>
     <wordCountLabel> WORDS WRITTEN</wordCountLabel>
     <beganWritingLabel>BEGAN WRITING</beganWritingLabel>
+    <milestoneWords>
+      WORDS PER DAY
+    </milestoneWords>
     <lastUpdateLabel>LAST UPDATE</lastUpdateLabel>
     <characterCountLabel> CHARACTER COUNT</characterCountLabel>
     <chart_tab>General</chart_tab>
@@ -27,6 +30,9 @@
     <projectTimeLabel> ZEIT AUFGEWENDET </projectTimeLabel>
     <wordCountLabel> WORDS WRITTENDE </wordCountLabel>
     <beganWritingLabel> FANG AN ZU SCHREIBEN </beganWritingLabel>
+    <milestoneWords>
+      WORDS PER DAY
+    </milestoneWords>
     <lastUpdateLabel> LETZT AKTUALISIERUNG </lastUpdateLabel>
     <characterCountLabel> BUCHSTAB ZAHL </characterCountLabel>
     <chart_tab> Allgemein </chart_tab>
@@ -48,6 +54,9 @@
     <projectTimeLabel> TEMPO GASTO </projectTimeLabel>
     <wordCountLabel> PALAVRAS ESCRITAS </wordCountLabel>
     <beganWritingLabel> COMEÇOU A ESCREVER </beganWritingLabel>
+    <milestoneWords>
+      PALAVRAS POR DIA
+    </milestoneWords>
     <lastUpdateLabel> ÚLTIMA ATUALIZAÇÃO </lastUpdateLabel>
     <characterCountLabel> CONTAGEM DE CARACTERES </characterCountLabel>
     <chart_tab> Geral </chart_tab>

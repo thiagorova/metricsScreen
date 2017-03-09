@@ -27,7 +27,6 @@ window.onload = function() {
   });
   });
 }
-
   var openProject = function(callback){
     var createdProject = false;
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
@@ -64,7 +63,7 @@ window.onload = function() {
 
   function getMilestoneText(project) {
     if (project.milestone.type == "wDay" || project.milestone.type == "Words per Day") {
-      return project.milestone.words + " WORDS PER DAY";
+      return "<span id='milestoneWords'>" + project.milestone.words + " WORDS PER DAY </span>";
     } else if (dProject.milestone.type == "wMonth") {
       return project.milestone.words + " WORDS PER MONTH";
     } else {

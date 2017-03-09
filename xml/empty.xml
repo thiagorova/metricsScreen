@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <en>
+    <createProject>
+      Create a Project
+    </createProject>
+    <welcome>
+      Welcome to
+    </welcome>
+    <msg>
+      To start, please create a project.
+    </msg>
+    <footer-start-text>© Copyright </footer-start-text>
+    <authorship-name>Authorship.me</authorship-name>
+    <footer-end-text>All rights reserved.</footer-end-text>
+  </en>
+
+  <de>
+
+    <createProject>
+      Create a Project
+    </createProject>
+    <welcome>
+      Welcome to
+    </welcome>
+    <msg>
+      To start, please create a project.
+    </msg>
+    <footer-start-text>© Copyright </footer-start-text>
+    <authorship-name>Authorship.me</authorship-name>
+    <footer-end-text>All rights reserved.</footer-end-text>
+  </de>
+
+  <pt>
+    <createProject>
+      Criar um Projeto
+    </createProject>
+    <welcome>
+      Eem vindo ao
+    </welcome>
+    <msg>
+      Para começar, por favor crie um projeto.
+    </msg>
+    <footer-start-text>© Copyright </footer-start-text>
+    <authorship-name>Authorship.me</authorship-name>
+    <footer-end-text>Todos os direitos reservados.</footer-end-text>
+  </pt>
+</xml>

@@ -9,6 +9,8 @@
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" href="css/empty.css" media="screen" title="no title">
+    <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+    <script type="text/javascript" src="js/translation.js"></script>
     <script src="js/master.js"></script>
   </head>
   <body>
@@ -21,11 +23,13 @@
 <div class="empty-page container">
   <img src="img/pointer.png">
    <p>
-     Welcome to <b>Metrics</b>. To start, please create a project.
+     <span id="welcome">Welcome to</span> <b>Metrics</b>. <span id="msg"> To start, please create a project.</span>
    </p>
 </div>
-    <footer class="container">
-      <span> © Copyright <a href="www.authorship.me" id="authorshipLink">Authorship.me</a> All rights reserved.</span>
-    </footer>
+<footer class="container" id="authorshipLink">
+ <span id="footer-start-text"> © Copyright </span>
+ <a href="www.authorship.me" id="authorship-name">Authorship.me</a>
+ <span id="footer-end-text"> All rights reserved.</span>
+</footer>
   </body>
 </html>

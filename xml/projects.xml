@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <en>
+    <createProject>
+      Create a Project
+    </createProject>
+    <title>
+      Your projects
+    </title>
+    <completeLabel>
+      COMPLETE
+    </completeLabel>
+    <footer-start-text>© Copyright </footer-start-text>
+    <authorship-name>Authorship.me</authorship-name>
+    <footer-end-text>All rights reserved.</footer-end-text>
+  </en>
+
+  <de>
+    <createProject>
+      Create a Project
+    </createProject>
+    <title>
+      Your projects
+    </title>
+    <completeLabel>
+      COMPLETE
+    </completeLabel>
+    <footer-start-text>© Copyright </footer-start-text>
+    <authorship-name>Authorship.me</authorship-name>
+    <footer-end-text>All rights reserved.</footer-end-text>
+
+  </de>
+
+  <pt>
+    <createProject>
+      Criar um Projeto
+    </createProject>
+    <title>
+      Seus Projetos
+    </title>
+    <completeLabel>
+      COMPLETO
+    </completeLabel>
+    <footer-start-text>© Copyright </footer-start-text>
+    <authorship-name>Authorship.me</authorship-name>
+    <footer-end-text>All rights reserved.</footer-end-text>
+  </pt>
+</xml>
