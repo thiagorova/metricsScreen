@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+    <title>Metrics</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+     integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/master.css" media="screen" title="no title">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link rel="stylesheet" href="css/create.css" media="screen" title="no title">
+    <script type="text/javascript" src="js/metricsApi.js"></script>
+    <script type="text/javascript" src="js/create.js"></script>
+    <script src="js/master.js"></script>
+  </head>
+  <body>
+    <p id="online_offline"></p>
+    <header>
+      <img src="img/metrics_logo.png">
+    </header>
+
+<div class="container col-md-12 col-sm-12 col-xs-12">
+     <button class="btn right btn-primary backButton" id="back">Back</button>
+      <h4 class="viewTitle">Create Project</h4>
+      <div class="col-md-12 col-xs-12">
+        <div class="cpj-form col-md-10 col-md-offset-1 col-xs-12">
+          <form name="form">
+            <div class="form-group">
+              <label for="project-title">Title</label>
+              <input type="text" class="form-control" id="projectName">
+              <div class="bg-danger" id="nameError">
+                <span class="glyphicon glyphicon-exclamation-sign"></span>  Empty field
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="total-words">Total number of words</label>
+              <input type="number" class="form-control" id="totalWords">
+              <div class="bg-danger"  id="wordsError">
+                <span class="glyphicon glyphicon-exclamation-sign"></span>  Please, put a number greater than 0.
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="milestone">Milestone</label>
+              <select class="form-control" id="selectMilestone">
+                <option value="wDay" selected>Words per Day</option>
+                <option value="wMonth">Words per Month</option>
+                <option value="deadline">Deadline</option>
+              </select>
+            </div>
+              <div class="form-group" id="wordMilestoneDiv">
+                <label for="milestoneMeasure" id="milestoneMeasureLabel"></label>
+                <input type="number" class="form-control" id="milestoneMeasure">
+                <div class="bg-danger"  id="milestoneError">
+                  <span class="glyphicon glyphicon-exclamation-sign"></span> Please, put a number greater than 0.
+                </div>
+              </div>
+              <div class="form-group"id="deadlineDiv">
+                <label for="deadline" id="deadlineLabel">For when is your project</label>
+                <input type="date" class="form-control" id="deadline">
+                <div class="bg-danger"  id="deadlineError">
+                  <span class="glyphicon glyphicon-exclamation-sign"></span> Invalid date.
+                </div>
+              </div>
+              <span id="output"></span>
+              <div class="center btn-div col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
+                <button class="btn btn-block" type="button" id="create">Create Project</button>
+              </div>
+          </form>
+        </div>
+      </div>  
+</div>
+    <footer class="container">
+     <span> © Copyright <a href="www.authorship.me" id="authorshipLink">Authorship.me</a> All rights reserved.</span>
+    </footer>
+  </body>
+</html>

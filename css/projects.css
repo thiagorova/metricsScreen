@@ -1,0 +1,109 @@
+.projects-view{
+   min-height: inherit;
+   padding: 0px !important;
+   height: inherit;
+}
+
+.projects-container h3, h4{
+  text-align: center;
+  color: #808080;
+  font-weight: 100;
+}
+
+.circle{
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+}
+.icon-success{
+  background-color:#80b984;
+}
+.icon-ok{
+  background-color: #4f81ae;
+}
+.icon-danger{
+  background-color: #cb8184;
+}
+
+.icon-attention{
+  background-color: #f2f302;
+}
+
+.projects-table tr{
+  border-bottom: 1px solid #C5CDCB;
+  border-top: 1px solid #C5CDCB;
+}
+
+.projects-table tr:hover{
+  background-color: #eaeaea;
+}
+.projects-table tr td:first-child{
+  padding-left: 20px;
+}
+.projects-table tr:last-child{
+  border-top: 1px solid #C5CDCB;
+  border-bottom: none;
+}
+.projects-table tr:first-child{
+  padding-left: 20px;
+}
+.td-project-name{
+  max-width: 115px;
+}
+.projects-table .info{
+  padding: 7px 20px 7px 20px;
+  text-align: center;
+  display: table-cell;
+  border-right: 1px solid;
+  border-color: #C5CDCB;
+  width: 15.3%;
+}
+
+.projects-table .info p{
+  font-size: 10pt;
+  font-weight: bold;
+}
+
+.projects-table .info span{
+  font-size: 8pt;
+  color: #999;
+}
+
+.projects-table .moreOptions {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: inherit;
+  width: 10px;
+}
+
+.btn-project-name{
+  border:none;
+  background: none;
+  outline:none;
+}
+
+td:nth-last-child(2) {
+  border: none !important;
+}
+
+td:last-child {
+  border: none !important;
+  padding-right: 10px !important;
+  margin-right: 0px !important;
+  width: 1% !important;
+}
+
+.loading {
+  margin-top: 105px;
+  margin-left: 190px;
+  margin-bottom: 105px;
+}
+
+#projects {
+  display: none;
+}
+
+.col-xs-12{
+  padding: 0px;
+}

@@ -1,0 +1,58 @@
+body {
+  height: 356px;
+}
+
+header {
+  margin-left: 30%;
+}
+
+a {
+	font-size: 9pt;
+}
+
+main {
+   width: 80%;
+   margin-left: auto;
+}
+
+button {
+   margin-top: 10px;
+   width: 80%;
+   padding: 10px;
+}
+
+input {
+   width: 80%;
+   height: 31px;
+   outline: none;
+   -webkit-box-shadow: none;
+  box-shadow: none;
+  border: solid 1.8px;
+  border-color: #D5D5D5;
+  border-radius: 0.2em;
+}
+
+h3 {
+   font-size: 16pt;
+   color: #777;
+}
+
+label {
+  font-weight: normal;
+  color: #959595;
+}
+
+section {
+  text-align: center;
+}
+
+section a {
+  color: #39C9D9;
+  margin-top: 0px;
+  font-size: 11pt;
+  font-weight: 500;
+}
+
+section h3{
+  margin-bottom: 0px;
+}

@@ -1,0 +1,48 @@
+.empty-page{
+  text-align: center;
+  background-color: #f3f3f3;
+  font-size: 20px;
+  margin: 0px;
+  min-height: inherit;
+  padding-top: 20px;
+  height: inherit;
+}
+
+.empty-page h1{
+    margin: 5px;
+}
+
+.empty-page h2{
+  margin: 5px;
+  font-size: 26px;
+}
+.empty-page h3{
+  margin-top: 5px;
+  font-size: 30px;
+  padding-bottom: 20px;
+}
+.empty-page span{
+  color: #1AA7B5;
+  font-size: 50px;
+}
+
+.empty-page p {
+  color: #CDCDCD;
+  font-size: 12pt;
+  text-align: center;
+  width: 60%;
+  margin-left: 20%;
+}
+
+.empty-page b{
+  color: #656565;
+  font-size: 12pt;
+}
+
+.empty-page .btn{
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}

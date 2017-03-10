@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
+    <title>Metrics</title>
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link rel="stylesheet" href="css/master.css" media="screen" title="no title">
+    <link rel="stylesheet" href="css/userScreen.css" media="screen" title="no title">
+    <link rel="stylesheet" href="css/tabs.css" media="screen" title="no title">
+    <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+    <script src="js/Chart.min.js"></script>
+    <script type="text/javascript" src="js/metricsApi.js"></script>
+    <script type="text/javascript" src="js/tabs.js"></script>
+    <script type="text/javascript" src="js/charts.js"></script>
+    <script type="text/javascript" src="js/userScreen.js"></script>
+    <script src="js/master.js"></script>
+  </head>
+
+  <body>
+    <p id="online_offline"></p>
+    <header>
+      <button id="goUser"> <img src="img/users-profile-icon.png"></button>
+      <button class="btn createProject" id="createProject"> Create a Project</button>
+      <img src="img/metrics_logo.png">
+    </header>
+
+    <div id="user-view" class="view container">
+      <div class="metrics-container">
+      <div id="mainHead">
+         <button class="btn btn-primary" id="back">Projects</button>
+         <h1 id="hello"></h1>
+       </div>
+        <ul class="authorship-metrics-indicators">
+            <li>
+              <img src="img/most-productive-day.png" alt="">
+              <p class="authorship-metrics-indicators-title" id="prodDay"></p>
+              <p class="authorship-metrics-indicators-description">MOST PRODUCTIVE DAY</p>
+            </li>
+            <li>
+              <img src="img/most-productive-hour.png" alt="">
+              <p class="authorship-metrics-indicators-title" id="prodHour"></p>
+              <p class="authorship-metrics-indicators-description">MOST PRODUCTIVE HOUR</p>
+            </li>
+        </ul>
+        <div id="chart">
+          <div id="chartControls">
+            <span>Productivity in:</span>
+            <button id="daily" class="pressed">Days</button>
+            <button id="hourly">Hours</button>
+          </div>
+          <canvas id="myChart" width="400" height="190"></canvas>
+        </div>
+      </div>
+    </div>
+    <footer class="container">
+     <span> © Copyright <a href="www.authorship.me" id="authorshipLink">Authorship.me</a> All rights reserved.</span>
+    </footer>
+  </body>
+
+</html>
