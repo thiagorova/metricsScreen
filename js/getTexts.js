@@ -34,6 +34,8 @@ chrome.runtime.onMessage.addListener( function (request, sender, callback) {
     callback();
   } else if (request.request === "getData") {
     callback(heldData);
+  } else if (request.request === "exist") {
+    callback(true);
   }
   return true;
 });
@@ -148,8 +150,6 @@ function injectScript(file, node) {
 function instance(once) {
     time += count;
     var elapsed = Math.floor(count/1000);
-//    totalTime.setSeconds(totalTime.getSeconds() + elapsed);
-//    var seconds = totalTime.getHours() * 3600 + totalTime.getMinutes() * 60 + totalTime.getSeconds();
     metrics.addDuration(projectId, count/1000);
     var diff = (new Date().getTime() - start) - time;
     if(typeof once === "undefined") timeoutId = window.setTimeout(instance, (count - diff));

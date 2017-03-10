@@ -11,6 +11,7 @@ window.onload = function() {
   document.getElementById("start").addEventListener('click', startMeasuring);
   document.getElementById("pause").addEventListener('click', stopMeasuring);
   document.getElementById("showMore").addEventListener('click', changeView);
+  testContentScript();
   buildTabs("chart_tab");
   setSystem(function (metrics) {
      metricsApi = metrics;
@@ -27,12 +28,24 @@ window.onload = function() {
   });
   });
 }
-
+  var testContentScript = function() {
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {request: "exist"}, function(response) {
+        if (typeof response !== "undefined") {
+            document.getElementById("start").style.display = "inline-block";
+            document.getElementById("no-content-script").style.display = "none";
+        }
+        else {
+            document.getElementById("start").style.display = "none";
+            document.getElementById("no-content-script").style.display = "block";
+        }
+    });
+  });
+  }
   var openProject = function(callback){
     var createdProject = false;
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {request: "getData"}, function (project) {
-        dProject = project;
+    chrome.storage.local.get('openedP', function(project) {
+        dProject = project.openedP;
         document.getElementById("projectName").innerHTML = dProject.projectName;
         document.getElementById("projectTime").innerHTML = setTimeString(dProject.time);
         document.getElementById("wordCount").innerHTML = dProject.words;
@@ -58,8 +71,8 @@ window.onload = function() {
             buildGraph([]);
         });
         callback();
+        chrome.storage.local.remove('openedP');
       });
-    });
   }
 
   function getMilestoneText(project) {
@@ -108,18 +121,15 @@ window.onload = function() {
       });
     });
     clearTimeout(timeoutId);
-    if (typeof projectTime !== "undefined") {
-      var seconds = projectTime.getHours() * 3600 + projectTime.getMinutes() * 60 + projectTime.getSeconds();
-      metricsApi.setDuration(dProject.id, seconds);
-    }
   }
 
 //setting the messages to start recording the data
-  startMeasuring = function(){
+  startMeasuring = function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {request: "start", project: dProject.id, time: dProject.time}, null);
     });
     measuring();
+    chrome.storage.local.set({ 'openedP': dProject });
   };
 
   var stopMeasuring = function(project) {
