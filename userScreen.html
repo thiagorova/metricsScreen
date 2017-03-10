@@ -15,6 +15,7 @@
     <script type="text/javascript" src="js/charts.js"></script>
     <script type="text/javascript" src="js/userScreen.js"></script>
     <script src="js/master.js"></script>
+    <script type="text/javascript" src="js/translation.js"></script>
   </head>
 
   <body>
@@ -35,17 +36,17 @@
             <li>
               <img src="img/most-productive-day.png" alt="">
               <p class="authorship-metrics-indicators-title" id="prodDay"></p>
-              <p class="authorship-metrics-indicators-description">MOST PRODUCTIVE DAY</p>
+              <p class="authorship-metrics-indicators-description" id="prodDayLabel">MOST PRODUCTIVE DAY</p>
             </li>
             <li>
               <img src="img/most-productive-hour.png" alt="">
               <p class="authorship-metrics-indicators-title" id="prodHour"></p>
-              <p class="authorship-metrics-indicators-description">MOST PRODUCTIVE HOUR</p>
+              <p class="authorship-metrics-indicators-description" id="prodHourLabel">MOST PRODUCTIVE HOUR</p>
             </li>
         </ul>
         <div id="chart">
           <div id="chartControls">
-            <span>Productivity in:</span>
+            <span id="productivityLabel">Productivity in:</span>
             <button id="daily" class="pressed">Days</button>
             <button id="hourly">Hours</button>
           </div>
@@ -53,9 +54,16 @@
         </div>
       </div>
     </div>
-    <footer class="container">
-     <span> © Copyright <a href="www.authorship.me" id="authorshipLink">Authorship.me</a> All rights reserved.</span>
+    <footer class="container" id="authorshipLink">
+     <span id="footer-start-text"> © Copyright </span>
+     <a href="www.authorship.me" id="authorship-name">Authorship.me</a>
+     <span id="footer-end-text"> All rights reserved.</span>
     </footer>
+    <div class="languages">
+      <a id="lEn">en</a>
+      <a  id="lDe">de</a>
+      <a  id="lPt">pt</a>
+    </div>
   </body>
 
 </html>

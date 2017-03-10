@@ -4,6 +4,10 @@
     <createProject> Create a Project  </createProject>
     <title> Your projects  </title>
     <completeLabel> COMPLETE  </completeLabel>
+    <pWordsLabel> WORDS </pWordsLabel>
+    <dailyLabel> DAILY </dailyLabel>
+    <monthlyLabel> MONTHLY </monthlyLabel>
+    <deadlineLabel> DEADLINE </deadlineLabel>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>All rights reserved.</footer-end-text>
@@ -13,6 +17,10 @@
     <createProject> Projekt Anfangen </createProject>
     <title> Deine Projekten  </title>
     <completeLabel> FERTIG  </completeLabel>
+    <pWordsLabel> WORDS </pWordsLabel>
+    <dailyLabel> DAILY </dailyLabel>
+    <monthlyLabel> MONTHLY </monthlyLabel>
+    <deadlineLabel> DEADLINE </deadlineLabel>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
@@ -23,6 +31,10 @@
     <createProject> Criar um Projeto  </createProject>
     <title> Seus Projetos  </title>
     <completeLabel> COMPLETO  </completeLabel>
+    <pWordsLabel> PALAVRAS </pWordsLabel>
+    <dailyLabel> POR DIA </dailyLabel>
+    <monthlyLabel> POR MÊS </monthlyLabel>
+    <deadlineLabel> DATA LIMITE </deadlineLabel>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Todos os direitos reservados.</footer-end-text>

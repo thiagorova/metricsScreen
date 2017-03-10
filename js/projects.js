@@ -55,7 +55,8 @@
       var mPercentageTD = document.createElement("TD");
       var mPercentageP = document.createElement("P");
       var mPercentageSpan = document.createElement("SPAN");
-      mPercentageSpan.innerHTML = "<span id='completeLabel'>COMPLETE</span>";
+      mPercentageSpan.innerHTML = "COMPLETE";
+      mPercentageSpan.setAttribute("id", "completeLabel");
       mPercentageP.setAttribute("class", "milestonePercentage");
       mPercentageP.innerHTML = project.milestone.percentage;
       mPercentageTD.setAttribute("class", "info");
@@ -68,6 +69,7 @@
       var pWordsSpan = document.createElement("SPAN");
       pWordsSpan.innerHTML = "WORDS";
       pWordsP.setAttribute("class", "projectWords");
+      pWordsSpan.setAttribute("Id", "pWordsLabel");
       pWordsP.innerHTML = project.words;
       pWordsTD.setAttribute("class", "info");
       pWordsTD.appendChild(pWordsSpan);
@@ -78,13 +80,14 @@
       var mValueP = document.createElement("P");
       var mValueSpan = document.createElement("SPAN");
       mValueSpan.setAttribute("class", "milestoneText");
-      mValueSpan.innerHTML = (project.milestone.type === "deadline") ? "DEADLINE" :  (project.milestone.type === "wDay") ? "DAILY": "MONTHLY";
+      mValueSpan.innerHTML = (project.milestone.type === "deadline") ? "<span id='deadlineLabel'>DEADLINE</span>" :  (project.milestone.type === "wDay") ? "<span id='dailyLabel'>DAILY</span>": "<span id='monthlyLabel'>MONTHLY</span>";
       mValueP.setAttribute("class", "milestoneValue");
       mValueP.innerHTML = project.milestone.words || project.milestone.deadline.replace("/20", "/");
       mValueTD.setAttribute("class", "info");
       mValueTD.appendChild(mValueSpan);
       mValueTD.appendChild(mValueP);
       line.appendChild(mValueTD);
+
 
       var exOtTD = document.createElement("TD");
       var exOtButton = document.createElement("BUTTON");
@@ -98,7 +101,9 @@
       line.appendChild(exOtTD);
 
       document.getElementsByTagName("table")[0].appendChild(line);
+
     });
+
   }
 
   function openOptions(project) {
