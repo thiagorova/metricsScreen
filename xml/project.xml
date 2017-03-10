@@ -5,9 +5,7 @@
     <projectTimeLabel>TIME SPENT</projectTimeLabel>
     <wordCountLabel> WORDS WRITTEN</wordCountLabel>
     <beganWritingLabel>BEGAN WRITING</beganWritingLabel>
-    <milestoneWords>
-      WORDS PER DAY
-    </milestoneWords>
+    <milestoneWords> WORDS PER DAY </milestoneWords>
     <lastUpdateLabel>LAST UPDATE</lastUpdateLabel>
     <characterCountLabel> CHARACTER COUNT</characterCountLabel>
     <chart_tab>General</chart_tab>
@@ -30,9 +28,7 @@
     <projectTimeLabel> ZEIT AUFGEWENDET </projectTimeLabel>
     <wordCountLabel> WORDS WRITTENDE </wordCountLabel>
     <beganWritingLabel> FANG AN ZU SCHREIBEN </beganWritingLabel>
-    <milestoneWords>
-      WORDS PER DAY
-    </milestoneWords>
+    <milestoneWords> WORTE PRO TAG </milestoneWords>
     <lastUpdateLabel> LETZT AKTUALISIERUNG </lastUpdateLabel>
     <characterCountLabel> BUCHSTAB ZAHL </characterCountLabel>
     <chart_tab> Allgemein </chart_tab>
@@ -60,32 +56,15 @@
     <lastUpdateLabel> ÚLTIMA ATUALIZAÇÃO </lastUpdateLabel>
     <characterCountLabel> CONTAGEM DE CARACTERES </characterCountLabel>
     <chart_tab> Geral </chart_tab>
-    <daily_tab> Detalhado
-    </daily_tab>
-    <productionLabel>
-      PRODUÇÃO
-    </productionLabel>
-    <dateLabel>
-      Data
-    </dateLabel>
-    <wordsLabel>
-      Palavras
-    </wordsLabel>
-    <hoursLabel>
-      Horas
-    </hoursLabel>
-    <export-text>
-         Exportar
-    </export-text>
-    <start>
-      Começar
-    </start>
-    <pause>
-      Pausar
-    </pause>
-    <chartsBack>
-      Voltar
-    </chartsBack>
+    <daily_tab> Detalhado </daily_tab>
+    <productionLabel> PRODUÇÃO </productionLabel>
+    <dateLabel> Data </dateLabel>
+    <wordsLabel> Palavras </wordsLabel>
+    <hoursLabel> Horas </hoursLabel>
+    <export-text> Exportar </export-text>
+    <start> Começar </start>
+    <pause> Pausar </pause>
+    <chartsBack> Voltar </chartsBack>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Todos os direitos reservados.</footer-end-text>

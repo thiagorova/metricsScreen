@@ -1,48 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xml>
   <en>
-    <createProject>
-      Create a Project
-    </createProject>
-    <title>
-      Your projects
-    </title>
-    <completeLabel>
-      COMPLETE
-    </completeLabel>
+    <createProject> Create a Project  </createProject>
+    <title> Your projects  </title>
+    <completeLabel> COMPLETE  </completeLabel>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>All rights reserved.</footer-end-text>
   </en>
 
   <de>
-    <createProject>
-      Create a Project
-    </createProject>
-    <title>
-      Your projects
-    </title>
-    <completeLabel>
-      COMPLETE
-    </completeLabel>
+    <createProject> Projekt Anfangen </createProject>
+    <title> Deine Projekten  </title>
+    <completeLabel> FERTIG  </completeLabel>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
-    <footer-end-text>All rights reserved.</footer-end-text>
+    <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
 
   </de>
 
   <pt>
-    <createProject>
-      Criar um Projeto
-    </createProject>
-    <title>
-      Seus Projetos
-    </title>
-    <completeLabel>
-      COMPLETO
-    </completeLabel>
+    <createProject> Criar um Projeto  </createProject>
+    <title> Seus Projetos  </title>
+    <completeLabel> COMPLETO  </completeLabel>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
-    <footer-end-text>All rights reserved.</footer-end-text>
+    <footer-end-text>Todos os direitos reservados.</footer-end-text>
   </pt>
 </xml>

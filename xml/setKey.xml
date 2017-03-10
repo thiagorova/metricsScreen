@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xml>
+  <en>
+    <title> Use your Authorship.me account</title>
+    <emailLabel>Email:</emailLabel>
+    <passwordLabel>Password:</passwordLabel>
+    <login>Login</login>
+    <no-account>Don't have an account yet?</no-account>
+     <create-account>Create an Authorship.me account</create-account>
+    <footer-start-text>© Copyright </footer-start-text>
+    <authorship-name>Authorship.me</authorship-name> 
+    <footer-end-text>All rights reserved.</footer-end-text>
+    <footer-end-text>Todos os direitos reservados.</footer-end-text>
+  </en>
+  
+  <de>
+    <title> Nutzen Sie Ihr Authorship.me Konto</title>
+    <emailLabel>E-mail:</emailLabel>
+    <passwordLabel>Passwort:</passwordLabel>
+    <login>Benutzername</login>
+    <no-account>haben Sie noch nicht ein Konto?</no-account>
+     <create-account>Schreiben Sie in Authorship.me ein</create-account>
+    <footer-start-text>© Copyright </footer-start-text>
+    <authorship-name>Authorship.me</authorship-name> 
+    <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
+  </de>
+  
+  <pt>
+    <title> Use sua conta do Authorship.me</title>
+    <emailLabel>Email:</emailLabel>
+    <passwordLabel>Senha:</passwordLabel>
+    <login>Login</login>
+    <no-account>Ainda não tem uma conta?</no-account>
+     <create-account>Crie uma conta Authorship.me</create-account>
+    <footer-start-text>© Copyright </footer-start-text>
+    <authorship-name>Authorship.me</authorship-name> 
+    <footer-end-text>Todos os direitos reservados.</footer-end-text>
+  </pt>
+</xml>

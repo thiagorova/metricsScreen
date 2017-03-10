@@ -1,208 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xml>
   <en>
-    <back>
-      Back
-    </back>
-
-    <createProjectLabel>
-      Create Project
-    </createProjectLabel>
-
-    <projectTitleLabel>
-      Title
-    </projectTitleLabel>
-
-    <emptyFieldLabel>
-      Empty Field
-    </emptyFieldLabel>
-
-    <totalWordsLabel>
-      Total number of words
-    </totalWordsLabel>
-
-    <wordsErrorLabel>
-      Please, put a number greater than 0.
-    </wordsErrorLabel>
-
-    <milestoneLabel>
-      Milestone
-    </milestoneLabel>
-
-    <wDayLabel>
-      Words per Day
-    </wDayLabel>
-
-    <wMonthLabel>
-      Words per Month
-    </wMonthLabel>
-
-    <deadlineLabelOption>
-      Deadline
-    </deadlineLabelOption>
-
-    <milestoneDayLabel>
-      How many words do you want to write per day.
-    </milestoneDayLabel>
-
-    <milestoneMonthLabel>
-      How many words do you want to write per month
-    </milestoneMonthLabel>
-
-    <milestoneErrorLabel>
-      Please, put a number greater than 0.
-    </milestoneErrorLabel>
-
-    <deadlineLabel>
-      For when is your project
-    </deadlineLabel>
-
-    <deadlineErrorLabel>
-      Invalid date.
-    </deadlineErrorLabel>
-
-    <create>
-      Create Project
-    </create>
+    <back> Back </back>
+    <createProjectLabel> Create Project </createProjectLabel>
+    <projectTitleLabel> Title </projectTitleLabel>
+    <emptyFieldLabel> Empty Field </emptyFieldLabel>
+    <totalWordsLabel> Total number of words </totalWordsLabel>
+    <wordsErrorLabel> Please, put a number greater than 0. </wordsErrorLabel>
+    <milestoneLabel> Milestone </milestoneLabel>
+    <wDayLabel> Words per Day </wDayLabel>
+    <wMonthLabel> Words per Month </wMonthLabel>
+    <deadlineLabelOption> Deadline </deadlineLabelOption>
+    <milestoneDayLabel> How many words do you want to write per day. </milestoneDayLabel>
+    <milestoneMonthLabel> How many words do you want to write per month </milestoneMonthLabel>
+    <milestoneErrorLabel> Please, put a number greater than 0. </milestoneErrorLabel>
+    <deadlineLabel> For when is your project </deadlineLabel>
+    <deadlineErrorLabel> Invalid date. </deadlineErrorLabel>
+    <create> Create Project </create>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>All rights reserved.</footer-end-text>
   </en>
-
+  
   <de>
-    <back>
-      Back
-    </back>
-
-    <createProjectLabel>
-      Create Project
-    </createProjectLabel>
-
-    <projectTitleLabel>
-      Title
-    </projectTitleLabel>
-
-    <emptyFieldLabel>
-      Empty Field
-    </emptyFieldLabel>
-
-    <totalWordsLabel>
-      Total number of words
-    </totalWordsLabel>
-
-    <wordsErrorLabel>
-      Please, put a number greater than 0.
-    </wordsErrorLabel>
-
-    <milestoneLabel>
-      Milestone
-    </milestoneLabel>
-
-    <wDayLabel>
-      Words per Day
-    </wDayLabel>
-
-    <wMonthLabel>
-      Words per Month
-    </wMonthLabel>
-
-    <deadlineLabelOption>
-      Deadline
-    </deadlineLabelOption>
-
-    <milestoneDayLabel>
-      How many words do you want to write per day.
-    </milestoneDayLabel>
-
-    <milestoneMonthLabel>
-      How many words do you want to write per month
-    </milestoneMonthLabel>
-
-    <milestoneErrorLabel>
-      Please, put a number greater than 0.
-    </milestoneErrorLabel>
-
-    <deadlineLabel>
-      For when is your project
-    </deadlineLabel>
-
-    <deadlineErrorLabel>
-      Invalid date.
-    </deadlineErrorLabel>
-
-    <create>
-      Create Project
-    </create>
-
+    <back> Zurück </back>
+    <createProjectLabel> Projekt Anfangen </createProjectLabel>
+    <projectTitleLabel> Titel </projectTitleLabel>
+    <emptyFieldLabel> Leeres Feld </emptyFieldLabel>
+    <totalWordsLabel> Wie viele Worte muss das Projekt am Ende haben </totalWordsLabel>
+    <wordsErrorLabel> Bitte schreiben Sie eine Nummer, die größer als 0 ist. </wordsErrorLabel>
+    <milestoneLabel> Meilenstein </milestoneLabel>
+    <wDayLabel> Worte pro Tag </wDayLabel>
+    <wMonthLabel> Worte pro Monat </wMonthLabel>
+    <deadlineLabelOption> Frist </deadlineLabelOption>
+    <milestoneDayLabel> Wie viele Worte möchten Sie jeder Tag schreiben. </milestoneDayLabel>
+    <milestoneMonthLabel> Wie viele Worte möchten Sie jeder Monat schreiben </milestoneMonthLabel>
+    <milestoneErrorLabel> Bitte schreiben Sie eine Nummer, die größer als 0 ist. </milestoneErrorLabel>
+    <deadlineLabel> Wenn ist der letzte Tag der Frist  </deadlineLabel>
+    <deadlineErrorLabel> Datum ist ungültig. </deadlineErrorLabel>
+    <create> Projekt kreiren </create>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
   </de>
-
+  
   <pt>
-    <back>
-      Voltar
-    </back>
-
-    <createProjectLabel>
-      Criar Projeto
-    </createProjectLabel>
-
-    <projectTitleLabel>
-      Título
-    </projectTitleLabel>
-
-    <emptyFieldLabel>
-      Campo Vazio
-    </emptyFieldLabel>
-
-    <totalWordsLabel>
-      Número total de palavras
-    </totalWordsLabel>
-
-    <wordsErrorLabel>
-      Por favor, coloque um número maior que 0.
-    </wordsErrorLabel>
-
-    <milestoneLabel>
-      Marcos
-    </milestoneLabel>
-
-    <wDayLabel>
-      Palavras por dia
-    </wDayLabel>
-
-    <wMonthLabel>
-      Palavras por mês
-    </wMonthLabel>
-
-    <deadlineLabelOption>
-      Data Limite
-    </deadlineLabelOption>
-
-    <milestoneDayLabel>
-      Quantas palavras você deseja escrever por dia.
-    </milestoneDayLabel>
-
-    <milestoneMonthLabel>
-      Quantas palavras você deseja escrever por mês.
-    </milestoneMonthLabel>
-    <milestoneErrorLabel>
-      Por favor, coloque um número maior que 0.
-    </milestoneErrorLabel>
-
-    <deadlineLabel>
-      Para quando é seu projeto.
-    </deadlineLabel>
-
-    <deadlineErrorLabel>
-      Data inválida.
-    </deadlineErrorLabel>
-
-    <create>
-      Criar Projeto
-    </create>
-
+    <back> Voltar </back>
+    <createProjectLabel> Criar Projeto </createProjectLabel>
+    <projectTitleLabel> Título </projectTitleLabel>
+    <emptyFieldLabel> Campo Vazio </emptyFieldLabel>
+    <totalWordsLabel> Número total de palavras </totalWordsLabel>
+    <wordsErrorLabel> Por favor, coloque um número maior que 0. </wordsErrorLabel>
+    <milestoneLabel> Marcos </milestoneLabel>
+    <wDayLabel> Palavras por dia </wDayLabel>
+    <wMonthLabel> Palavras por mês </wMonthLabel>
+    <deadlineLabelOption> Data Limite </deadlineLabelOption>
+    <milestoneDayLabel> Quantas palavras você deseja escrever por dia. </milestoneDayLabel>
+    <milestoneMonthLabel> Quantas palavras você deseja escrever por mês. </milestoneMonthLabel>
+    <milestoneErrorLabel> Por favor, coloque um número maior que 0. </milestoneErrorLabel>
+    <deadlineLabel> Para quando é seu projeto. </deadlineLabel>
+    <deadlineErrorLabel> Data inválida. </deadlineErrorLabel>
+    <create> Criar Projeto </create>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Todos os direitos reservados.</footer-end-text>
