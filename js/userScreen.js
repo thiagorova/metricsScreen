@@ -1,6 +1,8 @@
-  var metricsApi;
-  var data;
-
+var metricsApi;
+var data;
+var weekdays = new Array(7);
+var userLogin;
+var activeChart;
 
 window.onload = function() {
   document.getElementById("back").addEventListener('click', goBack);
@@ -9,7 +11,8 @@ window.onload = function() {
   setSystem(function (metrics) {
      metricsApi = metrics;
      metricsApi.getUser( function(login) {
-       document.getElementById("hello").innerHTML = "Ahoy " + login.split("@")[0];
+       userLogin = login;
+       document.getElementById("hello").innerHTML += login.split("@")[0];
      });
      metricsApi.getUserProductivity(function (metricsData) {
       if(metricsData !== "") {
@@ -18,21 +21,30 @@ window.onload = function() {
         document.getElementById("prodHour").innerHTML = getMostProductiveHour(metricsData);
         setChart("daily");
       } else {
-        document.getElementById("prodDay").innerHTML = 0;
+        document.getElementById("prodDay").innerHTML =  0;
         document.getElementById("prodHour").innerHTML = 0;
         buildGraph([]);
       }
     }, function (error) {
-      document.getElementById("prodDay").innerHTML = 0;
+      document.getElementById("prodDay").innerHTML =  0;
       document.getElementById("prodHour").innerHTML = 0;
       buildGraph([]);
     });
   });
 }
 
+  function resetDynamicText () {
+    weekdays = new Array(7);
+    document.getElementById("prodDay").innerHTML = getMostProductiveDay(data);
+    if (typeof userLogin !== "undefined") document.getElementById("hello").innerHTML += userLogin.split("@")[0];
+    setChart(activeChart);
+  }
+
   function setChart(method) {
+    if (typeof data === "undefined") return;
     var dailyButton = document.getElementById("daily");
     var hourlyButton = document.getElementById("hourly")
+    activeChart = method;
     if (method === "daily") {
       var chartData = getDailyProduction(data);
       dailyButton.setAttribute("class", "pressed");
@@ -54,6 +66,7 @@ window.onload = function() {
 
   function getMostProductiveDay(metricsData) {
     var daily = getDailyProduction(metricsData);
+    if (isEmpty(daily)) return {};
     return Object.keys(daily).reduce(function(a, b){ return daily[a] > daily[b] ? a : b });
   }
 
@@ -70,7 +83,6 @@ window.onload = function() {
     }
     var today = new Date();
     var timeZoneDiff = -today.getTimezoneOffset()/60;   //this method returns time difference in minuts
-    console.log(timeZoneDiff);
     if (timeZoneDiff >= 0) {
       var keyOrder = Object.keys(hourly);
     } else {
@@ -84,6 +96,7 @@ window.onload = function() {
   }
 
   function getDailyProduction(data) {
+    if (typeof data === "undefined") return {};
     var len = data.length;
     var daily = {}
     for (var i = 0; i < len; i++) {
@@ -99,35 +112,12 @@ window.onload = function() {
 
   function getWday(date) {
     var dateParts = date.date.split(" ")[0].split("-")
-    var date = new Date(dateParts[0], parseInt(dateParts[1])-1, dateParts[2]).getDay()
-    if(language ==='en'){
-      if (date === 1) return "Monday";
-      else if (date === 2) return "Tuesday";
-      else if (date === 3) return "Wednesday";
-      else if (date === 4) return "Thursday";
-      else if (date === 5) return "Friday";
-      else if (date === 6) return "Saturday";
-      else if (date === 0) return "Sunday";
+    var date = new Date(dateParts[0], parseInt(dateParts[1])-1, dateParts[2]).getDay();
+    localStorage.setItem('date', date);
+    if (typeof weekdays[date] === "undefined") {
+      weekdays[date] = getWeekDay(date);
     }
-    else if (language === 'de') {
-      if (date === 1) return "Montag";
-      else if (date === 2) return "Dienstag";
-      else if (date === 3) return "Mittwoch";
-      else if (date === 4) return "Donnerstag";
-      else if (date === 5) return "Freitag";
-      else if (date === 6) return "Samstag";
-      else if (date === 0) return "Sonntag";
-    }
-    else if (language==='pt') {
-      if (date === 1) return "Segunda-feira";
-      else if (date === 2) return "Terça-feira";
-      else if (date === 3) return "Quarta-feira";
-      else if (date === 4) return "Quinta-feira";
-      else if (date === 5) return "Sexta-feira";
-      else if (date === 6) return "Sábado";
-      else if (date === 0) return "Domingo";
-
-    }
+    return weekdays[date];
   }
 
   function goBack() {

@@ -3,6 +3,7 @@
   <en>
     <createProject>  Create a Project  </createProject>
     <back>Projects</back>
+    <hello> Ahoy </hello>
     <prodDayLabel>MOST PRODUCTIVE DAY</prodDayLabel>
     <prodHourLabel>MOST PRODUCTIVE HOUR</prodHourLabel>
     <productivityLabel>Productivity in:</productivityLabel>
@@ -11,12 +12,22 @@
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>All rights reserved.</footer-end-text>
+    <prodDay type="multiDate">
+        <monday> Monday </monday>
+        <tuesday> Tuesday </tuesday>
+        <wednesday> Wednesday </wednesday>
+        <thursday> Thursday </thursday>
+        <friday> Friday </friday>
+        <saturday> Saturday </saturday>
+        <sunday> Sunday </sunday>
+    </prodDay>
   </en>
 
   <de>
 
     <createProject>  Create a Project  </createProject>
     <back>Projects</back>
+    <hello> Ahoi </hello>
     <prodDayLabel>MOST PRODUCTIVE DAY</prodDayLabel>
     <prodHourLabel>MOST PRODUCTIVE HOUR</prodHourLabel>
     <productivityLabel>Productivity in:</productivityLabel>
@@ -25,13 +36,21 @@
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
-
-
+    <prodDay type="multiDate">
+        <monday> Montag </monday>
+        <tuesday> Dienstag </tuesday>
+        <wednesday> Mittwoch </wednesday>
+        <thursday> Donnerstag </thursday>
+        <friday> Freitag </friday>
+        <saturday> Samstag </saturday>
+        <sunday> Sonntag </sunday>
+    </prodDay>
   </de>
 
   <pt>
     <createProject>  Criar um Projeto  </createProject>
     <back>Projetos</back>
+    <hello> Ola </hello>
     <prodDayLabel>DIA MAIS PRODUTIVO</prodDayLabel>
     <prodHourLabel>HORA MAIS PRODUTIVA</prodHourLabel>
     <productivityLabel>Produtividade em:</productivityLabel>
@@ -40,5 +59,14 @@
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Todos os direitos reservados.</footer-end-text>
+    <prodDay type="multiDate">
+        <monday> Segunda-feira </monday>
+        <tuesday> Terça-feira </tuesday>
+        <wednesday> Quarta-feira</wednesday>
+        <thursday> Quinta-feira </thursday>
+        <friday> Sexta-feira </friday>
+        <saturday> Sábado </saturday>
+        <sunday> Domingo </sunday>
+    </prodDay>
   </pt>
 </xml>
