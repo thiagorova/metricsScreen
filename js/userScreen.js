@@ -56,7 +56,7 @@ window.onload = function() {
     var daily = getDailyProduction(metricsData);
     return Object.keys(daily).reduce(function(a, b){ return daily[a] > daily[b] ? a : b });
   }
-  
+
   function getHourlyProduction(data) {
     var len = data.length;
     var hourly = {}
@@ -76,13 +76,13 @@ window.onload = function() {
     } else {
      var keyOrder = Object.keys(hourly).reverse()
     }
-    keyOrder.map(function (hour) { 
+    keyOrder.map(function (hour) {
       hourly[hour - timeZoneDiff] = hourly[hour];
       delete hourly[hour];
     });
     return hourly;
   }
-  
+
   function getDailyProduction(data) {
     var len = data.length;
     var daily = {}
@@ -96,17 +96,38 @@ window.onload = function() {
     }
     return daily;
   }
-  
+
   function getWday(date) {
     var dateParts = date.date.split(" ")[0].split("-")
     var date = new Date(dateParts[0], parseInt(dateParts[1])-1, dateParts[2]).getDay()
-    if (date === 1) return "Monday";
-    else if (date === 2) return "Tuesday";
-    else if (date === 3) return "Wednesday";
-    else if (date === 4) return "Thursday";
-    else if (date === 5) return "Friday";
-    else if (date === 6) return "Saturday";
-    else if (date === 0) return "Sunday";
+    if(language ==='en'){
+      if (date === 1) return "Monday";
+      else if (date === 2) return "Tuesday";
+      else if (date === 3) return "Wednesday";
+      else if (date === 4) return "Thursday";
+      else if (date === 5) return "Friday";
+      else if (date === 6) return "Saturday";
+      else if (date === 0) return "Sunday";
+    }
+    else if (language === 'de') {
+      if (date === 1) return "Montag";
+      else if (date === 2) return "Dienstag";
+      else if (date === 3) return "Mittwoch";
+      else if (date === 4) return "Donnerstag";
+      else if (date === 5) return "Freitag";
+      else if (date === 6) return "Samstag";
+      else if (date === 0) return "Sonntag";
+    }
+    else if (language==='pt') {
+      if (date === 1) return "Segunda-feira";
+      else if (date === 2) return "Terça-feira";
+      else if (date === 3) return "Quarta-feira";
+      else if (date === 4) return "Quinta-feira";
+      else if (date === 5) return "Sexta-feira";
+      else if (date === 6) return "Sábado";
+      else if (date === 0) return "Domingo";
+
+    }
   }
 
   function goBack() {

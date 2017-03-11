@@ -3,11 +3,11 @@
   <en>
     <createProject> Create a Project  </createProject>
     <title> Your projects  </title>
-    <completeLabel> COMPLETE  </completeLabel>
-    <pWordsLabel> WORDS </pWordsLabel>
-    <dailyLabel> DAILY </dailyLabel>
-    <monthlyLabel> MONTHLY </monthlyLabel>
-    <deadlineLabel> DEADLINE </deadlineLabel>
+    <completeLabel type="class"> COMPLETE  </completeLabel>
+    <pWordsLabel type="class"> WORDS </pWordsLabel>
+    <dailyLabel type="class"> DAILY </dailyLabel>
+    <monthlyLabel type="class"> MONTHLY </monthlyLabel>
+    <deadlineLabel type="class"> DEADLINE </deadlineLabel>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>All rights reserved.</footer-end-text>
@@ -16,11 +16,11 @@
   <de>
     <createProject> Projekt Anfangen </createProject>
     <title> Deine Projekten  </title>
-    <completeLabel> FERTIG  </completeLabel>
-    <pWordsLabel> WORDS </pWordsLabel>
-    <dailyLabel> DAILY </dailyLabel>
-    <monthlyLabel> MONTHLY </monthlyLabel>
-    <deadlineLabel> DEADLINE </deadlineLabel>
+    <completeLabel type="class"> FERTIG  </completeLabel>
+    <pWordsLabel type="class"> WORDSDE </pWordsLabel>
+    <dailyLabel type="class"> DAILYDE </dailyLabel>
+    <monthlyLabel type="class"> MONTHLYDE </monthlyLabel>
+    <deadlineLabel type="class"> DEADLINEDE </deadlineLabel>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
@@ -30,11 +30,11 @@
   <pt>
     <createProject> Criar um Projeto  </createProject>
     <title> Seus Projetos  </title>
-    <completeLabel> COMPLETO  </completeLabel>
-    <pWordsLabel> PALAVRAS </pWordsLabel>
-    <dailyLabel> POR DIA </dailyLabel>
-    <monthlyLabel> POR MÊS </monthlyLabel>
-    <deadlineLabel> DATA LIMITE </deadlineLabel>
+    <completeLabel type="class"> COMPLETO  </completeLabel>
+    <pWordsLabel type="class"> PALAVRAS </pWordsLabel>
+    <dailyLabel type="class"> POR DIA </dailyLabel>
+    <monthlyLabel type="class"> POR MÊS </monthlyLabel>
+    <deadlineLabel type="class"> DATA LIMITE </deadlineLabel>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Todos os direitos reservados.</footer-end-text>

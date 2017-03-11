@@ -56,7 +56,7 @@
       var mPercentageP = document.createElement("P");
       var mPercentageSpan = document.createElement("SPAN");
       mPercentageSpan.innerHTML = "COMPLETE";
-      mPercentageSpan.setAttribute("id", "completeLabel");
+      mPercentageSpan.setAttribute("class", "completeLabel");
       mPercentageP.setAttribute("class", "milestonePercentage");
       mPercentageP.innerHTML = project.milestone.percentage;
       mPercentageTD.setAttribute("class", "info");
@@ -69,7 +69,7 @@
       var pWordsSpan = document.createElement("SPAN");
       pWordsSpan.innerHTML = "WORDS";
       pWordsP.setAttribute("class", "projectWords");
-      pWordsSpan.setAttribute("Id", "pWordsLabel");
+      pWordsSpan.setAttribute("class", "pWordsLabel");
       pWordsP.innerHTML = project.words;
       pWordsTD.setAttribute("class", "info");
       pWordsTD.appendChild(pWordsSpan);
@@ -80,7 +80,7 @@
       var mValueP = document.createElement("P");
       var mValueSpan = document.createElement("SPAN");
       mValueSpan.setAttribute("class", "milestoneText");
-      mValueSpan.innerHTML = (project.milestone.type === "deadline") ? "<span id='deadlineLabel'>DEADLINE</span>" :  (project.milestone.type === "wDay") ? "<span id='dailyLabel'>DAILY</span>": "<span id='monthlyLabel'>MONTHLY</span>";
+      mValueSpan.innerHTML = (project.milestone.type === "deadline") ? "<span class='deadlineLabel'>DEADLINE</span>" :  (project.milestone.type === "wDay") ? "<span class='dailyLabel'>DAILY</span>": "<span class='monthlyLabel'>MONTHLY</span>";
       mValueP.setAttribute("class", "milestoneValue");
       mValueP.innerHTML = project.milestone.words || project.milestone.deadline.replace("/20", "/");
       mValueTD.setAttribute("class", "info");
@@ -103,6 +103,7 @@
       document.getElementsByTagName("table")[0].appendChild(line);
 
     });
+    openXml(pageName);
 
   }
 

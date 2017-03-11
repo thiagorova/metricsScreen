@@ -37,8 +37,14 @@ function translate(xml){
   var i = 0;
   idiomLength = idiom.children.length;
   for(i=0; i< idiomLength; i++){
-    if(document.getElementById(idiom.children[i].tagName)){
-    document.getElementById(idiom.children[i].tagName).innerHTML = idiom.children[i].innerHTML;
+    var tag = idiom.children[i]
+      if(tag){
+        if(tag.getAttribute('type') ==='class'){
+          $('.' + tag.tagName).text(tag.innerHTML);
+        }
+        else {
+            $('#' + tag.tagName).text(tag.innerHTML);
+        }
+      }
     }
   }
-}
