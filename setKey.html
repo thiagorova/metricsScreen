@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/master.css" media="screen" title="no title">
     <script src="js/setKey.js"></script>
     <script src="js/master.js"></script>    
+    <script src="js/translation.js"></script>
   </head>
 
   <body>
@@ -18,26 +19,33 @@
       <img src="img/metrics_logo.png">
     </header>
 
-<main>
-     <h3> Use your Authorship.me account</h3>
-     <div id="formField">
+    <main>
+      <h3> Use your Authorship.me account</h3>
+      <div id="formField">
         <label for="email">Email:</label><br>
         <input type="email" id="email">
-     </div>
-     <div id="formField">
+      </div>
+      <div id="formField">
         <label for="password">Password:</label><br>
         <input type="password" id="password">
-     </div>
-     <button class="btn" id="login">Login</button>
-     <p id="message"></p>
-</main>
+      </div>
+      <button class="btn" id="login">Login</button>
+      <p id="message"></p>
+    </main>
 
-<section class="container">
-    <h3>Don't have an account yet?</h3>
-     <a href="http://metrics.authorship.me/users/sign_up" id="authorshipCreateAccount">Create an Authorship.me account</a>
-</div>
-    <footer class="container">
-     <span> © Copyright <a href="www.authorship.me" id="authorshipLink">Authorship.me</a> All rights reserved.</span>
+    <section class="container">
+      <h3>Don't have an account yet?</h3>
+      <a href="http://metrics.authorship.me/users/sign_up" id="authorshipCreateAccount">Create an Authorship.me account</a>
+    </div>
+    <footer class="container" id="authorshipLink">
+      <span id="footer-start-text"> © Copyright </span>
+      <a href="www.authorship.me" id="authorship-name">Authorship.me</a>
+      <span id="footer-end-text"> All rights reserved.</span>
+      <div>
+        <a id="lEn">en</a>
+        <a  id="lDe">de</a>
+        <a  id="lPt">pt</a>
+      </div>
     </footer>
   </body>
 </html>
