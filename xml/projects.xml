@@ -17,10 +17,10 @@
     <createProject> Projekt Anfangen </createProject>
     <title> Deine Projekten  </title>
     <completeLabel type="class"> FERTIG  </completeLabel>
-    <pWordsLabel type="class"> WORDSDE </pWordsLabel>
-    <dailyLabel type="class"> DAILYDE </dailyLabel>
-    <monthlyLabel type="class"> MONTHLYDE </monthlyLabel>
-    <deadlineLabel type="class"> DEADLINEDE </deadlineLabel>
+    <pWordsLabel type="class"> WORTE </pWordsLabel>
+    <dailyLabel type="class"> TÄGLICH </dailyLabel>
+    <monthlyLabel type="class"> MONATLICH </monthlyLabel>
+    <deadlineLabel type="class"> FRISTENDE </deadlineLabel>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>

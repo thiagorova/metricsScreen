@@ -36,7 +36,7 @@
     <milestoneDayLabel> Wie viele Worte möchten Sie jeder Tag schreiben. </milestoneDayLabel>
     <milestoneMonthLabel> Wie viele Worte möchten Sie jeder Monat schreiben </milestoneMonthLabel>
     <milestoneErrorLabel> Bitte schreiben Sie eine Nummer, die größer als 0 ist. </milestoneErrorLabel>
-    <deadlineLabel> Wenn ist der letzte Tag der Frist  </deadlineLabel>
+    <deadlineLabel> Wenn ist die Fristende  </deadlineLabel>
     <deadlineErrorLabel> Datum ist ungültig. </deadlineErrorLabel>
     <create> Projekt kreiren </create>
     <footer-start-text>© Copyright </footer-start-text>

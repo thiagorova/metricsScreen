@@ -12,8 +12,8 @@
   <de>
 
     <createProject>  Projekt Anfangen  </createProject>
-    <welcome>  Wilkommen im </welcome>
-    <msg>  To start, please create a project.  </msg>
+    <welcome>  Wilkommen im Metrics</welcome>
+    <msg>  Bitte kreiren Sie ein Projekt, um anzufangen. </msg>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
