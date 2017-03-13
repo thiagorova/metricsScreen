@@ -26,9 +26,9 @@
   <de>
     <createProject> Projekt Anfangen </createProject>
     <projectTimeLabel> ZEIT AUFGEWENDET </projectTimeLabel>
-    <wordCountLabel> WORDS WRITTENDE </wordCountLabel>
+    <wordCountLabel> GESCHRIEBENE WÖRTER </wordCountLabel>
     <beganWritingLabel> FANG AN ZU SCHREIBEN </beganWritingLabel>
-    <milestoneWords> WORTE PRO TAG </milestoneWords>
+    <milestoneWords> WÖRTER PRO TAG </milestoneWords>
     <lastUpdateLabel> LETZT AKTUALISIERUNG </lastUpdateLabel>
     <characterCountLabel> BUCHSTAB ZAHL </characterCountLabel>
     <chart_tab> Allgemein </chart_tab>
@@ -37,7 +37,7 @@
     <dateLabel> Datum </dateLabel>
     <wordsLabel> Wörter </wordsLabel>
     <hoursLabel> Stunde </hoursLabel>
-    <export-text> Exporr</export-text>
+    <export-text> Export</export-text>
     <start> Anfangen </start>
     <pause> Pause </pause>
     <footer-start-text>© Copyright </footer-start-text>

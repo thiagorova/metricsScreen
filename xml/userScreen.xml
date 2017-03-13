@@ -25,14 +25,14 @@
 
   <de>
 
-    <createProject>  Create a Project  </createProject>
-    <back>Projects</back>
+    <createProject> Projekt Anfangen </createProject>
+    <back>Projekte</back>
     <hello> Ahoi </hello>
-    <prodDayLabel>MOST PRODUCTIVE DAY</prodDayLabel>
-    <prodHourLabel>MOST PRODUCTIVE HOUR</prodHourLabel>
-    <productivityLabel>Productivity in:</productivityLabel>
-    <daily>Days</daily>
-    <hourly>Hours</hourly>
+    <prodDayLabel>AM PRODUKTIVSTEN TAG</prodDayLabel>
+    <prodHourLabel>AM PRODUKTIVSTEN UHR</prodHourLabel>
+    <productivityLabel>Produktivität im:</productivityLabel>
+    <daily>Tage</daily>
+    <hourly>Uhren</hourly>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
