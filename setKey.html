@@ -8,9 +8,10 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" href="css/setKey.css" type="text/css">
     <link rel="stylesheet" href="css/master.css" media="screen" title="no title">
+    <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
     <script src="js/setKey.js"></script>
-    <script src="js/master.js"></script>    
-    <script src="js/translation.js"></script>
+    <script src="js/master.js"></script>
+    <script type="text/javascript" src="js/translation.js"></script>
   </head>
 
   <body>
@@ -19,33 +20,33 @@
       <img src="img/metrics_logo.png">
     </header>
 
-    <main>
-      <h3> Use your Authorship.me account</h3>
-      <div id="formField">
-        <label for="email">Email:</label><br>
+<main>
+     <h3 id="title"> Use your Authorship.me account</h3>
+     <div id="formField">
+        <label for="email" id="emailLabel">Email:</label><br>
         <input type="email" id="email">
-      </div>
-      <div id="formField">
-        <label for="password">Password:</label><br>
+     </div>
+     <div id="formField">
+        <label for="password" id="passwordLabel">Password:</label><br>
         <input type="password" id="password">
-      </div>
-      <button class="btn" id="login">Login</button>
-      <p id="message"></p>
-    </main>
+     </div>
+     <button class="btn" id="login">Login</button>
+     <p id="message"></p>
+</main>
 
-    <section class="container">
-      <h3>Don't have an account yet?</h3>
-      <a href="http://metrics.authorship.me/users/sign_up" id="authorshipCreateAccount">Create an Authorship.me account</a>
-    </div>
+<section class="container">
+    <h3 id="no-account">Don't have an account yet?</h3>
+     <a href="http://metrics.authorship.me/users/sign_up" id="authorshipCreateAccount">Create an Authorship.me account</a>
+</div>
     <footer class="container" id="authorshipLink">
-      <span id="footer-start-text"> © Copyright </span>
-      <a href="www.authorship.me" id="authorship-name">Authorship.me</a>
-      <span id="footer-end-text"> All rights reserved.</span>
-      <div>
-        <a id="lEn">en</a>
-        <a  id="lDe">de</a>
-        <a  id="lPt">pt</a>
-      </div>
+     <span id="footer-start-text"> © Copyright </span>
+     <a href="www.authorship.me" id="authorship-name">Authorship.me</a>
+     <span id="footer-end-text"> All rights reserved.</span>
     </footer>
+    <div class="languages container">
+      <a id="lEn">en</a>
+      <a  id="lDe">de</a>
+      <a  id="lPt">pt</a>
+    </div>
   </body>
 </html>
