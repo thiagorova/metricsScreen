@@ -1,12 +1,12 @@
   var metrics;
 
   var updateOnlineStatus = function () {
-    document.getElementById("online_offline").innerHTML = "Online mode";
+    document.getElementById("online_offline").innerHTML = "Online";
     checkStorage();
   }
 
   var updateOfflineStatus = function () {
-    document.getElementById("online_offline").innerHTML = "Offline mode";
+    document.getElementById("online_offline").innerHTML = "Offline";
   }
 
   var goToAuthorship = function(e) {

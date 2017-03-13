@@ -63,7 +63,7 @@ window.onload = function() {
 
   function getMilestoneText(project) {
     if (project.milestone.type == "wDay" || project.milestone.type == "Words per Day") {
-      return "<span id='milestoneWords'>" + project.milestone.words + " WORDS PER DAY </span>";
+      return "<span class='authorship-metrics-indicators-description' id='milestoneWords'>" + project.milestone.words + " WORDS PER DAY </span>";
     } else if (dProject.milestone.type == "wMonth") {
       return project.milestone.words + " WORDS PER MONTH";
     } else {

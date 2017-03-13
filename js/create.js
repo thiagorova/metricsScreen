@@ -131,7 +131,6 @@
      var wordsPerDay;
      var wordCount = parseInt(document.getElementById("milestoneMeasure").value);
      var deadlineParts = document.getElementById("deadline").value.split("-");
-     console.log(deadlineParts);
      var deadlineValue = new Date(deadlineParts[0], deadlineParts[1] - 1, deadlineParts[2]);
       if(project.selectMilestone === "wDay") {
         if(! isNaN(wordCount)) {
