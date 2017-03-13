@@ -53,7 +53,7 @@
   var setSystem = function (callback) {
     window.addEventListener('online',  updateOnlineStatus);
     window.addEventListener('offline', updateOfflineStatus);
-    document.getElementById("authorshipLink").addEventListener('click', goToAuthorship);
+    document.getElementById("authorship-name").addEventListener('click', goToAuthorship);
     if (document.getElementById("goUser") !== null) document.getElementById("goUser").addEventListener('click', GoToUserScreen);
     if (document.getElementById("createProject") !== null) document.getElementById("createProject").addEventListener('click', function (e) {changeLocation("create.html");});
     
