@@ -6,7 +6,6 @@
 body {
   width: 500px;
   height: 356px;
-  margin-bottom: 40px;
 }
 
 
@@ -104,8 +103,8 @@ footer a{
 }
 
 #online_offline {
-	margin-left: 22px;
-	padding-top: 10px;
+  margin-left: 22px;
+  padding-top: 10px;
 }
 
 #loading {
