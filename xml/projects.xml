@@ -15,7 +15,7 @@
 
   <de>
     <createProject> Projekt Anfangen </createProject>
-    <title> Deine Projekte  </title>
+    <title> Ihr Projekte  </title>
     <completeLabel type="class"> FERTIG  </completeLabel>
     <pWordsLabel type="class"> WORTE </pWordsLabel>
     <dailyLabel type="class"> TÄGLICH </dailyLabel>

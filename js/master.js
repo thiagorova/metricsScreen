@@ -79,29 +79,29 @@
   }
 
   function testOpenProject(metrics, callback) {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {request: "getId"}, function (projectId) {
-        if(projectId !== null && typeof projectId !== "undefined") {
-          metrics.getProject(projectId, GoToProject,
+    chrome.storage.local.get('openedP', function(project) {
+        if(!isEmpty(project)) {
+          metrics.getProject(project.openedP.id, function(project) {
+              GoToProject([project]);
+            },
             function(error) {
-              getFromStorage(projectId, GoToProject);
+              getFromStorage(project.openedP, function(project) {
+                GoToProject([project]);
+              });
             });
           } else {
               if (callback !== null) callback(metrics);
           }
       });
-    });
   }
 
 function GoToProject(project, projectSet) {
   if (typeof projectSet === "undefined") {
     project = setProjects(project)[0];
   }
-  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {request: "holdData", project: project}, function () {
-        changeLocation("project.html");
-      });
-  });
+  if (project === "undefined") return;
+  chrome.storage.local.set({ 'openedP': project.id });
+  changeLocation("project.html");
 }
 
 function GoToUserScreen() {

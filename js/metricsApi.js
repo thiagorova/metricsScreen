@@ -103,7 +103,7 @@ var Metrics = function (key) {
       if (typeof callback === 'undefined') { callback = null; }
       if (typeof callbackError === 'undefined') { callbackError = null; }
       apiCall("GET", this.priv.projectAdd + "show", buildJSON(this.priv.key, projectId), function(response) {
-        if(callback !== null) callback(JSON.parse( response ).projects);
+        if(callback !== null) callback(JSON.parse( response ).projects[0]);
       },
       callbackError);
     };

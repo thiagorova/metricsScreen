@@ -21,13 +21,14 @@
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>All rights reserved.</footer-end-text>
+    <no-content-script> Unfortunately, you cannot measure now. perhaps you should try refreshing your page? </no-content-script>
   </en>
 
   <de>
     <createProject> Projekt Anfangen </createProject>
     <projectTimeLabel> ZEIT AUFGEWENDET </projectTimeLabel>
     <wordCountLabel> GESCHRIEBENE WÖRTER </wordCountLabel>
-    <beganWritingLabel> FANG AN ZU SCHREIBEN </beganWritingLabel>
+    <beganWritingLabel> SCHREIBEN ANFANG </beganWritingLabel>
     <milestoneWords> WÖRTER PRO TAG </milestoneWords>
     <lastUpdateLabel> LETZT AKTUALISIERUNG </lastUpdateLabel>
     <characterCountLabel> BUCHSTAB ZAHL </characterCountLabel>
@@ -40,9 +41,11 @@
     <export-text> Export</export-text>
     <start> Anfangen </start>
     <pause> Pause </pause>
+    <chartsBack> Zurück </chartsBack>
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
+    <no-content-script> Leider ist es jetzt nicht möglich, Ihr Projekt zu analisieren. Vielleicht sollen Sie Ihr Seite new laden? </no-content-script>
   </de>
 
   <pt>
@@ -68,5 +71,6 @@
     <footer-start-text>© Copyright </footer-start-text>
     <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Todos os direitos reservados.</footer-end-text>
+    <no-content-script> Infelizmente, não é possível medir agora. Talvez valha a pena recarregar sua página? </no-content-script>
   </pt>
 </xml>

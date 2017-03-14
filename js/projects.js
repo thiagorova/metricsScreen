@@ -1,4 +1,3 @@
-
   var showProjects = function(metrics) {
     metrics.getAllProjects(viewProjects,
       function(error) {
