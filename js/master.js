@@ -83,7 +83,7 @@
         if(!isEmpty(project)) {
           metrics.getProject(project.openedP.id, GoToProject,
             function(error) {
-              getFromStorage(project.openedP.id, GoToProject);
+              getFromStorage(project.openedP, GoToProject);
             });
           } else {
               if (callback !== null) callback(metrics);
@@ -95,7 +95,7 @@ function GoToProject(project, projectSet) {
   if (typeof projectSet === "undefined") {
     project = setProjects(project)[0];
   }
-  chrome.storage.local.set({ 'openedP': project });
+  chrome.storage.local.set({ 'openedP': project.id });
   changeLocation("project.html");
 }
 
