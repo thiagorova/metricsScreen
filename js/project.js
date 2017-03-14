@@ -11,6 +11,7 @@ window.onload = function() {
   document.getElementById("start").addEventListener('click', startMeasuring);
   document.getElementById("pause").addEventListener('click', stopMeasuring);
   document.getElementById("showMore").addEventListener('click', changeView);
+  testContentScript();
   buildTabs("chart_tab");
   setSystem(function (metrics) {
      metricsApi = metrics;
@@ -27,39 +28,58 @@ window.onload = function() {
   });
   });
 }
+  var testContentScript = function() {
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, {request: "exist"}, function(response) {
+        if (typeof response !== "undefined") {
+            document.getElementById("start").style.display = "inline-block";
+            document.getElementById("no-content-script").style.display = "none";
+        }
+        else {
+            document.getElementById("start").style.display = "none";
+            document.getElementById("no-content-script").style.display = "block";
+        }
+    });
+  });
+  }
 
   var openProject = function(callback){
     var createdProject = false;
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, {request: "getData"}, function (project) {
-        dProject = project;
-        document.getElementById("projectName").innerHTML = dProject.projectName;
-        document.getElementById("projectTime").innerHTML = setTimeString(dProject.time);
-        document.getElementById("wordCount").innerHTML = dProject.words;
-        document.getElementById("milestonePercentage").innerHTML = dProject.milestone.percentage + "%" ;
-        document.getElementById("milestoneText").innerHTML = getMilestoneText(dProject) ;
-        document.getElementById("lastUpdate").innerHTML = getLastUpdate(dProject);
-        document.getElementById("characterCount").innerHTML = dProject.charCount;
-        metricsApi.getMetrics(dProject.id, function (metricsData) {
-          projectMetrics = metricsData;
-          if(metricsData !== "") {
-            var firstMetric = metricsData.reduce(function(a, b) {return (a.date < b.date) ?  a: b;});
-            var firstDate = firstMetric.date.split(" ")[0] ;
-            var firstDate = [firstDate.slice(0, 6), "20", firstDate.slice(6)].join('');
-            document.getElementById("beganWriting").innerHTML = firstDate;
-            buildGraph(metricsData);
-            wordsPerHour(metricsData);
-          } else {
-            document.getElementById("beganWriting").innerHTML = dProject.creation;
-            buildGraph([]);
-          }
-        }, function (error) {
-            document.getElementById("beganWriting").innerHTML = dProject.creation;
-            buildGraph([]);
+    chrome.storage.local.get('openedP', function(projectId) {
+        metrics.getProject(projectId.openedP, function(project) {
+          dProject = setProjects([project])[0];
+           setScreenInfo(dProject);
+          metricsApi.getMetrics(dProject.id, function (metricsData) {
+            projectMetrics = metricsData;
+            if(metricsData !== "") {
+              var firstMetric = metricsData.reduce(function(a, b) {return (a.date < b.date) ?  a: b;});
+              var firstDate = firstMetric.date.split(" ")[0] ;
+              var firstDate = [firstDate.slice(0, 6), "20", firstDate.slice(6)].join('');
+              document.getElementById("beganWriting").innerHTML = firstDate;
+              buildGraph(metricsData);
+              wordsPerHour(metricsData);
+            } else {
+              document.getElementById("beganWriting").innerHTML = dProject.creation;
+              buildGraph([]);
+            }
+          }, function (error) {
+              document.getElementById("beganWriting").innerHTML = dProject.creation;
+              buildGraph([]);
+          });
+          callback();
+          chrome.storage.local.remove('openedP');
         });
-        callback();
       });
-    });
+  }
+
+  function setScreenInfo(project) {
+    document.getElementById("projectName").innerHTML = project.projectName;
+    document.getElementById("projectTime").innerHTML = setTimeString(project.time);
+    document.getElementById("wordCount").innerHTML = project.words;
+    document.getElementById("milestonePercentage").innerHTML = project.milestone.percentage + "%" ;
+    document.getElementById("milestoneText").innerHTML = getMilestoneText(project) ;
+    document.getElementById("lastUpdate").innerHTML = getLastUpdate(project);
+    document.getElementById("characterCount").innerHTML = project.charCount;
   }
 
   function getMilestoneText(project) {
@@ -93,6 +113,7 @@ window.onload = function() {
       });
     });
     setCounter();
+    chrome.storage.local.set({ 'openedP': dProject });
   }
 
   function stopped() {
@@ -108,14 +129,11 @@ window.onload = function() {
       });
     });
     clearTimeout(timeoutId);
-    if (typeof projectTime !== "undefined") {
-      var seconds = projectTime.getHours() * 3600 + projectTime.getMinutes() * 60 + projectTime.getSeconds();
-      metricsApi.setDuration(dProject.id, seconds);
-    }
+    chrome.storage.local.remove('openedP');
   }
 
 //setting the messages to start recording the data
-  startMeasuring = function(){
+  startMeasuring = function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {request: "start", project: dProject.id, time: dProject.time}, null);
     });
