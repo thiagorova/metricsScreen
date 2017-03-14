@@ -116,7 +116,7 @@ function injectScript(file, node) {
         var message = data;
        if (intervalId !== null) intervalId = window.setTimeout(readText, timeInterval * 60 * 1000);
         if (lastMeasure === data.length) {
-          timeInterval *= 2;
+          timeInterval *= 1.2;
           if (timeInterval >= 12.8) {
             stopMeasuring();
             timeInterval = 0.1;
