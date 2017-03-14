@@ -20,7 +20,8 @@ chrome.runtime.onMessage.addListener( function (request, sender, callback) {
   if(request.request === "start") {
     startMeasuring();
     projectId = request.project;
-    setCounter(request.time)
+    setCounter(request.time);
+    timeInterval = 0.1;
   } else if (request.request === "stop") {
     stopMeasuring();
     readText();

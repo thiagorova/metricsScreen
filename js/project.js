@@ -113,6 +113,7 @@ window.onload = function() {
       });
     });
     setCounter();
+    chrome.storage.local.set({ 'openedP': dProject });
   }
 
   function stopped() {
@@ -128,6 +129,7 @@ window.onload = function() {
       });
     });
     clearTimeout(timeoutId);
+    chrome.storage.local.remove('openedP');
   }
 
 //setting the messages to start recording the data
@@ -136,7 +138,6 @@ window.onload = function() {
       chrome.tabs.sendMessage(tabs[0].id, {request: "start", project: dProject.id, time: dProject.time}, null);
     });
     measuring();
-    chrome.storage.local.set({ 'openedP': dProject });
   };
 
   var stopMeasuring = function(project) {
