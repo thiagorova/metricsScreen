@@ -116,8 +116,8 @@
       milestoneMeasure,
       function () {
         metricsApi.getProjectId(project.projectName, function (projectId) {
-          metrics.getProject(projectId, function(project) {
-            GoToProject([project]);
+          metrics.getProject(projectId, function(fetchedProject) {
+            GoToProject([fetchedProject]);
           });
       });
       },

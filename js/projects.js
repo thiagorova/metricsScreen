@@ -125,7 +125,7 @@ function openOptions(project, id){
   optionBox.animate({
     height:'toggle',    
   });
-  $(".open-project").click(function() {GoToProject(null, project); });
+  $(".open-project").click(function() {GoToProject(project, true); });
   $(".delete-project").click(function() {metrics.deleteProject(project.id); });
 }
 

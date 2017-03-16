@@ -1,12 +1,13 @@
 var language = 'en';
 var pageName = location.href.split("/").slice(-1)[0].split(".").slice(-2)[0];
 var xmlPage;
+globalTranslation = {};
+
 $( document ).ready(function() {
   openXml(pageName);
   $( "#lEn" ).click(function() {
     localStorage.setItem('language','en');
     openXml(pageName);
-
   });
   $( "#lDe" ).click(function() {
     localStorage.setItem('language','de');
@@ -34,8 +35,9 @@ function openXml(pageName){
   xhttp.send();
 }
 
-function translate(xml){
+function translate(xml, language){
   var idiom = xml.getElementsByTagName(language)[0];
+  if (typeof idiom === "undefined") return;
   xmlPage = idiom;
   var i = 0;
   idiomLength = idiom.children.length;
@@ -46,8 +48,10 @@ function translate(xml){
           $('.' + tag.tagName).text(tag.innerHTML);
         } else if (tag.getAttribute('type') ==='multiDate'){
           $('#' + tag.tagName).text(getWeekDay(localStorage.getItem('date')));
-        }
-        else {
+        }  else if (tag.getAttribute('type') ==='save'){
+          globalTranslation[tag.getAttribute(value)] = tag.innerHTML;
+          $('#' + tag.tagName).text(getWeekDay(localStorage.getItem('date')));
+        } else {
             $('#' + tag.tagName).text(tag.innerHTML);
         }
       }
