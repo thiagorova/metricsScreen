@@ -123,8 +123,7 @@ function openOptions(project, id){
   var position = $("#"+ id).position();
   optionBox.css('top', position.top +50);
   optionBox.animate({
-    height:'toggle',
-    width: 'toggle'
+    height:'toggle',    
   });
 }
 
