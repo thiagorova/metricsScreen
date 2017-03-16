@@ -27,7 +27,7 @@
     <createProject> Projekt Anfangen </createProject>
     <projectTimeLabel> ZEIT AUFGEWENDET </projectTimeLabel>
     <wordCountLabel> GESCHRIEBENE WÖRTER </wordCountLabel>
-    <beganWritingLabel> SCHREIBEN ANFANG </beganWritingLabel>
+    <beganWritingLabel> PROJEKTBEGINN </beganWritingLabel>
     <milestoneWords> WÖRTER PRO TAG </milestoneWords>
     <lastUpdateLabel> LETZT AKTUALISIERUNG </lastUpdateLabel>
     <characterCountLabel> BUCHSTAB ZAHL </characterCountLabel>
