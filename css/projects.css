@@ -107,3 +107,28 @@ td:last-child {
 .col-xs-12{
   padding: 0px;
 }
+
+.optionBox{
+  padding-left: 5px;
+  padding-right: 5px;
+
+  background: #eaeaea;
+  position: absolute;
+  display: none;
+  left: 400px;
+  box-shadow: 2px 6px 15px 0px #888888;
+}
+
+.optionBox p{
+  margin: 0;
+  border-bottom: 1px solid #c2c2c2;
+  padding: 10px;
+
+}
+.optionBox p:last-of-type{
+  border: none;
+}
+
+.optionBox a:hover{
+  text-decoration: none;
+}

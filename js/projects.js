@@ -33,7 +33,9 @@
   }
 
   function displayProjects(projects) {		//here is where the projects actively appear on the page
+    var cont = 0;
     projects.forEach(function (project) {
+
       var line = document.createElement("TR");
       var pStatusTD = document.createElement("TD");
       var pStatusDiv = document.createElement("DIV");
@@ -75,6 +77,10 @@
       pWordsTD.appendChild(pWordsP);
       line.appendChild(pWordsTD);
 
+
+
+
+
       var mValueTD = document.createElement("TD");
       var mValueP = document.createElement("P");
       var mValueSpan = document.createElement("SPAN");
@@ -93,22 +99,35 @@
       var exOtImg = document.createElement("IMG");
       exOtImg.src = "img/menu-options.png";
       exOtButton.setAttribute("class", "moreOptions");
-      exOtButton.addEventListener("click", function(e) { openOptions(project); });
+      exOtButton.setAttribute("id", "opt"+cont);
+      exOtButton.addEventListener("click", function(e) { openOptions(project, exOtButton.id); });
       exOtTD.setAttribute("class", "info");
       exOtButton.appendChild(exOtImg);
       exOtTD.appendChild(exOtButton);
       line.appendChild(exOtTD);
 
+
+
+
       document.getElementsByTagName("table")[0].appendChild(line);
+      cont++;
 
     });
     openXml(pageName);
 
   }
 
-  function openOptions(project) {
+function openOptions(project, id){
+  var optionBox = $(".optionBox");
+  optionBox.hide();
+  var position = $("#"+ id).position();
+  optionBox.css('top', position.top +50);
+  optionBox.animate({
+    height:'toggle',
+    width: 'toggle'
+  });
+}
 
-  }
 
   //função para calcular a porcentagem cumulativa
   var eloCalc = function(project){
@@ -156,6 +175,8 @@ function attemptStorage(callback, callbackError) {
       else callbackError()
     });
 }
+
+
 
 function saveProjects(projects) {
     chrome.storage.local.get('projects', function(storedItem) {
