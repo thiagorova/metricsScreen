@@ -57,6 +57,11 @@ window.onload=function(){
   document.getElementById("authorshipCreateAccount").addEventListener('click', createAccount);
   document.getElementById("online_offline").innerHTML = "";  
   setSystem();
+  chrome.storage.local.get('apikey', function(storedItem) {
+    if (isEmpty(storedItem)  === false) {		//if we are here, its either doesnt exist or the key is null... im just testing the option i dont care about
+      document.getElementById("login-again").style.display = "block";  
+    }
+  });
 }    
 
 

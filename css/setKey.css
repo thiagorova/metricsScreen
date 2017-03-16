@@ -56,3 +56,7 @@ section a {
 section h3{
   margin-bottom: 0px;
 }
+
+#login-again {
+  display: none;
+}
