@@ -98,6 +98,8 @@
 function GoToProject(project, projectSet) {
   if (typeof projectSet === "undefined") {
     project = setProjects(project)[0];
+  } else {
+    project = projectSet;
   }
   if (project === "undefined") return;
   chrome.storage.local.set({ 'openedP': project.id });
