@@ -47,7 +47,7 @@
 
   var createAccount = function(e) {
     e.preventDefault();
-    chrome.tabs.create({ url: "http://metrics.authorship.me/users/sign_up"});
+    chrome.tabs.create({ url: "https://metrics.authorship.me/users/sign_up"});
     return false;
   }
 
