@@ -60,7 +60,7 @@
     var hrefParts = window.location.href.split("/");
     if(hrefParts[hrefParts.length - 1] === "empty.html") return;
     chrome.storage.local.get('apikey', function(storedItem) {
-      if(isEmpty(storedItem)  === false) {
+      if(isEmpty(storedItem)  === false && storedItem.apikey !== null) {
         metrics = new Metrics(storedItem.apikey);
         if (navigator.onLine === true) {
           updateOnlineStatus();
