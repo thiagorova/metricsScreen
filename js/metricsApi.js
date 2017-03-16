@@ -10,7 +10,7 @@ var Metrics = function (key) {
     this.priv.key = key;
     this.priv.project = null;
     var mainAdd = "https://www.metrics.api.authorship.me/"
-//    var mainAdd = "http://localhost:4000/";
+    var mainAdd = "http://localhost:4000/";
     this.priv.metricsAdd = mainAdd + "metrics/";
     this.priv.userAdd = mainAdd + "users/";
     this.priv.projectAdd = mainAdd + "projects/";
@@ -111,7 +111,7 @@ var Metrics = function (key) {
     Metrics.prototype.getProjectId = function (projectName, callback, callbackError) {
       if (typeof callback === 'undefined') { callback = null; }
       if (typeof callbackError === 'undefined') { callbackError = null; }
-      apiCall("GET", this.priv.projectAdd + "getId", buildJSON(this.priv.key, projectName), function(response) {
+      apiCall("POST", this.priv.projectAdd + "getId", buildJSON(this.priv.key, projectName), function(response) {
         if(callback !== null) callback(JSON.parse( response ).id);
       },
       callbackError);
