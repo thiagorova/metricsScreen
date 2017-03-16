@@ -116,3 +116,8 @@ footer a{
 .language a {
   cursor: pointer;
 }
+
+.language {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
