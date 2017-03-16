@@ -113,3 +113,6 @@ footer a{
   height:
 }
 
+.language a {
+  cursor: pointer;
+}

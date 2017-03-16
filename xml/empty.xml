@@ -5,7 +5,6 @@
     <welcome>  Welcome to  </welcome>
     <msg>  To start, please create a project.  </msg>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>All rights reserved.</footer-end-text>
   </en>
 
@@ -15,7 +14,6 @@
     <welcome>  Wilkommen bei Metrics</welcome>
     <msg>  Bitte kreiren Sie ein Projekt, um anzufangen. </msg>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
   </de>
 
@@ -24,7 +22,6 @@
     <welcome>  Bem vindo ao  </welcome>
     <msg>  Para começar, por favor crie um projeto.  </msg>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Todos os direitos reservados.</footer-end-text>
   </pt>
 </xml>

@@ -18,7 +18,6 @@
     <deadlineErrorLabel> Invalid date. </deadlineErrorLabel>
     <create> Create Project </create>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>All rights reserved.</footer-end-text>
   </en>
   
@@ -40,7 +39,6 @@
     <deadlineErrorLabel> Datum ist ungültig. </deadlineErrorLabel>
     <create> Projekt kreiren </create>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
   </de>
   
@@ -62,7 +60,6 @@
     <deadlineErrorLabel> Data inválida. </deadlineErrorLabel>
     <create> Criar Projeto </create>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Todos os direitos reservados.</footer-end-text>
   </pt>
 </xml>

@@ -9,7 +9,6 @@
     <monthlyLabel type="class"> MONTHLY </monthlyLabel>
     <deadlineLabel type="class"> DEADLINE </deadlineLabel>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>All rights reserved.</footer-end-text>
   </en>
 
@@ -22,7 +21,6 @@
     <monthlyLabel type="class"> MONATLICH </monthlyLabel>
     <deadlineLabel type="class"> FRISTENDE </deadlineLabel>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
 
   </de>
@@ -36,7 +34,6 @@
     <monthlyLabel type="class"> POR MÊS </monthlyLabel>
     <deadlineLabel type="class"> DATA LIMITE </deadlineLabel>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Todos os direitos reservados.</footer-end-text>
   </pt>
 </xml>

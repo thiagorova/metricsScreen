@@ -19,7 +19,6 @@
     <pause> Pause</pause>
     <chartsBack> Back </chartsBack>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>All rights reserved.</footer-end-text>
     <no-content-script> Unfortunately, you cannot measure now. perhaps you should try refreshing your page? </no-content-script>
   </en>
@@ -43,7 +42,6 @@
     <pause> Pause </pause>
     <chartsBack> Zurück </chartsBack>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
     <no-content-script> Leider ist es jetzt nicht möglich, Ihr Projekt zu analisieren. Vielleicht sollen Sie Ihr Seite new laden? </no-content-script>
   </de>
@@ -69,7 +67,6 @@
     <pause> Pausar </pause>
     <chartsBack> Voltar </chartsBack>
     <footer-start-text>© Copyright </footer-start-text>
-    <authorship-name>Authorship.me</authorship-name>
     <footer-end-text>Todos os direitos reservados.</footer-end-text>
     <no-content-script> Infelizmente, não é possível medir agora. Talvez valha a pena recarregar sua página? </no-content-script>
   </pt>
