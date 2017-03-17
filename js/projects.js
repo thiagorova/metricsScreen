@@ -188,7 +188,7 @@ function saveProjects(projects) {
   }
 
   var getFromStorage = function(projectId, callback) {
-    chrome.storage.local.get('projects', function(storedItems) {
+    chrome.storage.local.get('projects', function(storedItem) {
       storedItems.projects.forEach(function (project) {
         if (project.id == projectId) callback(project);
       });
@@ -197,5 +197,4 @@ function saveProjects(projects) {
 
 window.onload = function() {
   setSystem(function(metrics) {showProjects(metrics);} );
-
 }
