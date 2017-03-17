@@ -11,7 +11,6 @@ window.onload = function() {
   document.getElementById("start").addEventListener('click', startMeasuring);
   document.getElementById("pause").addEventListener('click', stopMeasuring);
   document.getElementById("showMore").addEventListener('click', changeView);
-  testContentScript();
   buildTabs("chart_tab");
   setSystem(function (metrics) {
      metricsApi = metrics;
@@ -23,6 +22,7 @@ window.onload = function() {
           } else {
             stopped();
           }
+          testContentScript();
         });
     });
   });

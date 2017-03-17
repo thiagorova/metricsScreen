@@ -3,32 +3,42 @@ var pageName = location.href.split("/").slice(-1)[0].split(".").slice(-2)[0];
 var xmlPage;
 globalTranslation = {};
 
+
+
 $( document ).ready(function() {
   openXml(pageName);
   $( "#lEn" ).click(function() {
-    localStorage.setItem('language','en');
-    openXml(pageName);
+    chrome.storage.local.set({ 'language': "en" }, openAfterSaved(st));
   });
   $( "#lDe" ).click(function() {
-    localStorage.setItem('language','de');
-    openXml(pageName);
+    chrome.storage.local.set({ 'language': "de" }, openAfterSaved(st));
   });
   $( "#lPt" ).click(function() {
-    localStorage.setItem('language','pt');
-    openXml(pageName);
+    chrome.storage.local.set({ 'language': "pt" }, openAfterSaved(st));
   });
 });
+
+function openAfterSaved(st) {
+  openXml(pageName);
+}
 
 function openXml(pageName){
   var xhttp = new XMLHttpRequest();
   xhttp.overrideMimeType('text/xml');
   xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
-    language = localStorage.getItem('language');
-    var parser = new DOMParser();
-    var xmlDoc = parser.parseFromString(xhttp.responseText, "application/xml");
-    translate(xmlDoc, language);
-    if (typeof resetDynamicText !== "undefined") resetDynamicText();
+    chrome.storage.local.get('language', function(response) {
+      if (isEmpty(response) {
+        chrome.storage.local.set({ 'language': "en" });
+        language = "en";
+      } else {
+        language = response.language;
+      }
+      var parser = new DOMParser();
+      var xmlDoc = parser.parseFromString(xhttp.responseText, "application/xml");
+      translate(xmlDoc, language);
+      if (typeof resetDynamicText !== "undefined") resetDynamicText();
+    }
   }
 };
   xhttp.open("GET", "xml/" + pageName + ".xml", true);
@@ -59,8 +69,8 @@ function translate(xml, language){
   }
   
   function getWeekDay(date) {
-    var length = xmlPage.children.length;
     if (xmlPage === "undefined") return null;
+    var length = xmlPage.children.length;
     for(i=0; i< length; i++) {
       var tag = xmlPage.children[i];
         if(tag) {
