@@ -1,11 +1,12 @@
 .empty-page{
   text-align: center;
   background-color: #f3f3f3;
-  font-size: 20px;
+  font-size: 16px;
   margin: 0px;
   min-height: inherit;
   padding-top: 20px;
   height: inherit;
+  overflow-y: scroll;
 }
 
 .empty-page h1{
@@ -28,10 +29,10 @@
 
 .empty-page p {
   color: #CDCDCD;
-  font-size: 12pt;
+  font-size: 11.5pt;
   text-align: center;
-  width: 60%;
-  margin-left: 20%;
+  width: 85%;
+  margin-left: 10%;
 }
 
 .empty-page b{
@@ -45,4 +46,8 @@
   font-size: 20px;
   padding-left: 20px;
   padding-right: 20px;
+}
+
+.empty-page > img {
+  margin-left: 40%;
 }
