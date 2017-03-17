@@ -36,7 +36,9 @@ window.onload = function() {
           document.getElementById("start").style.display = "none";
           document.getElementById("no-content-script").style.display = "block";
           if ((typeof response !== "undefined") || isEmpty(storedItem)) {
-            document.getElementById("start").style.display = "inline-block";
+            if (document.getElementById("pause").style.display === "none") {
+              document.getElementById("start").style.display = "inline-block";
+            }
             document.getElementById("no-content-script").style.display = "none";
           }
         });
