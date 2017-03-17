@@ -13,6 +13,7 @@
 
   chrome.storage.local.get('apikey', function(storedItem) {
       metrics = new Metrics(storedItem.apikey);
+      console.log(storedItem.apikey);
   });
   
 chrome.runtime.onMessage.addListener( function (request, sender, callback) {
