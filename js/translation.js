@@ -8,13 +8,13 @@ globalTranslation = {};
 $( document ).ready(function() {
   openXml(pageName);
   $( "#lEn" ).click(function() {
-    chrome.storage.local.set({ 'language': "en" }, openAfterSaved(st));
+    chrome.storage.local.set({ 'language': "en" }, openAfterSaved);
   });
   $( "#lDe" ).click(function() {
-    chrome.storage.local.set({ 'language': "de" }, openAfterSaved(st));
+    chrome.storage.local.set({ 'language': "de" }, openAfterSaved);
   });
   $( "#lPt" ).click(function() {
-    chrome.storage.local.set({ 'language': "pt" }, openAfterSaved(st));
+    chrome.storage.local.set({ 'language': "pt" }, openAfterSaved);
   });
 });
 
@@ -28,7 +28,7 @@ function openXml(pageName){
   xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     chrome.storage.local.get('language', function(response) {
-      if (isEmpty(response) {
+      if (isEmpty(response)) {
         chrome.storage.local.set({ 'language': "en" });
         language = "en";
       } else {
@@ -38,7 +38,7 @@ function openXml(pageName){
       var xmlDoc = parser.parseFromString(xhttp.responseText, "application/xml");
       translate(xmlDoc, language);
       if (typeof resetDynamicText !== "undefined") resetDynamicText();
-    }
+    });
   }
 };
   xhttp.open("GET", "xml/" + pageName + ".xml", true);
