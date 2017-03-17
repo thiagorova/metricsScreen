@@ -113,9 +113,9 @@ function GoToUserScreen() {
     var len = projects.length;
     var pList = [];
     for (var i = 0; i < len; i ++) {
+      if (projects[i] === null) continue;
       percentage = Math.round((projects[i].wordCount / projects[i].finish)*100)
       if (percentage > 100) percentage = 100;
-      if (projects[i] === null) continue;
       pList.push({
         'projectName':projects[i].name,
         'totalWords':projects[i].finish.toString(),
