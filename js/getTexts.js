@@ -10,19 +10,18 @@
   var projectName;
   var heldData;  
   var lastMeasure = 0;
-
-  chrome.storage.local.get('apikey', function(storedItem) {
-      metrics = new Metrics(storedItem.apikey);
-      console.log(storedItem.apikey);
-  });
   
 chrome.runtime.onMessage.addListener( function (request, sender, callback) {
   //main program, that will be executed every time a button is pressed
   if(request.request === "start") {
-    startMeasuring();
-    projectId = request.project;
-    setCounter(request.time);
-    timeInterval = 0.1;
+    chrome.storage.local.get('apikey', function(storedItem) {
+      console.log(storedItem.apikey);
+      metrics = new Metrics(storedItem.apikey);
+      startMeasuring();
+      projectId = request.project;
+      setCounter(request.time);
+      timeInterval = 0.1;
+    });
   } else if (request.request === "stop") {
     stopMeasuring();
     readText();
