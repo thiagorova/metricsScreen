@@ -56,7 +56,7 @@
     document.getElementById("authorship-name").addEventListener('click', goToAuthorship);
     if (document.getElementById("goUser") !== null) document.getElementById("goUser").addEventListener('click', GoToUserScreen);
     if (document.getElementById("createProject") !== null) document.getElementById("createProject").addEventListener('click', function (e) {changeLocation("create.html");});
-    
+
     var hrefParts = window.location.href.split("/");
     if(hrefParts[hrefParts.length - 1] === "empty.html") return;
     chrome.storage.local.get('apikey', function(storedItem) {
@@ -102,6 +102,15 @@ function GoToProject(project, projectSet) {
   if (project === "undefined") return;
   chrome.storage.local.set({ 'openedP': project.id });
   changeLocation("project.html");
+}
+
+function AlterProject(project){
+  if(project === "undefined")
+    return;
+    chrome.storage.local.set({ 'openedP': project.id });
+    chrome.storage.local.set({ 'isAltering': true });
+    changeLocation("create.html");
+
 }
 
 function GoToUserScreen() {

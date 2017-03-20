@@ -123,10 +123,13 @@ function openOptions(project, id){
   var position = $("#"+ id).position();
   optionBox.css('top', position.top +50);
   optionBox.animate({
-    height:'toggle',    
+    height:'toggle',
   });
   $(".open-project").click(function() {GoToProject(project, true); });
   $(".delete-project").click(function() {metrics.deleteProject(project.id); });
+  $(".alter-project").click(function(){
+    AlterProject(project);
+  });
 }
 
 

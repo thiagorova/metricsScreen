@@ -205,6 +205,8 @@
   }
 
 window.onload = function () {
+
+
   document.getElementById("back").addEventListener('click', function(e){ changeLocation("projects.html");} );
   document.getElementById("create").addEventListener('click', addProject );
   document.getElementById("create").disabled = true;
@@ -227,5 +229,15 @@ window.onload = function () {
   setMilestone();
   setSystem(function(metrics) {
     metricsApi = metrics;
+  });
+  chrome.storage.local.get('isAltering', function(response){
+    var isAltering = response.isAltering;
+    if(isAltering === true){
+      chrome.storage.local.get('openedP', function(projectId){
+        metrics.getProject(projectId.openedP, function(project) {
+          console.log(project);
+        });
+      });
+    }
   });
 }
