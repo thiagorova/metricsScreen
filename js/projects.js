@@ -189,7 +189,7 @@ function saveProjects(projects) {
 
   var getFromStorage = function(projectId, callback) {
     chrome.storage.local.get('projects', function(storedItem) {
-      storedItems.projects.forEach(function (project) {
+      storedItem.projects.forEach(function (project) {
         if (project.id == projectId) callback(project);
       });
     });
