@@ -107,7 +107,7 @@ function GoToProject(project, projectSet) {
 function AlterProject(project){
   if(project === "undefined")
     return;
-    chrome.storage.local.set({ 'openedP': project.id });
+    chrome.storage.local.set({ 'projectAltering': project });
     chrome.storage.local.set({ 'isAltering': true });
     changeLocation("create.html");
 

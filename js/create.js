@@ -204,6 +204,27 @@
     };
   }
 
+  function setAlterProject(project){
+    console.log(project);
+
+    $('#projectName').val(project.projectName);
+    $('#totalWords').val(project.totalWords);
+    var milestone  = project.milestone.type;
+    if(milestone === 'wDay'){
+      $('#selectMilestone').val($('#wDayLabel').val());
+      $('milestoneMeasure').val(project.milestone.wDay);
+    }
+    else if (milestone ==='wMonth') {
+      $('#selectMilestone').val($('#wMonthLabel').val());
+      $('milestoneMeasure').val(project.milestone.wMonth);
+    }
+    else{
+      $('#selectMilestone').val($('#deadlineLabelOption').val()).change();
+      $('deadline').val(project.milestone.deadline);
+    }
+    $('#selectMilestone').change();
+  }
+
 window.onload = function () {
 
 
@@ -231,12 +252,9 @@ window.onload = function () {
     metricsApi = metrics;
   });
   chrome.storage.local.get('isAltering', function(response){
-    var isAltering = response.isAltering;
-    if(isAltering === true){
-      chrome.storage.local.get('openedP', function(projectId){
-        metrics.getProject(projectId.openedP, function(project) {
-          console.log(project);
-        });
+    if(response.isAltering === true){
+      chrome.storage.local.get('projectAltering', function(response){
+        setAlterProject(response.projectAltering);
       });
     }
   });
