@@ -212,17 +212,22 @@
     var milestone  = project.milestone.type;
     if(milestone === 'wDay'){
       $('#selectMilestone').val($('#wDayLabel').val());
-      $('milestoneMeasure').val(project.milestone.wDay);
+      setMilestone();
+      $('#milestoneMeasure').val(project.milestone.wDay);
     }
     else if (milestone ==='wMonth') {
       $('#selectMilestone').val($('#wMonthLabel').val());
-      $('milestoneMeasure').val(project.milestone.wMonth);
+        setMilestone();
+      $('#milestoneMeasure').val(project.milestone.wMonth);
+
     }
     else{
-      $('#selectMilestone').val($('#deadlineLabelOption').val()).change();
-      $('deadline').val(project.milestone.deadline);
+      $('#selectMilestone').val($('#deadlineLabelOption').val());
+        setMilestone();
+      $('#deadline').val(project.milestone.deadline);
     }
-    $('#selectMilestone').change();
+
+
   }
 
 window.onload = function () {
