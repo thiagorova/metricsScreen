@@ -12,7 +12,7 @@
 
     <createProject>  Projekt Anfangen  </createProject>
     <welcome>  Wilkommen bei </welcome>
-    <msg>  Bitte kreiren Sie ein Projekt, um anzufangen. </msg>
+    <msg> Bitte kreiren Sie ein Projekt, um anzufangen. </msg>
     <footer-start-text>© Copyright </footer-start-text>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
   </de>
