@@ -42,8 +42,8 @@ var Metrics = function (key) {
     };
 
     Metrics.prototype.UpdateProject = function (projectId, name, totalWords, milestoneType, milestoneValue, isDeadline, callback, callbackError) {
-      updateNames = [];
-      updateValues = [];
+      var updateNames = [];
+      var updateValues = [];
       if (name !== null) { 
         updateNames.push("projectName");
         updateValues.push(name);
@@ -56,15 +56,15 @@ var Metrics = function (key) {
         updateNames.push("milestoneType");
         updateValues.push(milestoneType);
       }
-      if (milestoneValue == null) { 
+      if (milestoneValue !== null) { 
         if (isDeadline) updateNames.push("deadline");
         else updateNames.push("milestoneCount");
         updateValues.push(milestoneValue);
       }
       if (typeof callback === 'undefined') { callback = null; }
       if (typeof callbackError === 'undefined') { callbackError = null; }
-      if (name !== null)
-      apiCall("PUT", this.priv.projectAdd + "update", buildUpdateJSON(this.priv.key, projectId, "duration", time), function(response) {
+      if (projectId !== null && updateNames.length > 0)
+      apiCall("PUT", this.priv.projectAdd + "update", buildUpdateJSON(this.priv.key, projectId, updateNames, updateValues), function(response) {
           if (response !== "") response = JSON.parse( response );
           if(callback !== null) callback();
         },
@@ -224,14 +224,19 @@ var buildJSON = function(key, project, text, time) {
     };
 }
 
-var buildUpdateJSON = function(key, projectId, toUpdateName, toUpdateData) {
+var buildUpdateJSON = function(key, projectId, toUpdateNames, toUpdateDatas) {
+   var length = toUpdateNames.length;
+   var toUpdate = [];
+   for (var i = 0; i < length; i++) {
+     toUpdate.push({
+        key: toUpdateNames[i],
+        value: toUpdateDatas[i]   
+     });
+   }
    return {
       apikey: key,
       project: projectId,
-      toUpdate: [{
-        key: toUpdateName,
-        value: toUpdateData
-      }]
+      toUpdate: toUpdate
     };
 }
 

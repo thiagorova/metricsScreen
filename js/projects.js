@@ -87,7 +87,9 @@
       mValueSpan.setAttribute("class", "milestoneText");
       mValueSpan.innerHTML = (project.milestone.type === "deadline") ? "<span class='deadlineLabel'>DEADLINE</span>" :  (project.milestone.type === "wDay") ? "<span class='dailyLabel'>DAILY</span>": "<span class='monthlyLabel'>MONTHLY</span>";
       mValueP.setAttribute("class", "milestoneValue");
-      mValueP.innerHTML = project.milestone.words || project.milestone.deadline.replace("/20", "/");
+      mValueP.innerHTML = (project.milestone.words !== null) ? 
+        project.milestone.words: 
+        ((project.milestone.deadline === null) ? "no deadline set":project.milestone.deadline.replace("/20", "/"));
       mValueTD.setAttribute("class", "info");
       mValueTD.appendChild(mValueSpan);
       mValueTD.appendChild(mValueP);
@@ -138,7 +140,10 @@ function openOptions(project, id){
     if(project.completed === true) {
         project.elo =100;
         return;
-      }
+    }
+    if (project.milestone.type === "deadline" && project.milestone.deadline === null)  {
+      return 0;
+    }
     var target;
     var today = new Date();
     var dateElements = project.creation.split("/")

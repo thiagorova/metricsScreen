@@ -7,7 +7,7 @@
     'milestoneMeasure': null,
     'deadline':null
     };
-
+  var oldProject;
 
     //This is a watcher function, which changes the milestone parameter based on the select field
   var setMilestone = function(e) {
@@ -127,6 +127,31 @@
       });
   };
 
+  var editProject = function(){
+    var milestoneMeasure = (!project.milestoneMeasure) ? project.deadline:project.milestoneMeasure;
+    var oldMilestoneMeasure = (!oldProject.milestone.type == "deadline") ? 
+      oldProject.milestone.deadline.split("/").reverse().join("-") :
+      oldProject.milestoneMeasure;
+    if ( (oldProject.projectName === project.projectName) && 
+      (oldProject.totalWords === project.totalWords) &&
+      (oldProject.milestone.type === project.selectMilestone) &&
+      (oldMilestoneMeasure === milestoneMeasure) ) {
+      GoToProject(oldProject, true);
+    }
+    metricsApi.UpdateProject(oldProject.id,
+      (oldProject.projectName === project.projectName) ? null: project.projectName,
+      (oldProject.totalWords === project.totalWords) ? null: project.totalWords,
+      (oldProject.milestone.type === project.selectMilestone) ? null: project.selectMilestone,
+      (oldMilestoneMeasure === milestoneMeasure) ? null: milestoneMeasure,
+      (project.selectMilestone === "deadline"),
+      function () {
+          metrics.getProject(oldProject.id, function(fetchedProject) {
+            GoToProject([fetchedProject]);
+      });
+      }
+    );
+  };
+
   var printWDays = function() {
     var totalWords = parseInt(document.getElementById("totalWords").value);
     if (! isNaN(totalWords)) {
@@ -204,30 +229,38 @@
     };
   }
 
-  function setAlterProject(project){
-    console.log(project);
-
-    $('#projectName').val(project.projectName);
-    $('#totalWords').val(project.totalWords);
-    var milestone  = project.milestone.type;
+  function setAlterProject(fetchedProject){
+    console.log(fetchedProject);
+    oldProject = fetchedProject;  
+    
+    document.getElementById("create").removeEventListener("click", addProject);
+    document.getElementById("create").addEventListener("click", editProject);
+    
+    $('#projectName').val(fetchedProject.projectName);
+    project.projectName = fetchedProject.projectName;
+    
+    $('#totalWords').val(fetchedProject.totalWords);
+    project.totalWords = fetchedProject.totalWords;
+    
+    var milestone  = fetchedProject.milestone.type;
     if(milestone === 'wDay'){
       $('#selectMilestone').val($('#wDayLabel').val());
       setMilestone();
-      $('#milestoneMeasure').val(project.milestone.words);
+      $('#milestoneMeasure').val(fetchedProject.milestone.words);
+      project.milestoneMeasure = fetchedProject.milestone.words;
     }
     else if (milestone ==='wMonth') {
       $('#selectMilestone').val($('#wMonthLabel').val());
         setMilestone();
-      $('#milestoneMeasure').val(project.milestone.words);
-
+      $('#milestoneMeasure').val(fetchedProject.milestone.words);
+      project.milestoneMeasure = fetchedProject.milestone.words;
     }
     else{
       $('#selectMilestone').val($('#deadlineLabelOption').val());
         setMilestone();
-      $('#deadline').val(project.milestone.deadline);
+      $('#deadline').val(fetchedProject.milestone.deadline.split("/").reverse().join("-"));
+      project.deadline = fetchedProject.milestone.deadline.split("/").reverse().join("-");
     }
-
-
   }
 
 window.onload = function () {
@@ -235,7 +268,7 @@ window.onload = function () {
 
   document.getElementById("back").addEventListener('click', function(e){ changeLocation("projects.html");} );
   document.getElementById("create").addEventListener('click', addProject );
-  document.getElementById("create").disabled = true;
+  document.getElementById("create").disabled = false;
   document.getElementById("projectName").addEventListener('blur', nameValidation );
   var milestoneSelect = document.getElementById("selectMilestone");
   var totalWords = document.getElementById("totalWords");
@@ -260,6 +293,7 @@ window.onload = function () {
     if(response.isAltering === true){
       chrome.storage.local.get('projectAltering', function(response){
         setAlterProject(response.projectAltering);
+        chrome.storage.local.remove("'projectAltering");
       });
     }
   });
