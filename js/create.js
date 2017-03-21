@@ -213,12 +213,12 @@
     if(milestone === 'wDay'){
       $('#selectMilestone').val($('#wDayLabel').val());
       setMilestone();
-      $('#milestoneMeasure').val(project.milestone.wDay);
+      $('#milestoneMeasure').val(project.milestone.words);
     }
     else if (milestone ==='wMonth') {
       $('#selectMilestone').val($('#wMonthLabel').val());
         setMilestone();
-      $('#milestoneMeasure').val(project.milestone.wMonth);
+      $('#milestoneMeasure').val(project.milestone.words);
 
     }
     else{

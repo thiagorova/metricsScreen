@@ -199,6 +199,7 @@ function saveProjects(projects) {
   }
 
 window.onload = function() {
+  chrome.storage.local.set({ 'isAltering': false });
   setSystem(function(metrics) {showProjects(metrics);} );
 
 }
