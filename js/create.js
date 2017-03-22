@@ -51,21 +51,24 @@
   }
 
   var nameValidation = function(e){
+
    var source = e.target || e.srcElement;
     var name = source.value;
-    if(name){
+    console.log(name);
       if(name.length <=0){
         project.projectName = null;
         document.getElementById("nameError").style.display = "block";
-        return false;
+        //temporary
+        document.getElementById("create").disabled = true;
       }
       else {
         project.projectName = name;
         document.getElementById("nameError").style.display = "none";
-        enable();
+        document.getElementById("create").disabled = false;
+        //enable();
         return true;
       }
-    }
+
   }
   var numberValidation = function(e){
    var source = e.target || e.srcElement;
@@ -129,10 +132,10 @@
 
   var editProject = function(){
     var milestoneMeasure = (!project.milestoneMeasure) ? project.deadline:project.milestoneMeasure;
-    var oldMilestoneMeasure = (!oldProject.milestone.type == "deadline") ? 
+    var oldMilestoneMeasure = (!oldProject.milestone.type == "deadline") ?
       oldProject.milestone.deadline.split("/").reverse().join("-") :
       oldProject.milestoneMeasure;
-    if ( (oldProject.projectName === project.projectName) && 
+    if ( (oldProject.projectName === project.projectName) &&
       (oldProject.totalWords === project.totalWords) &&
       (oldProject.milestone.type === project.selectMilestone) &&
       (oldMilestoneMeasure === milestoneMeasure) ) {
@@ -231,17 +234,17 @@
 
   function setAlterProject(fetchedProject){
     console.log(fetchedProject);
-    oldProject = fetchedProject;  
-    
+    oldProject = fetchedProject;
+
     document.getElementById("create").removeEventListener("click", addProject);
     document.getElementById("create").addEventListener("click", editProject);
-    
+
     $('#projectName').val(fetchedProject.projectName);
     project.projectName = fetchedProject.projectName;
-    
+
     $('#totalWords').val(fetchedProject.totalWords);
     project.totalWords = fetchedProject.totalWords;
-    
+
     var milestone  = fetchedProject.milestone.type;
     if(milestone === 'wDay'){
       $('#selectMilestone').val($('#wDayLabel').val());
@@ -268,16 +271,16 @@ window.onload = function () {
 
   document.getElementById("back").addEventListener('click', function(e){ changeLocation("projects.html");} );
   document.getElementById("create").addEventListener('click', addProject );
-  document.getElementById("create").disabled = false;
   document.getElementById("projectName").addEventListener('blur', nameValidation );
+  document.getElementById("projectName").addEventListener('change', nameValidation );
   var milestoneSelect = document.getElementById("selectMilestone");
   var totalWords = document.getElementById("totalWords");
   var milestoneMeasure = document.getElementById("milestoneMeasure");
   var deadline = document.getElementById("deadline");
 
   milestoneSelect.addEventListener('change', setMilestone );
-  totalWords.addEventListener('keyup', numberValidation );
-  milestoneMeasure.addEventListener('keyup', numberValidation );
+  //totalWords.addEventListener('keyup', numberValidation );
+  //milestoneMeasure.addEventListener('keyup', numberValidation );
   deadline.addEventListener('change', dateValidation );
   deadline.addEventListener('keyup', dateValidation );
   milestoneSelect.addEventListener('change', printWDays );
@@ -293,7 +296,7 @@ window.onload = function () {
     if(response.isAltering === true){
       chrome.storage.local.get('projectAltering', function(response){
         setAlterProject(response.projectAltering);
-        chrome.storage.local.remove("'projectAltering");
+        chrome.storage.local.remove("projectAltering");
       });
     }
   });

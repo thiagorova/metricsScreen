@@ -5,7 +5,7 @@
     var password = document.getElementById("password").value;
     data = {
       user: {
-        "email": email, 
+        "email": email,
         "password": password
       },
       tool: "metrics",
@@ -13,7 +13,7 @@
     }
     testLogin(data);
   }
-  
+
   var createXHTTP = function(callback) {
     var xhttp;
     if (window.XMLHttpRequest) {
@@ -55,13 +55,11 @@ window.onload=function(){
   document.getElementById("login").addEventListener('click', login);
   document.getElementById("password").addEventListener('keypress', login);
   document.getElementById("authorshipCreateAccount").addEventListener('click', createAccount);
-  document.getElementById("online_offline").innerHTML = "";  
+  document.getElementById("online_offline").innerHTML = "";
   setSystem();
   chrome.storage.local.get('apikey', function(storedItem) {
     if (isEmpty(storedItem)  === false) {		//if we are here, its either doesnt exist or the key is null... im just testing the option i dont care about
-      document.getElementById("login-again").style.display = "block";  
+      document.getElementById("login-again").style.display = "block";
     }
   });
-}    
-
-
+}
