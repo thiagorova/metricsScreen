@@ -17,10 +17,11 @@
     <deadlineLabel> For when is your project </deadlineLabel>
     <deadlineErrorLabel> Invalid date. </deadlineErrorLabel>
     <create> Create Project </create>
+    <create> Create Project </create>
     <footer-start-text>© Copyright </footer-start-text>
     <footer-end-text>All rights reserved.</footer-end-text>
   </en>
-  
+
   <de>
     <back> Zurück </back>
     <createProjectLabel> Projekt Anfangen </createProjectLabel>
@@ -41,7 +42,7 @@
     <footer-start-text>© Copyright </footer-start-text>
     <footer-end-text>Alle Rechte vorbehalten.</footer-end-text>
   </de>
-  
+
   <pt>
     <back> Voltar </back>
     <createProjectLabel> Criar Projeto </createProjectLabel>
