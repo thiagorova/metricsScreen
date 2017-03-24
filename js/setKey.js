@@ -54,7 +54,7 @@
       } else {
         language = storedItem.language;
       }
-      chrome.tabs.create({ url: "https://metrics.authorship.me/" + language +"users/sign_up"});
+      chrome.tabs.create({ url: "https://metrics.authorship.me/" + language +"/users/sign_up"});
 //      chrome.tabs.create({ url: "https://metrics.localhost.me:3000/users/sign_up"});
     });
     return false;
