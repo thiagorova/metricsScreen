@@ -10,7 +10,7 @@ var Metrics = function (key) {
     this.priv.key = key;
     this.priv.project = null;
     var mainAdd = "https://www.metrics.api.authorship.me/"
-//    var mainAdd = "http://localhost:4000/";
+    var mainAdd = "http://localhost:4000/";
     this.priv.metricsAdd = mainAdd + "metrics/";
     this.priv.userAdd = mainAdd + "users/";
     this.priv.projectAdd = mainAdd + "projects/";
@@ -34,7 +34,7 @@ var Metrics = function (key) {
     Metrics.prototype.addDuration = function (projectId, time, callback, callbackError) {
       if (typeof callback === 'undefined') { callback = null; }
       if (typeof callbackError === 'undefined') { callbackError = null; }
-        apiCall("PUT", this.priv.projectAdd + "update", buildUpdateJSON(this.priv.key, projectId, "duration", time), function(response) {
+        apiCall("PUT", this.priv.projectAdd + "update", buildUpdateJSON(this.priv.key, projectId, ["duration"], [time]), function(response) {
           if (response !== "") response = JSON.parse( response );
           if(callback !== null) callback();
         },
@@ -207,7 +207,7 @@ var Metrics = function (key) {
           xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
         }
 
-        xhttp.setRequestHeader("Origin", window.top.location.href.split("?")[0]);
+//        xhttp.setRequestHeader("Origin", window.top.location.href.split("?")[0]);
         //it is necessary to repeat the if because the request headers cannot be set before the xhttp.open()
         if (method === "GET")   xhttp.send();
         else xhttp.send(JSON.stringify( data ));
