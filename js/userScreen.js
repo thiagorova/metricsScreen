@@ -15,19 +15,19 @@ window.onload = function() {
        document.getElementById("hello").innerHTML += login.split("@")[0];
      });
      metricsApi.getUserProductivity(function (metricsData) {
-      if(metricsData !== "") {
+      if(metricsData !== null && metricsData !== "" && metricsData.length > 0) {
         data = metricsData;
         document.getElementById("prodDay").innerHTML = getMostProductiveDay(metricsData);
         document.getElementById("prodHour").innerHTML = getMostProductiveHour(metricsData);
         setChart("daily");
       } else {
-        document.getElementById("prodDay").innerHTML =  0;
-        document.getElementById("prodHour").innerHTML = 0;
+        document.getElementById("prodDay").innerHTML =  "-";
+        document.getElementById("prodHour").innerHTML = "-";
         buildGraph([]);
       }
     }, function (error) {
-      document.getElementById("prodDay").innerHTML =  0;
-      document.getElementById("prodHour").innerHTML = 0;
+      document.getElementById("prodDay").innerHTML =  "-";
+      document.getElementById("prodHour").innerHTML = "-";
       buildGraph([]);
     });
   });

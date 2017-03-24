@@ -69,7 +69,8 @@ function translate(xml, language){
   }
   
   function getWeekDay(date) {
-    if (xmlPage === "undefined") return null;
+    if (xmlPage === "undefined") return "-";
+    if (date === null) return "-";
     var length = xmlPage.children.length;
     for(i=0; i< length; i++) {
       var tag = xmlPage.children[i];
