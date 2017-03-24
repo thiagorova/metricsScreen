@@ -32,16 +32,19 @@ window.onload = function() {
   var testContentScript = function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
       chrome.tabs.sendMessage(tabs[0].id, {request: "exist"}, function(response) {
-        chrome.storage.local.get('apikey', function(storedItem) {
+/*        chrome.storage.local.get('apikey', function(storedItem) {
           document.getElementById("start").style.display = "none";
-          document.getElementById("no-content-script").style.display = "block";
-          if ((typeof response !== "undefined") || isEmpty(storedItem)) {
-            document.getElementById("start").style.display = "inline-block";
+          document.getElementById("no-content-script").style.display = "block";*/
+          if ((typeof response !== "undefined") ) {
+/*            document.getElementById("start").style.display = "inline-block";
             document.getElementById("no-content-script").style.display = "none";
+*/
+             chrome.tabs.executeScript(tabs[0].id, {file: "js/metricsApi.js"});
+             chrome.tabs.executeScript(tabs[0].id, {file: "js/getTexts.js"});
           }
         });
       });
-    });
+//    }); 
   }
 
   var openProject = function(callback){
