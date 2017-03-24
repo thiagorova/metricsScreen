@@ -17,7 +17,6 @@
       } else {
         language = storedItem.language;
       }
-      console.log(language);
       chrome.tabs.create({ url: "https://www.authorship.me/" + language});
     });
     return false;
@@ -130,15 +129,19 @@ function GoToUserScreen() {
     var pList = [];
     for (var i = 0; i < len; i ++) {
       if (projects[i] === null) continue;
-      percentage = Math.round((projects[i].wordCount / projects[i].finish)*100)
-      if (percentage > 100) percentage = 100;
+      if (!attributeSet(projects[i].wordCount)  || !attributeSet(projects[i].finish)) {
+        percentage = 0;
+      } else {
+        percentage = Math.round((projects[i].wordCount / projects[i].finish)*100);
+        if (percentage > 100) percentage = 100;
+      }
       pList.push({
         'projectName':projects[i].name,
-        'totalWords':projects[i].finish.toString(),
+        'totalWords': (!attributeSet(projects[i].finish)) ? "Not Set":projects[i].finish.toString(),
         'id': projects[i].id.toString(),
         'time': projects[i].time.hours.toString() + ":" + projects[i].time.minutes.toString()  + ":" + projects[i].time.seconds.toString(),
         //'words':projects[i].wordCount.toString(),
-        'words':(projects[i].wordCount === null || typeof projects[i].wordCount === "undefined") ? projects[i].wordCount = "Not Set" : projects[i].wordCount.toString(),
+        'words': (!attributeSet(projects[i].wordCount) ) ? projects[i].wordCount = "Not Set" : projects[i].wordCount.toString(),
         'creation': projects[i].creation,
         'completed' : projects[i].done,
         'lastUpdate' : projects[i].lastUpdate,
@@ -147,12 +150,16 @@ function GoToUserScreen() {
           'type': projects[i].milestoneType,
           'percentage': percentage.toString(),
           //'words':(typeof projects[i].milestoneAverage === "undefined") ? null: projects[i].milestoneAverage.toString(),
-          'words':(projects[i].milestoneAverage === null || typeof projects[i].milestoneAverage === "undefined") ? projects[i].milestoneAverage = "Not Set" : projects[i].milestoneAverage.toString(),
-          'deadline': (typeof projects[i].deadline === "undefined" || projects[i].deadline === null) ? projects[i].deadline = "Not Set": projects[i].deadline.toString()
+          'words': (!attributeSet(projects[i].milestoneAverage) ) ? projects[i].milestoneAverage = "Not Set" : projects[i].milestoneAverage.toString(),
+          'deadline': (!attributeSet(projects[i].deadline) ) ? projects[i].deadline = "Not Set": projects[i].deadline.toString()
         }
       });
     }
     return pList;
+  }
+
+  function attributeSet(att) {
+    return (typeof att !== "undefined" && att !== null && att !== "");
   }
 
   function toDays(date){

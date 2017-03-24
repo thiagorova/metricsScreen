@@ -38,8 +38,8 @@
         }
       }
     });
-//    xhttp.open('POST', 'https://metrics.authorship.me/users/login', true);
-    xhttp.open('POST', 'http://metrics.localhost.me:3000/users/login', true);
+    xhttp.open('POST', 'https://metrics.authorship.me/users/login', true);
+//    xhttp.open('POST', 'http://metrics.localhost.me:3000/users/login', true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.setRequestHeader("Origin", window.top.location.href.split("?")[0]);
     xhttp.send(JSON.stringify( data ));
@@ -54,7 +54,8 @@
       } else {
         language = storedItem.language;
       }
-      chrome.tabs.create({ url: "https://metrics.authorship.me/" + language + "users/sign_up"});
+      chrome.tabs.create({ url: "https://metrics.authorship.me/" + language +"users/sign_up"});
+//      chrome.tabs.create({ url: "https://metrics.localhost.me:3000/users/sign_up"});
     });
     return false;
   }
