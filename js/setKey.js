@@ -38,8 +38,8 @@
         }
       }
     });
-    xhttp.open('POST', 'https://metrics.authorship.me/users/login', true);
-//    xhttp.open('POST', 'http://metrics.localhost.me:3000/users/login', true);
+//    xhttp.open('POST', 'https://metrics.authorship.me/users/login', true);
+    xhttp.open('POST', 'http://metrics.localhost.me:3000/users/login', true);
     xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
     xhttp.setRequestHeader("Origin", window.top.location.href.split("?")[0]);
     xhttp.send(JSON.stringify( data ));
@@ -47,7 +47,15 @@
 
   var createAccount = function(e) {
     e.preventDefault();
-    chrome.tabs.create({ url: "https://metrics.authorship.me/users/sign_up"});
+    chrome.storage.local.get("language", function(storedItem) {
+      console.log((storedItem.language !== "en" && storedItem.language !== "de"));
+      if (isEmpty(storedItem) || typeof storedItem.language === "undefined" || (storedItem.language !== "en" && storedItem.language !== "de")) {
+        language = "en";
+      } else {
+        language = storedItem.language;
+      }
+      chrome.tabs.create({ url: "https://metrics.authorship.me/" + language + "users/sign_up"});
+    });
     return false;
   }
 

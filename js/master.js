@@ -11,7 +11,15 @@
 
   var goToAuthorship = function(e) {
     e.preventDefault();
-    chrome.tabs.create({ url: "http://www.authorship.me"});
+    chrome.storage.local.get("language", function(storedItem) {
+      if (isEmpty(storedItem) || typeof storedItem.language === "undefined" || (storedItem.language !== "en" && storedItem.language !== "de")) {
+        language = "en";
+      } else {
+        language = storedItem.language;
+      }
+      console.log(language);
+      chrome.tabs.create({ url: "https://www.authorship.me/" + language});
+    });
     return false;
   }
 
