@@ -52,34 +52,41 @@
 
   var nameValidation = function(e){
    var source = e.target || e.srcElement;
-    var name = source.value;
-    if(name){
+   var name = source.value;
+   console.log(name);
+   if(name){
       if(name.length <=0){
         project.projectName = null;
         document.getElementById("nameError").style.display = "block";
+        document.getElementById("create").disabled = true;
         return false;
       }
       else {
         project.projectName = name;
+        console.log(name);
         document.getElementById("nameError").style.display = "none";
+        document.getElementById("create").disabled = false;
         enable();
         return true;
       }
     }
+    else
+      document.getElementById("nameError").style.display = "block";
+      document.getElementById("create").disabled = true;
   }
   var numberValidation = function(e){
    var source = e.target || e.srcElement;
     var number = source.value;
-    if(number){
+    console.log(number);
       if(number <= 0){
         if (source.id === "milestoneMeasure") {
           project.milestoneMeasure = null;
-          document.getElementById("milestoneError").style.display = "block";
+          //document.getElementById("milestoneError").style.display = "block";
         } else {
          project.totalWords = null;
-         document.getElementById("wordsError").style.display = "block";
+         //document.getElementById("wordsError").style.display = "block";
        }
-        return false;
+
       }
       else {
         if (source.id === "milestoneMeasure") {
@@ -90,10 +97,11 @@
           document.getElementById("wordsError").style.display = "none";
         }
         enable();
-        return true;
+        console.log(number);
       }
     }
-  }
+
+
 
   var enable = function(){
     var count = 0;
@@ -107,32 +115,39 @@
     }
   };
 
+
+
    //function to create a project
   var addProject = function(){
-    var milestoneMeasure = (!project.milestoneMeasure) ? project.deadline:project.milestoneMeasure;
-    metricsApi.createProject(project.projectName,
-      project.totalWords,
-      project.selectMilestone,
-      milestoneMeasure,
-      function () {
-        metricsApi.getProjectId(project.projectName, function (projectId) {
-          metrics.getProject(projectId, function(fetchedProject) {
-            GoToProject([fetchedProject]);
-          });
-      });
-      },
-      function(error) {
-        saveNewProject(project.projectName, project.totalWords, project.selectMilestone, milestoneMeasure);
-        changeLocation("projects.html");
-      });
+      console.log(project);
+      var milestoneMeasure = (!project.milestoneMeasure) ? project.deadline:project.milestoneMeasure;
+      metricsApi.createProject(project.projectName,
+        project.totalWords,
+        project.selectMilestone,
+        milestoneMeasure,
+        function () {
+          metricsApi.getProjectId(project.projectName, function (projectId) {
+            metrics.getProject(projectId, function(fetchedProject) {
+              GoToProject([fetchedProject]);
+            });
+        });
+        },
+        function(error) {
+          saveNewProject(project.projectName, project.totalWords, project.selectMilestone, milestoneMeasure);
+          changeLocation("projects.html");
+        });
   };
 
   var editProject = function(){
+
+    console.log(project);
+    console.log(oldProject);
+    chrome.storage.local.set({ 'isAltering': false});
     var milestoneMeasure = (!project.milestoneMeasure) ? project.deadline:project.milestoneMeasure;
-    var oldMilestoneMeasure = (!oldProject.milestone.type == "deadline") ? 
+    var oldMilestoneMeasure = (!oldProject.milestone.type == "deadline") ?
       oldProject.milestone.deadline.split("/").reverse().join("-") :
       oldProject.milestoneMeasure;
-    if ( (oldProject.projectName === project.projectName) && 
+    if ( (oldProject.projectName === project.projectName) &&
       (oldProject.totalWords === project.totalWords) &&
       (oldProject.milestone.type === project.selectMilestone) &&
       (oldMilestoneMeasure === milestoneMeasure) ) {
@@ -230,18 +245,18 @@
   }
 
   function setAlterProject(fetchedProject){
-    console.log(fetchedProject);
-    oldProject = fetchedProject;  
     
+    document.getElementById("create").disabled = false;
+    oldProject = fetchedProject;
     document.getElementById("create").removeEventListener("click", addProject);
     document.getElementById("create").addEventListener("click", editProject);
-    
+
     $('#projectName').val(fetchedProject.projectName);
     project.projectName = fetchedProject.projectName;
-    
+
     $('#totalWords').val(fetchedProject.totalWords);
     project.totalWords = fetchedProject.totalWords;
-    
+
     var milestone  = fetchedProject.milestone.type;
     if(milestone === 'wDay'){
       $('#selectMilestone').val($('#wDayLabel').val());
@@ -263,13 +278,15 @@
     }
   }
 
-window.onload = function () {
 
+
+window.onload = function () {
 
   document.getElementById("back").addEventListener('click', function(e){ changeLocation("projects.html");} );
   document.getElementById("create").addEventListener('click', addProject );
-  document.getElementById("create").disabled = false;
+  document.getElementById("create").disabled = true;
   document.getElementById("projectName").addEventListener('blur', nameValidation );
+  document.getElementById("projectName").addEventListener('change', nameValidation );
   var milestoneSelect = document.getElementById("selectMilestone");
   var totalWords = document.getElementById("totalWords");
   var milestoneMeasure = document.getElementById("milestoneMeasure");
@@ -292,8 +309,8 @@ window.onload = function () {
   chrome.storage.local.get('isAltering', function(response){
     if(response.isAltering === true){
       chrome.storage.local.get('projectAltering', function(response){
+
         setAlterProject(response.projectAltering);
-        chrome.storage.local.remove("'projectAltering");
       });
     }
   });

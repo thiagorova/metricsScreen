@@ -118,7 +118,6 @@ function AlterProject(project){
     chrome.storage.local.set({ 'projectAltering': project });
     chrome.storage.local.set({ 'isAltering': true });
     changeLocation("create.html");
-
 }
 
 function GoToUserScreen() {
@@ -138,7 +137,8 @@ function GoToUserScreen() {
         'totalWords':projects[i].finish.toString(),
         'id': projects[i].id.toString(),
         'time': projects[i].time.hours.toString() + ":" + projects[i].time.minutes.toString()  + ":" + projects[i].time.seconds.toString(),
-        'words':projects[i].wordCount.toString(),
+        //'words':projects[i].wordCount.toString(),
+        'words':(projects[i].wordCount === null || typeof projects[i].wordCount === "undefined") ? projects[i].wordCount = "Not Set" : projects[i].wordCount.toString(),
         'creation': projects[i].creation,
         'completed' : projects[i].done,
         'lastUpdate' : projects[i].lastUpdate,
@@ -146,8 +146,9 @@ function GoToUserScreen() {
         'milestone':{
           'type': projects[i].milestoneType,
           'percentage': percentage.toString(),
-          'words':(typeof projects[i].milestoneAverage === "undefined") ? null: projects[i].milestoneAverage.toString(),
-          'deadline': (typeof projects[i].deadline === "undefined" || projects[i].deadline === null) ? null: projects[i].deadline.toString()
+          //'words':(typeof projects[i].milestoneAverage === "undefined") ? null: projects[i].milestoneAverage.toString(),
+          'words':(projects[i].milestoneAverage === null || typeof projects[i].milestoneAverage === "undefined") ? projects[i].milestoneAverage = "Not Set" : projects[i].milestoneAverage.toString(),
+          'deadline': (typeof projects[i].deadline === "undefined" || projects[i].deadline === null) ? projects[i].deadline = "Not Set": projects[i].deadline.toString()
         }
       });
     }

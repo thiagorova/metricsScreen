@@ -87,9 +87,10 @@
       mValueSpan.setAttribute("class", "milestoneText");
       mValueSpan.innerHTML = (project.milestone.type === "deadline") ? "<span class='deadlineLabel'>DEADLINE</span>" :  (project.milestone.type === "wDay") ? "<span class='dailyLabel'>DAILY</span>": "<span class='monthlyLabel'>MONTHLY</span>";
       mValueP.setAttribute("class", "milestoneValue");
-      mValueP.innerHTML = (project.milestone.words !== null) ? 
-        project.milestone.words: 
+      mValueP.innerHTML = (project.milestone.words !== null) ?
+        project.milestone.words:
         ((project.milestone.deadline === null) ? "no deadline set":project.milestone.deadline.replace("/20", "/"));
+
       mValueTD.setAttribute("class", "info");
       mValueTD.appendChild(mValueSpan);
       mValueTD.appendChild(mValueP);
