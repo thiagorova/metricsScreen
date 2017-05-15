@@ -77,7 +77,10 @@ window.onload = function() {
      var keyOrder = Object.keys(hourly).reverse()
     }
     keyOrder.map(function (hour) { 
-      hourly[hour - timeZoneDiff] = hourly[hour];
+      var new_time = hour - timeZoneDiff;
+      if (new_time < 24) new_time += 24;
+      if (new_time > 24) new_time -= 24;
+      hourly[new_time] = hourly[hour];
       delete hourly[hour];
     });
     return hourly;
